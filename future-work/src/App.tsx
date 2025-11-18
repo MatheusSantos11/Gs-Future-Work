@@ -13,14 +13,14 @@ function App() {
   return (
     <>
       <div className='bg-[#2A2B30] h-full w-full'>
-        <header className='z-10 bg-[#202327] h-15 w-full p-2 flex gap-4 top-0'>
+        <header className=' fixed z-10 bg-[#202327] h-15 w-full p-2 flex gap-4 top-0'>
           <img src={logo} alt="" className='h-10 w-37'/>
           <input type="text" placeholder='Pesquisar' className='border-[#35393C] border-2 h-9 p-2 rounded-lg mt-1'/>
           <div>
             <img src={menu} alt="" className='flow h-10 w-10 ml-8 mt-1'/>
           </div>
         </header>
-        <div className=' h-40 p-2'>
+        <div className=' h-40 p-4'>
           <div className='flex flex-wrap'>
             <img src={perfil} alt="" className='h-20 w-20'/>
             <div className='mt-3 ml-3'>
