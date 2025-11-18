@@ -449,5 +449,1099 @@
     "certificacoes": ["Content Marketing"],
     "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
     "areainteresses": ["Educação", "Mídia"]
+  },
+  {
+    "id": 16,
+    "nome": "Paulo Henrique",
+    "foto": "https://i.pravatar.cc/150?img=16",
+    "cargo": "Full-Stack Developer",
+    "resumo": "Trabalha com aplicações web e APIs.",
+    "localizacao": "Campinas/SP",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["JavaScript","Node.js","Express"],
+    "softSkills": ["Trabalho em equipe","Organização"],
+    "experiencias": [
+      {
+        "empresa": "WebPlus",
+        "cargo": "Desenvolvedor",
+        "inicio": "2019-09",
+        "fim": "2024-03",
+        "descricao": "APIs e integrações."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Ciência da Computação",
+        "instituicao": "UNICAMP",
+        "ano": 2018
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "API Gateway",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["Node.js Certified"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Avançado"
+      }
+    ],
+    "areainteresses": ["APIs","DevOps"]
+  },
+  {
+    "id": 17,
+    "nome": "Quésia Ramos",
+    "foto": "https://i.pravatar.cc/150?img=17",
+    "cargo": "Data Scientist",
+    "resumo": "Modelagem estatística e experimentação A/B.",
+    "localizacao": "Manaus/AM",
+    "area": "Data",
+    "habilidadesTecnicas": ["Python","SciPy","ML"],
+    "softSkills": ["Curiosidade","Análise crítica"],
+    "experiencias": [
+      {
+        "empresa": "InsightAI",
+        "cargo": "Cientista de Dados",
+        "inicio": "2020-01",
+        "fim": "2024-06",
+        "descricao": "Modelos preditivos para churn."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "MSc Estatística",
+        "instituicao": "UFAM",
+        "ano": 2019
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "Churn Model",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["Coursera ML"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Intermediário"
+      }
+    ],
+    "areainteresses": ["IA","Negócios"]
+  },
+  {
+    "id": 18,
+    "nome": "Rafael Andrade",
+    "foto": "https://i.pravatar.cc/150?img=18",
+    "cargo": "Cloud Architect",
+    "resumo": "Projetos de arquitetura cloud e migrações.",
+    "localizacao": "Goiânia/GO",
+    "area": "Infraestrutura",
+    "habilidadesTecnicas": ["AWS","Terraform","Kubernetes"],
+    "softSkills": ["Visão estratégica","Comunicação"],
+    "experiencias": [
+      {
+        "empresa": "CloudMigrate",
+        "cargo": "Arquiteto",
+        "inicio": "2017-06",
+        "fim": "2024-04",
+        "descricao": "Migração de workloads para cloud."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Engenharia da Computação",
+        "instituicao": "UFG",
+        "ano": 2016
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "Cloud Lift",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["AWS Solution Architect"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Avançado"
+      }
+    ],
+    "areainteresses": ["Cloud","Automação"]
+  },
+  {
+    "id": 19,
+    "nome": "Sofia Carvalho",
+    "foto": "https://i.pravatar.cc/150?img=19",
+    "cargo": "Recruiter",
+    "resumo": "Recrutamento técnico e employer branding.",
+    "localizacao": "Brasília/DF",
+    "area": "RH",
+    "habilidadesTecnicas": ["ATS","Sourcing","LinkedIn"],
+    "softSkills": ["Comunicação","Empatia"],
+    "experiencias": [
+      {
+        "empresa": "TalentHub",
+        "cargo": "Recruiter",
+        "inicio": "2018-02",
+        "fim": "2024-01",
+        "descricao": "Processos seletivos para vagas tech."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BAd Recursos Humanos",
+        "instituicao": "UnB",
+        "ano": 2017
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "Programa de Estágio",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["LinkedIn Recruiter"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Intermediário"
+      }
+    ],
+    "areainteresses": ["RH","Educação"]
+  },
+  {
+    "id": 20,
+    "nome": "Thiago Alves",
+    "foto": "https://i.pravatar.cc/150?img=20",
+    "cargo": "Mobile Developer",
+    "resumo": "Desenvolvedor mobile com foco em apps cross-platform.",
+    "localizacao": "São Paulo/SP",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["Flutter","Dart","Android"],
+    "softSkills": ["Autonomia","Criatividade"],
+    "experiencias": [
+      {
+        "empresa": "AppWorks",
+        "cargo": "Mobile Dev",
+        "inicio": "2017-09",
+        "fim": "2024-05",
+        "descricao": "Apps híbridos e nativos."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Sistemas de Informação",
+        "instituicao": "USP",
+        "ano": 2016
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "App Cliente",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["Flutter Certified"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Avançado"
+      }
+    ],
+    "areainteresses": ["Mobile","UX"]
+  },
+  {
+    "id": 21,
+    "nome": "Ursula Pinto",
+    "foto": "https://i.pravatar.cc/150?img=21",
+    "cargo": "Technical Writer",
+    "resumo": "Documentação técnica e guias de usuário.",
+    "localizacao": "Belém/PA",
+    "area": "Conteúdo",
+    "habilidadesTecnicas": ["Markdown","Docs","Asciidoc"],
+    "softSkills": ["Clareza","Detalhismo"],
+    "experiencias": [
+      {
+        "empresa": "DocuTech",
+        "cargo": "Writer",
+        "inicio": "2016-04",
+        "fim": "2023-10",
+        "descricao": "Manuais e documentação de APIs."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BAd Letras",
+        "instituicao": "UFPA",
+        "ano": 2015
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "Guia de API",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["Technical Writing"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Intermediário"
+      }
+    ],
+    "areainteresses": ["Educação","Processos"]
+  },
+  {
+    "id": 22,
+    "nome": "Vitor Hugo",
+    "foto": "https://i.pravatar.cc/150?img=22",
+    "cargo": "BI Developer",
+    "resumo": "Desenvolvimento de dashboards e reports.",
+    "localizacao": "Maceió/AL",
+    "area": "Data",
+    "habilidadesTecnicas": ["Power BI","DAX","SQL"],
+    "softSkills": ["Analítico","Comunicação"],
+    "experiencias": [
+      {
+        "empresa": "InsightBI",
+        "cargo": "BI Dev",
+        "inicio": "2018-07",
+        "fim": "2024-02",
+        "descricao": "Dashboards corporativos."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Administração",
+        "instituicao": "UNEAL",
+        "ano": 2016
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "Dashboards Financeiros",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["Power BI Expert"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Intermediário"
+      }
+    ],
+    "areainteresses": ["BI","Finanças"]
+  },
+  {
+    "id": 23,
+    "nome": "Wagner Freitas",
+    "foto": "https://i.pravatar.cc/150?img=23",
+    "cargo": "Support Engineer",
+    "resumo": "Atendimento técnico e resolução de incidentes.",
+    "localizacao": "Cuiabá/MT",
+    "area": "Suporte",
+    "habilidadesTecnicas": ["Linux","Networking","SQL"],
+    "softSkills": ["Paciência","Orientação ao cliente"],
+    "experiencias": [
+      {
+        "empresa": "HelpDeskPro",
+        "cargo": "Support",
+        "inicio": "2015-01",
+        "fim": "2024-03",
+        "descricao": "Suporte a clientes corporativos."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "Tecnólogo Redes",
+        "instituicao": "UFMT",
+        "ano": 2014
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "SLA Improvements",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["CompTIA Network+"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Intermediário"
+      }
+    ],
+    "areainteresses": ["Infra","Atendimento"]
+  },
+  {
+    "id": 24,
+    "nome": "Ximena Lopes",
+    "foto": "https://i.pravatar.cc/150?img=24",
+    "cargo": "Analista de SEO",
+    "resumo": "Otimização de conteúdo para mecanismos de busca.",
+    "localizacao": "São Paulo/SP",
+    "area": "Marketing",
+    "habilidadesTecnicas": ["SEO","Google Search Console","Analytics"],
+    "softSkills": ["Analítico","Detalhismo"],
+    "experiencias": [
+      {
+        "empresa": "SEO Experts",
+        "cargo": "Analista",
+        "inicio": "2017-03",
+        "fim": "2024-04",
+        "descricao": "Estratégias para aumento de tráfego orgânico."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BAd Comunicação",
+        "instituicao": "USP",
+        "ano": 2016
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "SEO Audit",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["Google SEO"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Intermediário"
+      }
+    ],
+    "areainteresses": ["Conteúdo","Growth"]
+  },
+  {
+    "id": 25,
+    "nome": "Yara Mendes",
+    "foto": "https://i.pravatar.cc/150?img=25",
+    "cargo": "Front-End Developer",
+    "resumo": "Interfaces acessíveis e performáticas.",
+    "localizacao": "São Paulo/SP",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["HTML","CSS","JavaScript"],
+    "softSkills": ["Detalhismo","Criatividade"],
+    "experiencias": [
+      {
+        "empresa": "FrontLab",
+        "cargo": "Front-end",
+        "inicio": "2018-05",
+        "fim": "2024-06",
+        "descricao": "Foco em performance e A11y."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Design",
+        "instituicao": "FAAP",
+        "ano": 2017
+      }
+    ],
+    "projetos": [
+      {
+        "titulo": "Site Acessível",
+        "link": "https://example.com"
+      }
+    ],
+    "certificacoes": ["A11y Specialist"],
+    "idiomas": [
+      {
+        "idioma": "Inglês",
+        "nivel": "Intermediário"
+      }
+    ],
+    "areainteresses": ["Acessibilidade","Front-end"]
+  },
+  {
+    "id": 25,
+    "nome": "Rafaela Monteiro",
+    "foto": "https://i.pravatar.cc/150?img=25",
+    "cargo": "Analista de Sistemas",
+    "resumo": "Especialista em análise e modelagem de sistemas corporativos.",
+    "localizacao": "São Paulo/SP",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["Java", "SQL", "Spring"],
+    "softSkills": ["Pensamento Analítico", "Comunicação"],
+    "experiencias": [
+      { "empresa": "DataTech", "cargo": "Analista Júnior", "inicio": "2020-02", "fim": "2023-01", "descricao": "Atuação em sistemas de gestão para grandes empresas." }
+    ],
+    "formacao": [{ "curso": "BSc Sistemas de Informação", "instituicao": "FMU", "ano": 2019 }],
+    "projetos": [{ "titulo": "ERP Custom", "link": "https://example.com" }],
+    "certificacoes": ["Oracle Certified Associate"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Integração", "Arquitetura"]
+  },
+  {
+    "id": 26,
+    "nome": "Diego Nascimento",
+    "foto": "https://i.pravatar.cc/150?img=26",
+    "cargo": "Desenvolvedor Backend",
+    "resumo": "Focado em APIs de alta performance e arquitetura distribuída.",
+    "localizacao": "Curitiba/PR",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["Node.js", "Docker", "PostgreSQL"],
+    "softSkills": ["Organização", "Trabalho em Equipe"],
+    "experiencias": [
+      { "empresa": "CloudAPI", "cargo": "Backend Developer", "inicio": "2018-05", "fim": "2022-12", "descricao": "Desenvolvimento de microsserviços escaláveis." }
+    ],
+    "formacao": [{ "curso": "BSc Ciência da Computação", "instituicao": "UTFPR", "ano": 2017 }],
+    "projetos": [{ "titulo": "Order Service", "link": "https://example.com" }],
+    "certificacoes": ["Node.js Certified"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["APIs", "Performance"]
+  },
+  {
+    "id": 27,
+    "nome": "Juliana Ribeiro",
+    "foto": "https://i.pravatar.cc/150?img=27",
+    "cargo": "UX Designer",
+    "resumo": "Cria interfaces intuitivas e focadas na experiência do usuário.",
+    "localizacao": "Florianópolis/SC",
+    "area": "Design",
+    "habilidadesTecnicas": ["Figma", "UI Design", "Prototipação"],
+    "softSkills": ["Empatia", "Criatividade"],
+    "experiencias": [
+      { "empresa": "DesignUp", "cargo": "UX/UI Designer", "inicio": "2019-07", "fim": "2023-01", "descricao": "Projetos de interfaces para aplicativos móveis." }
+    ],
+    "formacao": [{ "curso": "BAd Design", "instituicao": "UDESC", "ano": 2018 }],
+    "projetos": [{ "titulo": "App Mobile X", "link": "https://example.com" }],
+    "certificacoes": ["UX Certification"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["UX", "Acessibilidade"]
+  },
+  {
+    "id": 28,
+    "nome": "Marcos Vinícius",
+    "foto": "https://i.pravatar.cc/150?img=28",
+    "cargo": "Engenheiro de Dados",
+    "resumo": "Constrói pipelines robustas e modelos de dados otimizados.",
+    "localizacao": "Belo Horizonte/MG",
+    "area": "Data",
+    "habilidadesTecnicas": ["Python", "Airflow", "BigQuery"],
+    "softSkills": ["Pensamento Crítico", "Resolução de Problemas"],
+    "experiencias": [
+      { "empresa": "DataFlow", "cargo": "Data Engineer", "inicio": "2020-04", "fim": "2023-03", "descricao": "Implementação de pipelines de dados em larga escala." }
+    ],
+    "formacao": [{ "curso": "BSc Engenharia da Computação", "instituicao": "UFMG", "ano": 2017 }],
+    "projetos": [{ "titulo": "Data Lake", "link": "https://example.com" }],
+    "certificacoes": ["Google Cloud Data Engineer"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Big Data", "Streaming"]
+  },
+  {
+    "id": 29,
+    "nome": "Carolina Azevedo",
+    "foto": "https://i.pravatar.cc/150?img=29",
+    "cargo": "Product Manager",
+    "resumo": "Gerencia produtos digitais com foco em métricas e valor.",
+    "localizacao": "São Paulo/SP",
+    "area": "Produto",
+    "habilidadesTecnicas": ["Gestão Ágil", "Roadmaps", "Analytics"],
+    "softSkills": ["Liderança", "Tomada de Decisão"],
+    "experiencias": [
+      { "empresa": "ProdMaster", "cargo": "PM", "inicio": "2018-09", "fim": "2023-02", "descricao": "Gestão de ciclo de vida de produtos digitais." }
+    ],
+    "formacao": [{ "curso": "MBA Gestão de Produtos", "instituicao": "FGV", "ano": 2020 }],
+    "projetos": [{ "titulo": "Marketplace Revamp", "link": "https://example.com" }],
+    "certificacoes": ["Pragmatic Marketing"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Produto", "UX"]
+  },
+  {
+    "id": 30,
+    "nome": "Ricardo Oliveira",
+    "foto": "https://i.pravatar.cc/150?img=30",
+    "cargo": "Cientista de Dados",
+    "resumo": "Cria modelos preditivos e análises avançadas.",
+    "localizacao": "Rio de Janeiro/RJ",
+    "area": "Data",
+    "habilidadesTecnicas": ["Python", "Machine Learning", "Pandas"],
+    "softSkills": ["Análise Crítica", "Comunicação"],
+    "experiencias": [
+      { "empresa": "InsightAI", "cargo": "Data Scientist", "inicio": "2019-01", "fim": "2022-11", "descricao": "Modelagem preditiva para grandes volumes de dados." }
+    ],
+    "formacao": [{ "curso": "MSc Data Science", "instituicao": "UFRJ", "ano": 2020 }],
+    "projetos": [{ "titulo": "Recommender System", "link": "https://example.com" }],
+    "certificacoes": ["TensorFlow Developer"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["IA", "Pesquisa"]
+  },
+  {
+    "id": 31,
+    "nome": "Fernanda Couto",
+    "foto": "https://i.pravatar.cc/150?img=31",
+    "cargo": "Tech Lead",
+    "resumo": "Lidera times de desenvolvimento com foco em escalabilidade.",
+    "localizacao": "Salvador/BA",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["Node.js", "AWS", "Arquitetura"],
+    "softSkills": ["Liderança", "Comunicação"],
+    "experiencias": [
+      { "empresa": "SkyTech", "cargo": "Líder Técnica", "inicio": "2017-08", "fim": "2023-01", "descricao": "Coordenação de squads de produtos digitais." }
+    ],
+    "formacao": [{ "curso": "BSc Ciência da Computação", "instituicao": "UFBA", "ano": 2016 }],
+    "projetos": [{ "titulo": "Plataforma Escalável", "link": "https://example.com" }],
+    "certificacoes": ["AWS Solution Architect"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Arquit. de Software", "DevOps"]
+  },
+  {
+    "id": 32,
+    "nome": "Lucas Moreira",
+    "foto": "https://i.pravatar.cc/150?img=32",
+    "cargo": "Desenvolvedor Mobile",
+    "resumo": "Cria aplicativos híbridos e nativos.",
+    "localizacao": "Porto Alegre/RS",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["Flutter", "Dart", "Kotlin"],
+    "softSkills": ["Adaptabilidade", "Criatividade"],
+    "experiencias": [
+      { "empresa": "AppMasters", "cargo": "Mobile Dev", "inicio": "2020-03", "fim": "2023-04", "descricao": "Desenvolvimento de apps multiplataforma." }
+    ],
+    "formacao": [{ "curso": "BSc Sistemas de Informação", "instituicao": "PUCRS", "ano": 2019 }],
+    "projetos": [{ "titulo": "App Cliente", "link": "https://example.com" }],
+    "certificacoes": ["Flutter Certified"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Mobile", "UX"]
+  },
+  {
+    "id": 33,
+    "nome": "Gabriela Duarte",
+    "foto": "https://i.pravatar.cc/150?img=33",
+    "cargo": "Desenvolvedora Frontend",
+    "resumo": "Cria interfaces modernas e responsivas.",
+    "localizacao": "São Luís/MA",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["React", "CSS", "JavaScript"],
+    "softSkills": ["Organização", "Comunicação"],
+    "experiencias": [
+      { "empresa": "WebStudio", "cargo": "Frontend", "inicio": "2019-10", "fim": "2023-01", "descricao": "Interfaces responsivas para e-commerce." }
+    ],
+    "formacao": [{ "curso": "BSc Ciência da Computação", "instituicao": "UFMA", "ano": 2018 }],
+    "projetos": [{ "titulo": "Site Acessível", "link": "https://example.com" }],
+    "certificacoes": ["React Specialist"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Acessibilidade", "Front-end"]
+  },
+  {
+    "id": 34,
+    "nome": "Eduardo Martins",
+    "foto": "https://i.pravatar.cc/150?img=34",
+    "cargo": "DevOps Engineer",
+    "resumo": "Automatiza pipelines e gerencia infraestrutura.",
+    "localizacao": "Campinas/SP",
+    "area": "Infraestrutura",
+    "habilidadesTecnicas": ["Docker", "Kubernetes", "CI/CD"],
+    "softSkills": ["Resolução de Problemas", "Proatividade"],
+    "experiencias": [
+      { "empresa": "InfraCloud", "cargo": "DevOps", "inicio": "2018-02", "fim": "2022-12", "descricao": "Automação e deploy contínuo." }
+    ],
+    "formacao": [{ "curso": "BSc Engenharia da Computação", "instituicao": "UNICAMP", "ano": 2016 }],
+    "projetos": [{ "titulo": "Infra as Code", "link": "https://example.com" }],
+    "certificacoes": ["CKA"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["SRE", "Cloud"]
+  },
+  {
+    "id": 35,
+    "nome": "Larissa Santos",
+    "foto": "https://i.pravatar.cc/150?img=35",
+    "cargo": "Tester QA",
+    "resumo": "Especialista em testes automatizados e qualidade.",
+    "localizacao": "Fortaleza/CE",
+    "area": "Qualidade",
+    "habilidadesTecnicas": ["Selenium", "JUnit", "Testes Automatizados"],
+    "softSkills": ["Atenção aos Detalhes", "Persistência"],
+    "experiencias": [
+      { "empresa": "QualityHub", "cargo": "QA Analyst", "inicio": "2020-01", "fim": "2023-02", "descricao": "Validação de sistemas e automação de testes." }
+    ],
+    "formacao": [{ "curso": "BSc Engenharia de Software", "instituicao": "UFCE", "ano": 2018 }],
+    "projetos": [{ "titulo": "Test Suite", "link": "https://example.com" }],
+    "certificacoes": ["ISTQB"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Automação", "Qualidade"]
+  },
+  {
+    "id": 36,
+    "nome": "Pedro Albuquerque",
+    "foto": "https://i.pravatar.cc/150?img=36",
+    "cargo": "Administrador de Redes",
+    "resumo": "Gerencia redes corporativas e segurança.",
+    "localizacao": "Manaus/AM",
+    "area": "Infraestrutura",
+    "habilidadesTecnicas": ["Redes", "Firewall", "VPN"],
+    "softSkills": ["Raciocínio Lógico", "Comunicação"],
+    "experiencias": [
+      { "empresa": "NetControl", "cargo": "Administrador de Redes", "inicio": "2017-06", "fim": "2022-12", "descricao": "Monitoramento e manutenção de redes internas." }
+    ],
+    "formacao": [{ "curso": "Tecnólogo Redes", "instituicao": "IFAM", "ano": 2016 }],
+    "projetos": [{ "titulo": "Monitoring Suite", "link": "https://example.com" }],
+    "certificacoes": ["CompTIA Network+"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Infra", "Segurança"]
+  },
+  {
+    "id": 37,
+    "nome": "Mariana Farias",
+    "foto": "https://i.pravatar.cc/150?img=37",
+    "cargo": "Analista de Marketing Digital",
+    "resumo": "Especialista em tráfego pago e crescimento digital.",
+    "localizacao": "Recife/PE",
+    "area": "Marketing",
+    "habilidadesTecnicas": ["SEO", "Google Ads", "Copywriting"],
+    "softSkills": ["Criatividade", "Comunicação"],
+    "experiencias": [
+      { "empresa": "MediaLab", "cargo": "Analista", "inicio": "2019-04", "fim": "2023-03", "descricao": "Otimização de campanhas digitais." }
+    ],
+    "formacao": [{ "curso": "BAd Marketing", "instituicao": "UFPE", "ano": 2017 }],
+    "projetos": [{ "titulo": "Campanha Z", "link": "https://example.com" }],
+    "certificacoes": ["Google Ads Certified"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Growth", "Mídia"]
+  },
+  {
+    "id": 38,
+    "nome": "João Ferreira",
+    "foto": "https://i.pravatar.cc/150?img=38",
+    "cargo": "Analista Financeiro",
+    "resumo": "Trabalha com análise e projeções financeiras.",
+    "localizacao": "São Paulo/SP",
+    "area": "Financeiro",
+    "habilidadesTecnicas": ["Excel", "Power BI", "Contabilidade"],
+    "softSkills": ["Atenção aos Detalhes", "Raciocínio Lógico"],
+    "experiencias": [
+      { "empresa": "FinControl", "cargo": "Analista", "inicio": "2018-07", "fim": "2022-11", "descricao": "Gestão financeira e análises estratégicas." }
+    ],
+    "formacao": [{ "curso": "BAd Economia", "instituicao": "FGV", "ano": 2016 }],
+    "projetos": [{ "titulo": "Relatórios Financeiros", "link": "https://example.com" }],
+    "certificacoes": ["CFA Level 1"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Finanças", "BI"]
+  },
+  {
+    "id": 39,
+    "nome": "Camila Vasconcelos",
+    "foto": "https://i.pravatar.cc/150?img=39",
+    "cargo": "Psicóloga Organizacional",
+    "resumo": "Atua com desenvolvimento humano e cultura.",
+    "localizacao": "Brasília/DF",
+    "area": "RH",
+    "habilidadesTecnicas": ["Avaliação Psicológica", "Dinâmicas", "Clima Organizacional"],
+    "softSkills": ["Empatia", "Comunicação"],
+    "experiencias": [
+      { "empresa": "PeopleCare", "cargo": "Psicóloga", "inicio": "2017-03", "fim": "2023-01", "descricao": "Programas de bem-estar e clima organizacional." }
+    ],
+    "formacao": [{ "curso": "MSc Psicologia Organizacional", "instituicao": "UnB", "ano": 2018 }],
+    "projetos": [{ "titulo": "Programa de Bem-Estar", "link": "https://example.com" }],
+    "certificacoes": ["Assessment Certification"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Cultura", "Desenvolvimento Humano"]
+  },
+  {
+    "id": 40,
+    "nome": "Tiago Mendes",
+    "foto": "https://i.pravatar.cc/150?img=40",
+    "cargo": "Arquiteto de Software",
+    "resumo": "Especialista em sistemas robustos e escaláveis.",
+    "localizacao": "São Paulo/SP",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["Microservices", "Java", "AWS"],
+    "softSkills": ["Liderança", "Pensamento Estratégico"],
+    "experiencias": [
+      { "empresa": "SoftBuild", "cargo": "Arquiteto", "inicio": "2016-01", "fim": "2023-04", "descricao": "Definição de arquiteturas para grandes sistemas." }
+    ],
+    "formacao": [{ "curso": "MSc Engenharia de Software", "instituicao": "USP", "ano": 2016 }],
+    "projetos": [{ "titulo": "Event Driven Platform", "link": "https://example.com" }],
+    "certificacoes": ["AWS Solution Architect"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Escalabilidade", "DevOps"]
+  },
+  {
+    "id": 41,
+    "nome": "Eduarda Nunes",
+    "foto": "https://i.pravatar.cc/150?img=41",
+    "cargo": "Analista de Segurança",
+    "resumo": "Focada em segurança ofensiva e defensiva.",
+    "localizacao": "Curitiba/PR",
+    "area": "Segurança",
+    "habilidadesTecnicas": ["Pentest", "SIEM", "Linux"],
+    "softSkills": ["Pensamento Crítico", "Atenção aos Detalhes"],
+    "experiencias": [
+      { "empresa": "CyberSafe", "cargo": "Analista", "inicio": "2019-02", "fim": "2023-01", "descricao": "Análise de vulnerabilidades e testes de intrusão." }
+    ],
+    "formacao": [{ "curso": "BSc Segurança da Informação", "instituicao": "UTFPR", "ano": 2017 }],
+    "projetos": [{ "titulo": "Pentest Reports", "link": "https://example.com" }],
+    "certificacoes": ["CEH"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Criptografia", "Forense"]
+  },
+  {
+    "id": 42,
+    "nome": "Renato Souza",
+    "foto": "https://i.pravatar.cc/150?img=42",
+    "cargo": "Engenheiro Civil",
+    "resumo": "Atua em projetos estruturais e gerenciamento de obras.",
+    "localizacao": "Rio de Janeiro/RJ",
+    "area": "Engenharia",
+    "habilidadesTecnicas": ["AutoCAD", "Estruturas", "Orçamentos"],
+    "softSkills": ["Organização", "Comunicação"],
+    "experiencias": [
+      { "empresa": "Construtora BR", "cargo": "Engenheiro", "inicio": "2018-05", "fim": "2022-12", "descricao": "Responsável técnico em obras residenciais." }
+    ],
+    "formacao": [{ "curso": "BSc Engenharia Civil", "instituicao": "UFRJ", "ano": 2016 }],
+    "projetos": [{ "titulo": "Residencial X", "link": "https://example.com" }],
+    "certificacoes": ["CREA"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Projetos", "Gerenciamento"]
+  },
+  {
+    "id": 43,
+    "nome": "Daniela Pires",
+    "foto": "https://i.pravatar.cc/150?img=43",
+    "cargo": "Biomédica",
+    "resumo": "Pesquisadora com foco em análises clínicas.",
+    "localizacao": "Belo Horizonte/MG",
+    "area": "Saúde",
+    "habilidadesTecnicas": ["Análises Clínicas", "Microscopia", "Biologia Molecular"],
+    "softSkills": ["Atenção aos Detalhes", "Comunicação"],
+    "experiencias": [
+      { "empresa": "BioLab", "cargo": "Biomédica", "inicio": "2019-06", "fim": "2023-02", "descricao": "Processamento de exames laboratoriais." }
+    ],
+    "formacao": [{ "curso": "BSc Biomedicina", "instituicao": "UFMG", "ano": 2017 }],
+    "projetos": [{ "titulo": "Protocolos Lab", "link": "https://example.com" }],
+    "certificacoes": ["Biosafety Training"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Pesquisa", "Laboratório"]
+  },
+  {
+    "id": 44,
+    "nome": "Marcelo Barros",
+    "foto": "https://i.pravatar.cc/150?img=44",
+    "cargo": "Administrador",
+    "resumo": "Especialista em processos empresariais.",
+    "localizacao": "São Paulo/SP",
+    "area": "Administração",
+    "habilidadesTecnicas": ["Planejamento", "Gestão", "Processos"],
+    "softSkills": ["Liderança", "Organização"],
+    "experiencias": [
+      { "empresa": "CorpGest", "cargo": "Administrador", "inicio": "2017-01", "fim": "2022-12", "descricao": "Gestão administrativa e melhoria de processos." }
+    ],
+    "formacao": [{ "curso": "BAd Administração", "instituicao": "FGV", "ano": 2016 }],
+    "projetos": [{ "titulo": "Process Optimization", "link": "https://example.com" }],
+    "certificacoes": ["Six Sigma Yellow Belt"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Processos", "Operações"]
+  },
+  {
+    "id": 45,
+    "nome": "Vitória Souza",
+    "foto": "https://i.pravatar.cc/150?img=45",
+    "cargo": "Arquiteta",
+    "resumo": "Cria projetos residenciais e comerciais.",
+    "localizacao": "Vitória/ES",
+    "area": "Arquitetura",
+    "habilidadesTecnicas": ["SketchUp", "Revit", "Design de Interiores"],
+    "softSkills": ["Criatividade", "Organização"],
+    "experiencias": [
+      { "empresa": "StudioA", "cargo": "Arquiteta", "inicio": "2018-02", "fim": "2023-01", "descricao": "Desenvolvimento de projetos arquitetônicos." }
+    ],
+    "formacao": [{ "curso": "BAd Arquitetura", "instituicao": "UFES", "ano": 2017 }],
+    "projetos": [{ "titulo": "Casa Modernista", "link": "https://example.com" }],
+    "certificacoes": ["Revit Specialist"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Interiores", "Urbanismo"]
+  },
+  {
+    "id": 46,
+    "nome": "Luiz Henrique",
+    "foto": "https://i.pravatar.cc/150?img=46",
+    "cargo": "Engenheiro Elétrico",
+    "resumo": "Especialista em sistemas elétricos industriais.",
+    "localizacao": "Uberlândia/MG",
+    "area": "Engenharia",
+    "habilidadesTecnicas": ["Projetos Elétricos", "MATLAB", "Autocad"],
+    "softSkills": ["Análise Crítica", "Organização"],
+    "experiencias": [
+      { "empresa": "EletricTech", "cargo": "Engenheiro Elétrico", "inicio": "2019-03", "fim": "2022-12", "descricao": "Desenvolvimento de sistemas elétricos industriais." }
+    ],
+    "formacao": [{ "curso": "BSc Engenharia Elétrica", "instituicao": "UFU", "ano": 2016 }],
+    "projetos": [{ "titulo": "Painéis Industriais", "link": "https://example.com" }],
+    "certificacoes": ["NR10"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Automação", "Indústria"]
+  },
+  {
+    "id": 47,
+    "nome": "Bianca Sales",
+    "foto": "https://i.pravatar.cc/150?img=47",
+    "cargo": "Enfermeira",
+    "resumo": "Cuida de pacientes e gerencia rotinas hospitalares.",
+    "localizacao": "Salvador/BA",
+    "area": "Saúde",
+    "habilidadesTecnicas": ["Curativos", "Coleta", "Emergências"],
+    "softSkills": ["Empatia", "Resiliência"],
+    "experiencias": [
+      { "empresa": "Hospital Vida", "cargo": "Enfermeira", "inicio": "2018-04", "fim": "2023-01", "descricao": "Atendimento humanizado em pronto-socorro." }
+    ],
+    "formacao": [{ "curso": "BSc Enfermagem", "instituicao": "UFBA", "ano": 2017 }],
+    "projetos": [{ "titulo": "Protocolos de Enfermagem", "link": "https://example.com" }],
+    "certificacoes": ["ATLS"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Emergência", "Cuidados"]
+  },
+  {
+    "id": 48,
+    "nome": "Anderson Ribeiro",
+    "foto": "https://i.pravatar.cc/150?img=48",
+    "cargo": "Professor de Matemática",
+    "resumo": "Atua no ensino fundamental e médio.",
+    "localizacao": "Fortaleza/CE",
+    "area": "Educação",
+    "habilidadesTecnicas": ["Matemática", "Didática", "Planejamento"],
+    "softSkills": ["Paciência", "Comunicação"],
+    "experiencias": [
+      { "empresa": "Colégio Alfa", "cargo": "Professor", "inicio": "2016-02", "fim": "2023-01", "descricao": "Ensino de matemática em diferentes níveis." }
+    ],
+    "formacao": [{ "curso": "Licenciatura em Matemática", "instituicao": "UECE", "ano": 2015 }],
+    "projetos": [{ "titulo": "Aulas Interativas", "link": "https://example.com" }],
+    "certificacoes": ["Formação Pedagógica"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Básico" }],
+    "areainteresses": ["Educação", "Tecnologia Educacional"]
+  },
+  {
+    "id": 49,
+    "nome": "Letícia Cardoso",
+    "foto": "https://i.pravatar.cc/150?img=49",
+    "cargo": "Advogada",
+    "resumo": "Especialista em direito civil e contratos.",
+    "localizacao": "Curitiba/PR",
+    "area": "Direito",
+    "habilidadesTecnicas": ["Direito Civil", "Contratos", "Negociação"],
+    "softSkills": ["Comunicação", "Argumentação"],
+    "experiencias": [
+      { "empresa": "Cardoso & Associados", "cargo": "Advogada", "inicio": "2018-06", "fim": "2023-02", "descricao": "Atuação em disputas civis e elaboração contratual." }
+    ],
+    "formacao": [{ "curso": "LLB Direito", "instituicao": "PUCPR", "ano": 2016 }],
+    "projetos": [{ "titulo": "Contratos Comerciais", "link": "https://example.com" }],
+    "certificacoes": ["OAB"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Contratos", "Consultoria"]
+  },
+  {
+    "id": 50,
+    "nome": "Gustavo Lima",
+    "foto": "https://i.pravatar.cc/150?img=50",
+    "cargo": "Técnico em Informática",
+    "resumo": "Atua com suporte e manutenção de sistemas.",
+    "localizacao": "São Paulo/SP",
+    "area": "Infraestrutura",
+    "habilidadesTecnicas": ["Hardware", "Redes", "Sistemas Operacionais"],
+    "softSkills": ["Atenção aos Detalhes", "Trabalho em Equipe"],
+    "experiencias": [
+      { "empresa": "InfoService", "cargo": "Técnico", "inicio": "2019-01", "fim": "2023-03", "descricao": "Suporte técnico e manutenção de computadores." }
+    ],
+    "formacao": [{ "curso": "Técnico em Informática", "instituicao": "ETEC", "ano": 2016 }],
+    "projetos": [{ "titulo": "Service Portal", "link": "https://example.com" }],
+    "certificacoes": ["CompTIA A+"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Básico" }],
+    "areainteresses": ["Suporte", "Infra"]
+  },
+  {
+    "id": 51,
+    "nome": "Sabrina Lopes",
+    "foto": "https://i.pravatar.cc/150?img=51",
+    "cargo": "Gestora de RH",
+    "resumo": "Responsável por recrutamento e desenvolvimento.",
+    "localizacao": "Recife/PE",
+    "area": "RH",
+    "habilidadesTecnicas": ["Recrutamento", "Treinamento", "Avaliações"],
+    "softSkills": ["Empatia", "Liderança"],
+    "experiencias": [
+      { "empresa": "RHMax", "cargo": "Gestora", "inicio": "2017-05", "fim": "2023-02", "descricao": "Gestão de processos de desenvolvimento humano." }
+    ],
+    "formacao": [{ "curso": "BAd Recursos Humanos", "instituicao": "UFPE", "ano": 2016 }],
+    "projetos": [{ "titulo": "Programa de Estágio", "link": "https://example.com" }],
+    "certificacoes": ["LinkedIn Recruiter"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["RH", "Educação"]
+  },
+  {
+    "id": 52,
+    "nome": "Felipe Araújo",
+    "foto": "https://i.pravatar.cc/150?img=52",
+    "cargo": "Chef de Cozinha",
+    "resumo": "Especialista em culinária contemporânea.",
+    "localizacao": "São Paulo/SP",
+    "area": "Gastronomia",
+    "habilidadesTecnicas": ["Técnicas Culinárias", "Gestão de Cozinha", "Menu"],
+    "softSkills": ["Criatividade", "Organização"],
+    "experiencias": [
+      { "empresa": "Bistrô Lumière", "cargo": "Chef", "inicio": "2016-03", "fim": "2023-01", "descricao": "Criação de cardápios e gestão da equipe." }
+    ],
+    "formacao": [{ "curso": "Tecnólogo em Gastronomia", "instituicao": "Senac", "ano": 2015 }],
+    "projetos": [{ "titulo": "Menu Degustação", "link": "https://example.com" }],
+    "certificacoes": ["HACCP"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Culinária", "Gestão"]
+  },
+  {
+    "id": 53,
+    "nome": "Amanda Torres",
+    "foto": "https://i.pravatar.cc/150?img=53",
+    "cargo": "Farmacêutica",
+    "resumo": "Atua em dispensação e controle de medicamentos.",
+    "localizacao": "Curitiba/PR",
+    "area": "Saúde",
+    "habilidadesTecnicas": ["Farmácia Clínica", "Controle de Qualidade", "Atendimento"],
+    "softSkills": ["Empatia", "Organização"],
+    "experiencias": [
+      { "empresa": "Farmácia Vida", "cargo": "Farmacêutica", "inicio": "2019-02", "fim": "2023-01", "descricao": "Atendimento e controle de medicamentos." }
+    ],
+    "formacao": [{ "curso": "BSc Farmácia", "instituicao": "UFPR", "ano": 2017 }],
+    "projetos": [{ "titulo": "Controle de Estoque", "link": "https://example.com" }],
+    "certificacoes": ["Boas Práticas Farmacêuticas"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Farmácia Clínica", "Gestão"]
+  },
+  {
+    "id": 54,
+    "nome": "Rodrigo Tavares",
+    "foto": "https://i.pravatar.cc/150?img=54",
+    "cargo": "Fisioterapeuta",
+    "resumo": "Especialista em reabilitação musculoesquelética.",
+    "localizacao": "Fortaleza/CE",
+    "area": "Saúde",
+    "habilidadesTecnicas": ["Reabilitação", "Alongamento", "Fisioterapia Esportiva"],
+    "softSkills": ["Empatia", "Persistência"],
+    "experiencias": [
+      { "empresa": "FisioCenter", "cargo": "Fisioterapeuta", "inicio": "2018-04", "fim": "2022-12", "descricao": "Atendimento especializado em reabilitação." }
+    ],
+    "formacao": [{ "curso": "BSc Fisioterapia", "instituicao": "UECE", "ano": 2015 }],
+    "projetos": [{ "titulo": "Reabilitação Esportiva", "link": "https://example.com" }],
+    "certificacoes": ["Pilates Instructor"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Básico" }],
+    "areainteresses": ["Esporte", "Reabilitação"]
+  },
+  {
+    "id": 55,
+    "nome": "Patrícia Gomes",
+    "foto": "https://i.pravatar.cc/150?img=55",
+    "cargo": "Jornalista",
+    "resumo": "Produz reportagens e conteúdos jornalísticos.",
+    "localizacao": "Rio de Janeiro/RJ",
+    "area": "Comunicação",
+    "habilidadesTecnicas": ["Reportagem", "Redação", "Edição"],
+    "softSkills": ["Comunicação", "Criatividade"],
+    "experiencias": [
+      { "empresa": "NewsRJ", "cargo": "Repórter", "inicio": "2017-06", "fim": "2023-01", "descricao": "Produção de matérias e entrevistas." }
+    ],
+    "formacao": [{ "curso": "BAd Jornalismo", "instituicao": "UFRJ", "ano": 2016 }],
+    "projetos": [{ "titulo": "Série Documental", "link": "https://example.com" }],
+    "certificacoes": ["Curso de Reportagem Investigativa"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Mídia", "Investigação"]
+  },
+  {
+    "id": 56,
+    "nome": "Henrique Passos",
+    "foto": "https://i.pravatar.cc/150?img=56",
+    "cargo": "Cinegrafista",
+    "resumo": "Filma e edita conteúdos audiovisuais.",
+    "localizacao": "São Paulo/SP",
+    "area": "Audiovisual",
+    "habilidadesTecnicas": ["Filmagem", "Edição", "Iluminação"],
+    "softSkills": ["Criatividade", "Trabalho em Equipe"],
+    "experiencias": [
+      { "empresa": "MediaPro", "cargo": "Cinegrafista", "inicio": "2018-01", "fim": "2023-01", "descricao": "Registro e edição de vídeos profissionais." }
+    ],
+    "formacao": [{ "curso": "Tecnólogo Produção Audiovisual", "instituicao": "FAAP", "ano": 2015 }],
+    "projetos": [{ "titulo": "Curta X", "link": "https://example.com" }],
+    "certificacoes": ["Color Grading Course"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Cinema", "Edição"]
+  },
+  {
+    "id": 57,
+    "nome": "Sofia Antunes",
+    "foto": "https://i.pravatar.cc/150?img=57",
+    "cargo": "Publicitária",
+    "resumo": "Cria campanhas e conceitos visuais.",
+    "localizacao": "Porto Alegre/RS",
+    "area": "Marketing",
+    "habilidadesTecnicas": ["Branding", "Copywriting", "Campanhas"],
+    "softSkills": ["Criatividade", "Comunicação"],
+    "experiencias": [
+      { "empresa": "Agência Brava", "cargo": "Publicitária", "inicio": "2019-02", "fim": "2023-01", "descricao": "Concepção e execução de campanhas." }
+    ],
+    "formacao": [{ "curso": "BAd Comunicação Social", "instituicao": "PUCRS", "ano": 2016 }],
+    "projetos": [{ "titulo": "Campanha Nacional", "link": "https://example.com" }],
+    "certificacoes": ["Marketing Digital"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Publicidade", "Brand"]
+  },
+  {
+    "id": 58,
+    "nome": "Vitor Mendes",
+    "foto": "https://i.pravatar.cc/150?img=58",
+    "cargo": "Médico",
+    "resumo": "Atua como clínico geral.",
+    "localizacao": "São Paulo/SP",
+    "area": "Saúde",
+    "habilidadesTecnicas": ["Clínica Geral", "Diagnóstico", "Emergência"],
+    "softSkills": ["Empatia", "Comunicação"],
+    "experiencias": [
+      { "empresa": "Hospital Central", "cargo": "Médico", "inicio": "2017-09", "fim": "2023-01", "descricao": "Atendimento clínico geral." }
+    ],
+    "formacao": [{ "curso": "Medicina", "instituicao": "USP", "ano": 2016 }],
+    "projetos": [{ "titulo": "Clínica Comunitária", "link": "https://example.com" }],
+    "certificacoes": ["Residência Clínica"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Clínica", "Saúde Pública"]
+  },
+  {
+    "id": 59,
+    "nome": "Alice Teixeira",
+    "foto": "https://i.pravatar.cc/150?img=59",
+    "cargo": "Nutricionista",
+    "resumo": "Foca em nutrição clínica e esportiva.",
+    "localizacao": "Belo Horizonte/MG",
+    "area": "Saúde",
+    "habilidadesTecnicas": ["Dieta", "Nutrição Esportiva", "Acompanhamento"],
+    "softSkills": ["Empatia", "Organização"],
+    "experiencias": [
+      { "empresa": "NutriLife", "cargo": "Nutricionista", "inicio": "2018-03", "fim": "2023-01", "descricao": "Consultório e acompanhamento personalizado." }
+    ],
+    "formacao": [{ "curso": "BSc Nutrição", "instituicao": "UFMG", "ano": 2017 }],
+    "projetos": [{ "titulo": "Planos Nutricionais", "link": "https://example.com" }],
+    "certificacoes": ["Especialização em Nutrição Esportiva"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Esporte", "Saúde"]
+  },
+  {
+    "id": 60,
+    "nome": "Rafael Campos",
+    "foto": "https://i.pravatar.cc/150?img=60",
+    "cargo": "Instrutor de Academia",
+    "resumo": "Ajuda alunos com treinos e condicionamento físico.",
+    "localizacao": "Curitiba/PR",
+    "area": "Saúde",
+    "habilidadesTecnicas": ["Treinamento", "Musculação", "Avaliação Física"],
+    "softSkills": ["Motivação", "Comunicação"],
+    "experiencias": [
+      { "empresa": "FitCenter", "cargo": "Instrutor", "inicio": "2019-01", "fim": "2023-03", "descricao": "Acompanhamento de treinos personalizados." }
+    ],
+    "formacao": [{ "curso": "BSc Educação Física", "instituicao": "UTFPR", "ano": 2018 }],
+    "projetos": [{ "titulo": "Programa de Condicionamento", "link": "https://example.com" }],
+    "certificacoes": ["Personal Trainer Certificado"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Básico" }],
+    "areainteresses": ["Treinamento", "Bem-estar"]
   }
 ]
