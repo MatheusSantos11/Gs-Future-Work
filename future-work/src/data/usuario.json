@@ -1,0 +1,453 @@
+[
+  {
+    "id": 1,
+    "nome": "Ana Silva",
+    "foto": "https://i.pravatar.cc/150?img=1",
+    "cargo": "Engenheira de Software",
+    "resumo": "Desenvolvedora full-stack com foco em aplicações web escaláveis.",
+    "localizacao": "São Paulo/SP",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["JavaScript", "React", "Node.js"],
+    "softSkills": ["Comunicação", "Resiliência"],
+    "experiencias": [
+      {
+        "empresa": "TechCorp",
+        "cargo": "Desenvolvedora",
+        "inicio": "2019-03",
+        "fim": "2022-08",
+        "descricao": "Trabalhou em projetos de e-commerce."
+      }
+    ],
+    "formacao": [
+      { "curso": "BSc Computer Science", "instituicao": "USP", "ano": 2018 }
+    ],
+    "projetos": [{ "titulo": "Plataforma X", "link": "https://example.com" }],
+    "certificacoes": ["AWS Certified Developer"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["IA", "Educação"]
+  },
+  {
+    "id": 2,
+    "nome": "Bruno Costa",
+    "foto": "https://i.pravatar.cc/150?img=2",
+    "cargo": "Product Designer",
+    "resumo": "Designer focado em experiência do usuário e design de produto.",
+    "localizacao": "Rio de Janeiro/RJ",
+    "area": "Design",
+    "habilidadesTecnicas": ["Figma", "Design Thinking"],
+    "softSkills": ["Empatia", "Criatividade"],
+    "experiencias": [
+      {
+        "empresa": "DesignCo",
+        "cargo": "Designer",
+        "inicio": "2017-01",
+        "fim": "2021-12",
+        "descricao": "Conduziu pesquisas com usuários."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "MDes Interaction Design",
+        "instituicao": "PUC-Rio",
+        "ano": 2016
+      }
+    ],
+    "projetos": [{ "titulo": "App Y", "link": "https://example.com" }],
+    "certificacoes": ["UX Certification"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Design", "Acessibilidade"]
+  },
+  {
+    "id": 3,
+    "nome": "Carla Souza",
+    "foto": "https://i.pravatar.cc/150?img=3",
+    "cargo": "Analista de Dados",
+    "resumo": "Analista com experiência em ciência de dados e visualização.",
+    "localizacao": "Belo Horizonte/MG",
+    "area": "Data",
+    "habilidadesTecnicas": ["Python", "Pandas", "SQL"],
+    "softSkills": ["Curiosidade", "Pensamento crítico"],
+    "experiencias": [
+      {
+        "empresa": "DataLabs",
+        "cargo": "Analista",
+        "inicio": "2020-02",
+        "fim": "2024-06",
+        "descricao": "Modelagem e dashboards."
+      }
+    ],
+    "formacao": [
+      { "curso": "MSc Data Science", "instituicao": "FIAP", "ano": 2021 }
+    ],
+    "projetos": [{ "titulo": "Notebook Z", "link": "https://example.com" }],
+    "certificacoes": ["Data Analyst Professional"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Ciência de Dados", "Educação"]
+  },
+  {
+    "id": 4,
+    "nome": "Diego Martins",
+    "foto": "https://i.pravatar.cc/150?img=4",
+    "cargo": "DevOps Engineer",
+    "resumo": "Especialista em infraestrutura e automação de deployment.",
+    "localizacao": "Curitiba/PR",
+    "area": "Infraestrutura",
+    "habilidadesTecnicas": ["Docker", "Kubernetes", "AWS"],
+    "softSkills": ["Organização", "Proatividade"],
+    "experiencias": [
+      {
+        "empresa": "CloudOps",
+        "cargo": "Engenheiro DevOps",
+        "inicio": "2018-05",
+        "fim": "2024-01",
+        "descricao": "Automação de pipelines CI/CD."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Sistemas de Informação",
+        "instituicao": "UTFPR",
+        "ano": 2017
+      }
+    ],
+    "projetos": [{ "titulo": "Infra as Code", "link": "https://example.com" }],
+    "certificacoes": ["CKA"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Cloud", "SRE"]
+  },
+  {
+    "id": 5,
+    "nome": "Elisa Ferreira",
+    "foto": "https://i.pravatar.cc/150?img=5",
+    "cargo": "QA Analyst",
+    "resumo": "Analista de qualidade com foco em testes automatizados.",
+    "localizacao": "Porto Alegre/RS",
+    "area": "Qualidade",
+    "habilidadesTecnicas": ["Selenium", "Java", "Cypress"],
+    "softSkills": ["Detalhismo", "Colaboração"],
+    "experiencias": [
+      {
+        "empresa": "QualityPlus",
+        "cargo": "Analista QA",
+        "inicio": "2016-09",
+        "fim": "2022-12",
+        "descricao": "Implementação de suíte de testes automatizados."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Engenharia de Software",
+        "instituicao": "PUCRS",
+        "ano": 2015
+      }
+    ],
+    "projetos": [{ "titulo": "Test Suite", "link": "https://example.com" }],
+    "certificacoes": ["ISTQB"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Automação", "Processos"]
+  },
+  {
+    "id": 6,
+    "nome": "Fernando Lima",
+    "foto": "https://i.pravatar.cc/150?img=6",
+    "cargo": "Gerente de Produto",
+    "resumo": "Lidera times de produto orientados a dados.",
+    "localizacao": "São Paulo/SP",
+    "area": "Produto",
+    "habilidadesTecnicas": ["Roadmapping", "SQL", "Analytics"],
+    "softSkills": ["Liderança", "Visão estratégica"],
+    "experiencias": [
+      {
+        "empresa": "ProdManage",
+        "cargo": "PM",
+        "inicio": "2015-02",
+        "fim": "2023-06",
+        "descricao": "Lançamento de features para marketplace."
+      }
+    ],
+    "formacao": [
+      { "curso": "MBA Gestão de Produtos", "instituicao": "FGV", "ano": 2019 }
+    ],
+    "projetos": [
+      { "titulo": "Marketplace Revamp", "link": "https://example.com" }
+    ],
+    "certificacoes": ["Pragmatic Marketing"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Produto", "UX"]
+  },
+  {
+    "id": 7,
+    "nome": "Gabriela Nunes",
+    "foto": "https://i.pravatar.cc/150?img=7",
+    "cargo": "Especialista em Segurança",
+    "resumo": "Trabalha com segurança da informação e auditorias.",
+    "localizacao": "Fortaleza/CE",
+    "area": "Segurança",
+    "habilidadesTecnicas": ["Pentest", "OWASP", "SIEM"],
+    "softSkills": ["Raciocínio lógico", "Curiosidade"],
+    "experiencias": [
+      {
+        "empresa": "SecureIT",
+        "cargo": "Analista sênior",
+        "inicio": "2016-06",
+        "fim": "2024-03",
+        "descricao": "Auditorias e pentests em aplicações web."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Segurança da Informação",
+        "instituicao": "Unifor",
+        "ano": 2016
+      }
+    ],
+    "projetos": [
+      { "titulo": "Relatórios de Segurança", "link": "https://example.com" }
+    ],
+    "certificacoes": ["CEH"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Criptografia", "Privacidade"]
+  },
+  {
+    "id": 8,
+    "nome": "Hugo Alves",
+    "foto": "https://i.pravatar.cc/150?img=8",
+    "cargo": "Full-Stack Developer",
+    "resumo": "Focado em front-end moderno e performance.",
+    "localizacao": "Recife/PE",
+    "area": "Desenvolvimento",
+    "habilidadesTecnicas": ["TypeScript", "React", "Next.js"],
+    "softSkills": ["Autonomia", "Curiosidade"],
+    "experiencias": [
+      {
+        "empresa": "WebStudio",
+        "cargo": "Dev",
+        "inicio": "2018-01",
+        "fim": "2024-05",
+        "descricao": "Construção de interfaces ricas."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Ciência da Computação",
+        "instituicao": "UFPE",
+        "ano": 2017
+      }
+    ],
+    "projetos": [{ "titulo": "Site de Conteúdo", "link": "https://example.com" }],
+    "certificacoes": ["React Specialist"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Front-end", "Acessibilidade"]
+  },
+  {
+    "id": 9,
+    "nome": "Isabela Rocha",
+    "foto": "https://i.pravatar.cc/150?img=9",
+    "cargo": "Analista de Marketing",
+    "resumo": "Atua com growth e campanhas digitais.",
+    "localizacao": "São Paulo/SP",
+    "area": "Marketing",
+    "habilidadesTecnicas": ["Google Ads", "SEO", "Analytics"],
+    "softSkills": ["Criatividade", "Comunicação"],
+    "experiencias": [
+      {
+        "empresa": "MarketLab",
+        "cargo": "Analista",
+        "inicio": "2017-04",
+        "fim": "2023-11",
+        "descricao": "Otimização de funis de conversão."
+      }
+    ],
+    "formacao": [
+      { "curso": "BAd Marketing", "instituicao": "ESPM", "ano": 2016 }
+    ],
+    "projetos": [{ "titulo": "Campanha Z", "link": "https://example.com" }],
+    "certificacoes": ["Google Analytics"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Growth", "Brand"]
+  },
+  {
+    "id": 10,
+    "nome": "João Pedro",
+    "foto": "https://i.pravatar.cc/150?img=10",
+    "cargo": "Engenheiro de ML",
+    "resumo": "Pesquisa e aplica modelos de machine learning em produção.",
+    "localizacao": "Campinas/SP",
+    "area": "Data",
+    "habilidadesTecnicas": ["Python", "TensorFlow", "ML"],
+    "softSkills": ["Pensamento analítico", "Colaboração"],
+    "experiencias": [
+      {
+        "empresa": "AIWorks",
+        "cargo": "ML Engineer",
+        "inicio": "2019-07",
+        "fim": "2024-02",
+        "descricao": "Modelos de recomendação."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "MSc Machine Learning",
+        "instituicao": "UNICAMP",
+        "ano": 2020
+      }
+    ],
+    "projetos": [
+      { "titulo": "Recommender System", "link": "https://example.com" }
+    ],
+    "certificacoes": ["TensorFlow Developer"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["IA", "Pesquisa"]
+  },
+  {
+    "id": 11,
+    "nome": "Karina Melo",
+    "foto": "https://i.pravatar.cc/150?img=11",
+    "cargo": "Analista Financeiro",
+    "resumo": "Atua em análise de dados financeiros e modelagem.",
+    "localizacao": "São Paulo/SP",
+    "area": "Finanças",
+    "habilidadesTecnicas": ["Excel", "Power BI", "SQL"],
+    "softSkills": ["Detalhismo", "Comunicação"],
+    "experiencias": [
+      {
+        "empresa": "FinSolve",
+        "cargo": "Analista",
+        "inicio": "2016-03",
+        "fim": "2023-09",
+        "descricao": "Forecasts e KPIs financeiros."
+      }
+    ],
+    "formacao": [
+      { "curso": "BAd Economia", "instituicao": "FGV", "ano": 2015 }
+    ],
+    "projetos": [
+      { "titulo": "Relatórios Financeiros", "link": "https://example.com" }
+    ],
+    "certificacoes": ["CFA Level 1"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Fintech", "Investimentos"]
+  },
+  {
+    "id": 12,
+    "nome": "Lucas Pereira",
+    "foto": "https://i.pravatar.cc/150?img=12",
+    "cargo": "UX Researcher",
+    "resumo": "Pesquisa com usuários para melhorar produtos digitais.",
+    "localizacao": "Florianópolis/SC",
+    "area": "UX",
+    "habilidadesTecnicas": ["Entrevistas", "Prototipação", "Hotjar"],
+    "softSkills": ["Empatia", "Observação"],
+    "experiencias": [
+      {
+        "empresa": "UXNow",
+        "cargo": "Pesquisador",
+        "inicio": "2018-10",
+        "fim": "2024-04",
+        "descricao": "Estudos qualitativos e quantitativos."
+      }
+    ],
+    "formacao": [
+      { "curso": "BSc Psicologia", "instituicao": "UFSC", "ano": 2017 }
+    ],
+    "projetos": [
+      { "titulo": "Pesquisa de Usuários", "link": "https://example.com" }
+    ],
+    "certificacoes": ["UX Research"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Design", "Comportamento"]
+  },
+  {
+    "id": 13,
+    "nome": "Mariana Dias",
+    "foto": "https://i.pravatar.cc/150?img=13",
+    "cargo": "Arquiteta de Software",
+    "resumo": "Desenha arquiteturas escaláveis e orientadas a eventos.",
+    "localizacao": "São Paulo/SP",
+    "area": "Arquitetura",
+    "habilidadesTecnicas": ["Microservices", "Kafka", "AWS"],
+    "softSkills": ["Visão sistêmica", "Comunicação"],
+    "experiencias": [
+      {
+        "empresa": "ScaleUp",
+        "cargo": "Arquiteta",
+        "inicio": "2017-08",
+        "fim": "2024-02",
+        "descricao": "Reestruturação de plataforma monolítica."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "MSc Engenharia de Software",
+        "instituicao": "USP",
+        "ano": 2016
+      }
+    ],
+    "projetos": [
+      { "titulo": "Evento Driven Platform", "link": "https://example.com" }
+    ],
+    "certificacoes": ["AWS Solution Architect"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Escalabilidade", "DevOps"]
+  },
+  {
+    "id": 14,
+    "nome": "Nicolas Rocha",
+    "foto": "https://i.pravatar.cc/150?img=14",
+    "cargo": "Engenheiro de Dados",
+    "resumo": "Constrói pipelines e modelos de dados robustos.",
+    "localizacao": "Porto Alegre/RS",
+    "area": "Data",
+    "habilidadesTecnicas": ["Python", "Airflow", "SQL"],
+    "softSkills": ["Curiosidade", "Resiliência"],
+    "experiencias": [
+      {
+        "empresa": "DataStream",
+        "cargo": "Engenheiro",
+        "inicio": "2018-11",
+        "fim": "2024-05",
+        "descricao": "Pipelines ETL para analytics."
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "BSc Sistemas de Informação",
+        "instituicao": "PUCRS",
+        "ano": 2017
+      }
+    ],
+    "projetos": [{ "titulo": "Data Lake", "link": "https://example.com" }],
+    "certificacoes": ["Google Cloud Data Engineer"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Avançado" }],
+    "areainteresses": ["Big Data", "Visualização"]
+  },
+  {
+    "id": 15,
+    "nome": "Olivia Gomes",
+    "foto": "https://i.pravatar.cc/150?img=15",
+    "cargo": "Content Strategist",
+    "resumo": "Estratégia de conteúdo e produção editorial.",
+    "localizacao": "Salvador/BA",
+    "area": "Conteúdo",
+    "habilidadesTecnicas": ["SEO", "Copywriting", "CMS"],
+    "softSkills": ["Criatividade", "Comunicação"],
+    "experiencias": [
+      {
+        "empresa": "ContentLab",
+        "cargo": "Estratégista",
+        "inicio": "2016-05",
+        "fim": "2023-12",
+        "descricao": "Planejamento editorial para blogs."
+      }
+    ],
+    "formacao": [
+      { "curso": "BAd Comunicação", "instituicao": "UFBA", "ano": 2015 }
+    ],
+    "projetos": [
+      { "titulo": "Guia de Conteúdo", "link": "https://example.com" }
+    ],
+    "certificacoes": ["Content Marketing"],
+    "idiomas": [{ "idioma": "Inglês", "nivel": "Intermediário" }],
+    "areainteresses": ["Educação", "Mídia"]
+  }
+]
