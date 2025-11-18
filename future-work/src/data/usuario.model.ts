@@ -23,7 +23,7 @@ export interface IProjeto {
 
 export interface IIdioma {
   idioma: string;
-  nivel: 'Básico' | 'Intermediário' | 'Avançado';
+  nivel: string;
 }
 
 
