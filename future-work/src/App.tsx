@@ -3,10 +3,10 @@ import usuariosData from './data/usuario.json';
 
 import type { IProjetoFeed } from './data/projeto.model';
 // Importando o JSON de projetos (verifique se o arquivo é 'projeto.json' ou 'projetos.json')
-import projetosData from './data/projeto.json'; 
+import projetosData from './data/projeto.json';
 import { SugestoesProjetos } from './components/SugestoesProjetos';
 import { ProjectModal } from './components/ProjectModal';
-
+import CustomizarModal from "./components/CustomizarModal";
 import logo from "./imgs/logo.png";
 import perfil from "./imgs/perfil.png";
 import './App.css'
@@ -38,6 +38,8 @@ function App() {
 
   return (
     <div className="bg-gray-100 dark:bg-[#2A2B30] min-h-screen w-full flex flex-col transition-colors duration-300 overflow-x-hidden">
+      <CustomizarModal />
+
 
       {/* ================= HEADER FIXO ================= */}
       <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-[#202327] h-16 px-4 flex items-center justify-between shadow-md border-b border-gray-200 dark:border-none transition-colors duration-300">
@@ -88,7 +90,12 @@ function App() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <button onClick={handleFecharMenu} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Customizar</button>
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('open-customizar'))}
+                className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+              >
+                Customizar
+              </button>
               <button onClick={handleFecharMenu} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Networks</button>
               <button onClick={handleFecharMenu} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Certificados</button>
             </div>
@@ -109,11 +116,13 @@ function App() {
           </div>
 
           <div className="mt-6 flex flex-col gap-3">
-            <button className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Customizar</button>
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-customizar'))}
+              className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Customizar</button>
             <button className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Networks</button>
             <button className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Certificados</button>
           </div>
-          
+
           <div className="relative h-full">
             <button
               onClick={() => setTemaEscuro(!temaEscuro)}
@@ -129,7 +138,7 @@ function App() {
         {/* CORREÇÃO CRÍTICA AQUI: ml-64 (margem) + w-auto (largura automática) */}
         {/* Em vez de w-full (que força 100% + margem), usamos w-auto ou flex-1 para preencher o resto */}
         <div className="flex-1 flex flex-col w-full md:ml-64 md:w-[calc(100%-16rem)] min-h-[calc(100vh-4rem)] transition-colors duration-300">
-          
+
           {/* max-w-full garante que o conteúdo interno não estoure o pai */}
           <main className="flex-1 p-4 w-full max-w-full overflow-hidden">
             <div className="mb-4 md:hidden relative">
@@ -159,14 +168,14 @@ function App() {
               projeto={projetoSelecionado}
               onClose={() => setProjetoSelecionado(null)}
             />
-            
+
             <div className="h-8"></div>
           </main>
 
           {/* Footer */}
           <footer className="bg-white dark:bg-[#202327] border-t border-gray-200 dark:border-none py-6 mt-auto transition-colors duration-300 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] relative z-0 w-full">
             <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-              
+
               <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                   SkillConnect
