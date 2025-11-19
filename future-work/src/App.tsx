@@ -2,7 +2,6 @@ import type { IUsuario } from './data/usuario.model';
 import usuariosData from './data/usuario.json';
 
 import type { IProjetoFeed } from './data/projeto.model';
-// Importando o JSON de projetos
 import projetosData from './data/projeto.json'; 
 import { SugestoesProjetos } from './components/SugestoesProjetos';
 import { ProjectModal } from './components/ProjectModal';
@@ -16,17 +15,34 @@ import './App.css'
 import { SugestoesPerfis } from "./components/SugestoesPerfis";
 import { UserModal } from "./components/UserModal";
 import { useState, useEffect } from 'react';
-// ADICIONEI Settings e Award nos imports
-import { Menu, X, Sun, Moon, Github, Linkedin, Twitter, Mail, Users, Settings, Award } from 'lucide-react';
+import { Menu, X, Sun, Moon, Github, Linkedin, Twitter, Mail, Users, Settings, Award, Search } from 'lucide-react';
 
 function App() {
   const usuarios = usuariosData as IUsuario[];
-  const projetos = projetosData as IProjetoFeed[];
+  const projetosTodos = projetosData as IProjetoFeed[];
 
   const [usuarioSelecionado, setUsuarioSelecionado] = useState<IUsuario | null>(null);
   const [projetoSelecionado, setProjetoSelecionado] = useState<IProjetoFeed | null>(null);
   const [networkModalAberto, setNetworkModalAberto] = useState(false);
   
+  // === ESTADO DA BUSCA ===
+  const [busca, setBusca] = useState("");
+
+  // === LÓGICA DE FILTRO (PESQUISA) ===
+  // Filtra Usuários por Nome, Cargo ou Habilidades
+  const usuariosFiltrados = usuarios.filter(u => 
+    u.nome.toLowerCase().includes(busca.toLowerCase()) ||
+    u.cargo.toLowerCase().includes(busca.toLowerCase()) ||
+    u.habilidadesTecnicas?.some(h => h.toLowerCase().includes(busca.toLowerCase()))
+  );
+
+  // Filtra Projetos por Título, Criador ou Descrição
+  const projetosFiltrados = projetosTodos.filter(p => 
+    p.titulo.toLowerCase().includes(busca.toLowerCase()) ||
+    p.criador.toLowerCase().includes(busca.toLowerCase()) ||
+    p.descricao.toLowerCase().includes(busca.toLowerCase())
+  );
+
   const [rede, setRede] = useState<number[]>([]);
 
   const toggleConexao = (usuario: IUsuario) => {
@@ -76,8 +92,17 @@ function App() {
       <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-[#202327] h-16 px-4 flex items-center justify-between shadow-md border-b border-gray-200 dark:border-none transition-colors duration-300">
         <div className="flex items-center gap-4">
           <img src={logo} alt="logo" className="h-10 w-auto object-contain invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 transition-all duration-300" />
+          
+          {/* INPUT DE BUSCA (DESKTOP) */}
           <div className="relative hidden md:block">
-            <input type="text" placeholder="Pesquisar..." className="border-gray-300 dark:border-[#35393C] border-2 h-9 pl-3 pr-3 rounded-lg w-80 bg-gray-50 dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors" />
+            <input 
+              type="text" 
+              placeholder="Pesquisar perfis ou projetos..." 
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              className="border-gray-300 dark:border-[#35393C] border-2 h-9 pl-10 pr-3 rounded-lg w-80 bg-gray-50 dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors" 
+            />
+            <Search size={16} className="absolute left-3 top-2.5 text-gray-400" />
           </div>
         </div>
         <button onClick={() => setMenuAberto(!menuAberto)} className="md:hidden p-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition">
@@ -132,7 +157,6 @@ function App() {
           </div>
           
           <div className="mt-6 flex flex-col gap-3">
-            {/* BOTÃO CUSTOMIZAR */}
             <button 
                 onClick={() => window.dispatchEvent(new CustomEvent('open-customizar'))} 
                 className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition flex items-center gap-2 group"
@@ -140,7 +164,6 @@ function App() {
                 <Settings size={18} className="opacity-80 group-hover:rotate-45 transition-transform"/> Customizar
             </button>
             
-            {/* BOTÃO NETWORKS */}
             <button 
                 onClick={() => setNetworkModalAberto(true)}
                 className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition flex justify-between items-center group"
@@ -149,7 +172,6 @@ function App() {
                {rede.length > 0 && <span className="bg-white/20 group-hover:bg-white/30 px-2 rounded-full text-xs font-bold transition-colors">{rede.length}</span>}
             </button>
 
-            {/* BOTÃO CERTIFICADOS */}
             <button 
                 className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition flex items-center gap-2 group"
             >
@@ -167,18 +189,50 @@ function App() {
         {/* CONTEÚDO */}
         <div className="flex-1 flex flex-col md:ml-64 min-w-0 transition-colors duration-300">
           <main className="flex-1 p-4 w-full max-w-full overflow-hidden">
+            
+            {/* INPUT DE BUSCA (MOBILE) */}
             <div className="mb-4 md:hidden relative">
-               <input type="text" placeholder="Pesquisar..." className="w-full border-gray-300 dark:border-[#35393C] border-2 h-10 pl-3 pr-3 rounded-lg bg-white dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none" />
+               <input 
+                 type="text" 
+                 placeholder="Pesquisar..." 
+                 value={busca}
+                 onChange={(e) => setBusca(e.target.value)}
+                 className="w-full border-gray-300 dark:border-[#35393C] border-2 h-10 pl-10 pr-3 rounded-lg bg-white dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none" 
+               />
+               <Search size={18} className="absolute left-3 top-2.5 text-gray-400" />
             </div>
 
-            <SugestoesPerfis 
-                usuarios={usuarios} 
-                abrirModal={(u) => setUsuarioSelecionado(u)}
-                redeIds={rede}
-                onToggleConexao={toggleConexao}
-            />
+            {/* LISTA DE PERFIS (FILTRADA) */}
+            {usuariosFiltrados.length > 0 ? (
+               <SugestoesPerfis 
+                  usuarios={usuariosFiltrados} 
+                  abrirModal={(u) => setUsuarioSelecionado(u)}
+                  redeIds={rede}
+                  onToggleConexao={toggleConexao}
+              />
+            ) : (
+               // Mensagem se não encontrar ninguém
+               busca && (
+                 <div className="py-8 text-center text-gray-500 dark:text-gray-400">
+                   <p>Nenhum perfil encontrado para "{busca}".</p>
+                 </div>
+               )
+            )}
 
-            <SugestoesProjetos projetos={projetos} abrirModal={(p) => setProjetoSelecionado(p)} />
+            {/* LISTA DE PROJETOS (FILTRADA) */}
+            {projetosFiltrados.length > 0 ? (
+               <SugestoesProjetos 
+                  projetos={projetosFiltrados} 
+                  abrirModal={(p) => setProjetoSelecionado(p)} 
+               />
+            ) : (
+               // Mensagem se não encontrar projetos (só exibe se também não achou usuários para não duplicar mensagem vazia na tela se um dos dois tiver resultados)
+               (busca && usuariosFiltrados.length === 0) && (
+                 <div className="py-4 text-center text-gray-500 dark:text-gray-400">
+                   <p>Nenhum projeto encontrado.</p>
+                 </div>
+               )
+            )}
 
             <UserModal 
               usuario={usuarioSelecionado} 
