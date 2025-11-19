@@ -1,8 +1,82 @@
 [
-    {
-        "id": 1,
-        "titulo": "Bomba automatica",
-        "imagem": "https://loremflickr.com/cache/resized/7480_16271130115_2f7debe40f_300_300_nofilter.jpg",
-        "criado": "Fred Silva"
-    }
+  {
+    "id": 1,
+    "titulo": "Bomba Automática Industrial",
+    "imagem": "https://loremflickr.com/300/300/machine,industry",
+    "criador": "Fred Silva",
+    "descricao": "Máquina industrial de precisão para automação de perfuração em madeira e MDF, otimizando a linha de produção com múltiplas cabeças operacionais.",
+    "data": "2023-10-15"
+  },
+  {
+    "id": 2,
+    "titulo": "App de Gestão Financeira",
+    "imagem": "https://loremflickr.com/300/300/finance,app",
+    "criador": "Ana Souza",
+    "descricao": "Aplicativo mobile desenvolvido em React Native para controle de gastos pessoais, com gráficos interativos e integração bancária via Open Finance.",
+    "data": "2024-01-20"
+  },
+  {
+    "id": 3,
+    "titulo": "Smart Home Hub",
+    "imagem": "https://loremflickr.com/300/300/iot,tech",
+    "criador": "Carlos Mendes",
+    "descricao": "Central de automação residencial baseada em IoT, permitindo controle de luzes, temperatura e segurança através de comandos de voz.",
+    "data": "2023-11-05"
+  },
+  {
+    "id": 4,
+    "titulo": "Design System Corporativo",
+    "imagem": "https://loremflickr.com/300/300/design,ui",
+    "criador": "Julia Pereira",
+    "descricao": "Biblioteca de componentes UI/UX completa, documentada no Storybook, garantindo consistência visual em todos os produtos digitais da empresa.",
+    "data": "2024-02-10"
+  },
+  {
+    "id": 5,
+    "titulo": "Braço Robótico MK-II",
+    "imagem": "https://loremflickr.com/300/300/robot,arm",
+    "criador": "Roberto Alencar",
+    "descricao": "Protótipo funcional de um braço mecânico impresso em 3D, controlado por Arduino, focado em auxiliar tarefas repetitivas em laboratórios.",
+    "data": "2023-09-30"
+  },
+  {
+    "id": 6,
+    "titulo": "Dashboard de Analytics",
+    "imagem": "https://loremflickr.com/300/300/analytics,chart",
+    "criador": "Fernanda Lima",
+    "descricao": "Painel administrativo para visualização de dados de vendas em tempo real, utilizando Power BI integrado a um banco de dados SQL Azure.",
+    "data": "2024-03-15"
+  },
+  {
+    "id": 7,
+    "titulo": "Drone Agrícola V1",
+    "imagem": "https://loremflickr.com/300/300/drone,farm",
+    "criador": "Marcos Vinícius",
+    "descricao": "Drone autônomo equipado com sensores multiespectrais para monitoramento de saúde de plantações e mapeamento aéreo de grandes áreas.",
+    "data": "2024-01-05"
+  },
+  {
+    "id": 8,
+    "titulo": "E-commerce de Moda Sustentável",
+    "imagem": "https://loremflickr.com/300/300/fashion,clothes",
+    "criador": "Beatriz Costa",
+    "descricao": "Plataforma completa de comércio eletrônico focada em marcas eco-friendly, com checkout transparente e cálculo de pegada de carbono no frete.",
+    "data": "2023-12-12"
+  },
+  {
+    "id": 9,
+    "titulo": "Realidade Aumentada para Educação",
+    "imagem": "https://loremflickr.com/300/300/vr,education",
+    "criador": "Tiago Santos",
+    "descricao": "Aplicação educacional que utiliza AR para projetar modelos 3D de anatomia e física, facilitando o aprendizado interativo em sala de aula.",
+    "data": "2023-08-22"
+  },
+  {
+    "id": 10,
+    "titulo": "Cadeira Ergonômica Zen",
+    "imagem": "https://loremflickr.com/300/300/furniture,chair",
+    "criador": "Lucas Oliveira",
+    "descricao": "Projeto de design industrial de uma cadeira de escritório focada em saúde postural, utilizando materiais recicláveis e malha respirável.",
+    "data": "2024-02-28"
+  }
 ]

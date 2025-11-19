@@ -1,5 +1,13 @@
 import type { IUsuario } from './data/usuario.model';
 import usuariosData from './data/usuario.json';
+
+import type { IProjetoFeed } from './data/projeto.model';
+// IMPORTANTE: Aqui estamos importando o SEU novo arquivo JSON de 60 projetos
+import projetosData from './data/projeto.json'; 
+import { SugestoesProjetos } from './components/SugestoesProjetos';
+// Importando o NOVO MODAL
+import { ProjectModal } from './components/projectmodal';
+
 import logo from "./imgs/logo.png";
 import perfil from "./imgs/perfil.png";
 import './App.css'
@@ -10,13 +18,19 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 
 function App() {
   const usuarios = usuariosData as IUsuario[];
-  const [usuarioSelecionado, setUsuarioSelecionado] = useState<IUsuario | null>(null);
-
   
+  // Carregando os projetos do SEU JSON novo
+  const projetos = projetosData as IProjetoFeed[];
+
+  // Estado para o Perfil Selecionado
+  const [usuarioSelecionado, setUsuarioSelecionado] = useState<IUsuario | null>(null);
+  
+  // Estado para o Projeto Selecionado
+  const [projetoSelecionado, setProjetoSelecionado] = useState<IProjetoFeed | null>(null);
+
   const [menuAberto, setMenuAberto] = useState(false);
   const [temaEscuro, setTemaEscuro] = useState(true);
 
-  
   useEffect(() => {
     if (temaEscuro) {
       document.documentElement.classList.add('dark');
@@ -28,7 +42,6 @@ function App() {
   const handleFecharMenu = () => setMenuAberto(false);
 
   return (
-    
     <div className="bg-gray-100 dark:bg-[#2A2B30] min-h-screen w-full flex flex-col transition-colors duration-300">
 
       {/* ================= HEADER FIXO ================= */}
@@ -60,9 +73,7 @@ function App() {
       {/* ================= MENU MOBILE FULLSCREEN ================= */}
       {menuAberto && (
         <div className="fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-white dark:bg-[#202327] z-50 p-4 md:hidden overflow-y-auto animate-in slide-in-from-top-2">
-            
             <div className="flex flex-col h-full">
-                {/* Botão de Tema */}
                 <button 
                 onClick={() => setTemaEscuro(!temaEscuro)}
                 className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-[#35393C] text-gray-900 dark:text-white py-4 rounded-lg mb-6 font-medium transition hover:brightness-95 border border-gray-200 dark:border-transparent"
@@ -73,7 +84,6 @@ function App() {
 
                 <hr className="border-gray-200 dark:border-[#35393C] mb-6"/>
 
-                {/* Perfil */}
                 <div className="flex items-center mb-6">
                     <img src={perfil} alt="perfil" className="h-14 w-14 rounded" />
                     <div className="ml-4">
@@ -91,7 +101,6 @@ function App() {
         </div>
       )}
 
-      {/* ================= CORPO DO SITE ================= */}
       <div className="flex pt-16 w-full relative">
 
         {/* Sidebar Desktop */}
@@ -112,7 +121,7 @@ function App() {
         </aside>
 
         {/* Conteúdo Principal */}
-        <main className="flex-1 w-full md:ml-64 p-4 transition-colors duration-300">
+        <main className="flex-1 w-full md:ml-64 p-4 transition-colors duration-300 overflow-x-hidden">
           
           <div className="mb-4 md:hidden relative">
              <input
@@ -122,15 +131,30 @@ function App() {
             />
           </div>
 
+          {/* === SEÇÃO DE PERFIS === */}
           <SugestoesPerfis
             usuarios={usuarios}
             abrirModal={(u) => setUsuarioSelecionado(u)}
+          />
+
+          {/* === NOVA SEÇÃO DE PROJETOS === */}
+          <SugestoesProjetos 
+             projetos={projetos} 
+             abrirModal={(p) => setProjetoSelecionado(p)} 
           />
 
           <UserModal
             usuario={usuarioSelecionado}
             onClose={() => setUsuarioSelecionado(null)}
           />
+
+          {/* Novo Modal de Projetos */}
+          <ProjectModal 
+             projeto={projetoSelecionado}
+             onClose={() => setProjetoSelecionado(null)}
+          />
+          
+          <div className="h-8"></div>
         </main>
 
       </div>

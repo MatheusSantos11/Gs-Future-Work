@@ -1,5 +1,6 @@
 import type { IUsuario } from "../data/usuario.model";
 import { ProfileCard } from "./ProfileCard";
+import { Users } from "lucide-react"; 
 
 interface Props {
   usuarios: IUsuario[];
@@ -9,12 +10,11 @@ interface Props {
 export function SugestoesPerfis({ usuarios, abrirModal }: Props) {
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white transition-colors">
-        Sugestões de Perfis para você
+      <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white transition-colors flex items-center gap-2">
+        <Users className="text-blue-500" size={20} /> Sugestões de Perfis para você
       </h2>
       
-      {/* Lista de Cards com scroll horizontal */}
-      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide w-115 md:w-150 lg:w-200 xl:w-250">
+      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
         {usuarios.map((usuario) => (
           <ProfileCard 
             key={usuario.id} 
