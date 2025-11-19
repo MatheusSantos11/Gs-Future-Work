@@ -1,76 +1,127 @@
 import type { IUsuario } from './data/usuario.model';
 import usuariosData from './data/usuario.json';
 import logo from "./imgs/logo.png";
-import menu from "./imgs/menu.svg";
 import perfil from "./imgs/perfil.png";
 import './App.css'
 import { SugestoesPerfis } from "./components/SugestoesPerfis";
 import { UserModal } from "./components/UserModal";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 
 function App() {
   const usuarios = usuariosData as IUsuario[];
   const [usuarioSelecionado, setUsuarioSelecionado] = useState<IUsuario | null>(null);
 
+  
+  const [menuAberto, setMenuAberto] = useState(false);
+  const [temaEscuro, setTemaEscuro] = useState(true);
+
+  
+  useEffect(() => {
+    if (temaEscuro) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [temaEscuro]);
+
+  const handleFecharMenu = () => setMenuAberto(false);
+
   return (
-    <div className="bg-[#2A2B30] min-h-screen w-full flex">
+    
+    <div className="bg-gray-100 dark:bg-[#2A2B30] min-h-screen w-full flex flex-col transition-colors duration-300">
 
-      {/* ==== SIDEBAR PERFIL (ESQUERDA) ==== */}
-      <aside className="hidden md:block w-64 bg-[#2A2B30] fixed left-0 top-0 h-full p-4 text-white">
-        <div className="flex">
-          <img src={perfil} alt="perfil" className="h-16 w-16 rounded" />
-          <div className="ml-3 mt-1">
-            <h2 className="text-lg">Nome</h2>
-            <p className="text-[#9FA2A3] text-sm">cargo</p>
-          </div>
+      {/* ================= HEADER FIXO ================= */}
+      <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-[#202327] h-16 px-4 flex items-center justify-between shadow-md border-b border-gray-200 dark:border-none transition-colors duration-300">
+        <div className="flex items-center gap-4">
+            <img 
+              src={logo} 
+              alt="logo" 
+              className="h-10 w-auto object-contain invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 transition-all duration-300" 
+            />
+            
+            <div className="relative hidden md:block">
+                <input
+                  type="text"
+                  placeholder="Pesquisar..."
+                  className="border-gray-300 dark:border-[#35393C] border-2 h-9 pl-3 pr-3 rounded-lg w-80 bg-gray-50 dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors"
+                />
+            </div>
         </div>
+        
+        <button 
+          onClick={() => setMenuAberto(!menuAberto)} 
+          className="md:hidden p-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition"
+        >
+          {menuAberto ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </header>
 
-        <div className="mt-4 flex flex-col gap-2">
-          <button className="bg-[#287ADF] px-3 py-1 rounded">Customizar</button>
-          <button className="bg-[#287ADF] px-3 py-1 rounded">Networks</button>
-          <button className="bg-[#287ADF] px-3 py-1 rounded">Certificados</button>
+      {/* ================= MENU MOBILE FULLSCREEN ================= */}
+      {menuAberto && (
+        <div className="fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-white dark:bg-[#202327] z-50 p-4 md:hidden overflow-y-auto animate-in slide-in-from-top-2">
+            
+            <div className="flex flex-col h-full">
+                {/* Botão de Tema */}
+                <button 
+                onClick={() => setTemaEscuro(!temaEscuro)}
+                className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-[#35393C] text-gray-900 dark:text-white py-4 rounded-lg mb-6 font-medium transition hover:brightness-95 border border-gray-200 dark:border-transparent"
+                >
+                {temaEscuro ? <Sun size={20} /> : <Moon size={20} />}
+                {temaEscuro ? "Mudar para Tema Claro" : "Mudar para Tema Escuro"}
+                </button>
+
+                <hr className="border-gray-200 dark:border-[#35393C] mb-6"/>
+
+                {/* Perfil */}
+                <div className="flex items-center mb-6">
+                    <img src={perfil} alt="perfil" className="h-14 w-14 rounded" />
+                    <div className="ml-4">
+                        <h2 className="text-xl font-bold text-gray-900 dark:text-white">Nome do Usuário</h2>
+                        <p className="text-gray-500 dark:text-[#9FA2A3]">Cargo / Função</p>
+                    </div>
+                </div>
+                
+                <div className="flex flex-col gap-3">
+                    <button onClick={handleFecharMenu} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Customizar</button>
+                    <button onClick={handleFecharMenu} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Networks</button>
+                    <button onClick={handleFecharMenu} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Certificados</button>
+                </div>
+            </div>
         </div>
-      </aside>
+      )}
 
-      {/* ==== CONTEÚDO CENTRAL ==== */}
-      <div className="flex-1 md:ml-64">
+      {/* ================= CORPO DO SITE ================= */}
+      <div className="flex pt-16 w-full relative">
 
-        {/* ==== HEADER ==== */}
-                {/* ==== HEADER ==== */}
-        <header className="fixed z-10 bg-[#202327] h-15 p-2 flex items-center gap-4 top-0 left-0 md:left-64 right-0">
-          <img src={logo} alt="logo" className="h-10 w-37" />
-
-          <input
-            type="text"
-            placeholder="Pesquisar"
-            className="border-[#35393C] border-2 h-9 p-2 rounded-lg mt-1 md:ml-10 md:w-80"
-          />
-
-          <img src={menu} alt="menu" className="h-10 w-10 ml-auto mt-1" />
-        </header>
-
-        {/* Espaçamento para o header */}
-        <div className="h-16"></div>
-
-        {/* ==== PERFIL NO MOBILE ==== */}
-        <div className="ml-3 md:hidden">
-          <div className="flex flex-wrap">
-            <img src={perfil} alt="perfil" className="h-20 w-20 ml-3" />
-            <div className="mt-3 ml-3">
-              <h2 className="text-xl text-white">Nome</h2>
-              <p className="text-[#9FA2A3]">cargo</p>
+        {/* Sidebar Desktop */}
+        <aside className="hidden md:flex flex-col w-64 bg-white dark:bg-[#2A2B30] fixed left-0 top-16 h-[calc(100vh-4rem)] p-4 border-r border-gray-200 dark:border-[#35393C] transition-colors duration-300">
+          <div className="flex items-center">
+            <img src={perfil} alt="perfil" className="h-16 w-16 rounded" />
+            <div className="ml-3">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white">Nome</h2>
+              <p className="text-gray-500 dark:text-[#9FA2A3] text-sm">cargo</p>
             </div>
           </div>
 
-          <div className="flex flex-wrap ml-4 mt-2 gap-2">
-            <button className="bg-[#287ADF] px-3 py-1 rounded">Customizar</button>
-            <button className="bg-[#287ADF] px-3 py-1 rounded">Networks</button>
-            <button className="bg-[#287ADF] px-3 py-1 rounded">Certificados</button>
+          <div className="mt-6 flex flex-col gap-3">
+            <button className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Customizar</button>
+            <button className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Networks</button>
+            <button className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Certificados</button>
           </div>
-        </div>
+        </aside>
 
-        {/* ==== FEED ==== */}
-        <div className="px-4 mt-4">
+        {/* Conteúdo Principal */}
+        <main className="flex-1 w-full md:ml-64 p-4 transition-colors duration-300">
+          
+          <div className="mb-4 md:hidden relative">
+             <input
+              type="text"
+              placeholder="Pesquisar..."
+              className="w-full border-gray-300 dark:border-[#35393C] border-2 h-10 pl-3 pr-3 rounded-lg bg-white dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none"
+            />
+          </div>
+
           <SugestoesPerfis
             usuarios={usuarios}
             abrirModal={(u) => setUsuarioSelecionado(u)}
@@ -80,9 +131,11 @@ function App() {
             usuario={usuarioSelecionado}
             onClose={() => setUsuarioSelecionado(null)}
           />
-        </div>
+        </main>
+
       </div>
     </div>
   );
 }
+
 export default App;
