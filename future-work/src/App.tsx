@@ -93,7 +93,11 @@ function App() {
             <hr className="border-gray-200 dark:border-[#35393C] mb-6" />
 
             <div className="flex items-center mb-6">
-              <img src={perfil} alt="perfil" className="h-14 w-14 rounded" />
+              <img
+                src={userCustom?.foto ? userCustom.foto : perfil}
+                alt="perfil"
+                className="h-14 w-14 rounded"
+              />
               <div className="ml-4">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                   {typeof userCustom?.nome === 'string' && userCustom.nome.trim() ? userCustom.nome : 'Nome'}
@@ -123,7 +127,11 @@ function App() {
         {/* Sidebar Desktop */}
         <aside className="hidden md:flex flex-col w-64 bg-white dark:bg-[#2A2B30] fixed left-0 top-16 h-[calc(100vh-4rem)] p-4 border-r border-gray-200 dark:border-[#35393C] transition-colors duration-300 z-40">
           <div className="flex items-center">
-            <img src={perfil} alt="perfil" className="h-16 w-16 rounded" />
+            <img
+              src={userCustom?.foto ? userCustom.foto : perfil}
+              alt="perfil"
+              className="h-14 w-14 rounded"
+            />
             <div className="ml-3">
               <h2 className="text-lg font-bold text-gray-900 dark:text-white">
                 {typeof userCustom?.nome === 'string' && userCustom.nome.trim() ? userCustom.nome : 'Nome'}
