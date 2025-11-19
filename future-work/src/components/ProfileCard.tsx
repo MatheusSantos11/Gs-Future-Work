@@ -1,13 +1,22 @@
 import type { IUsuario } from "../data/usuario.model";
+import { Check, UserPlus } from "lucide-react";
 
 interface Props {
     usuario: IUsuario;
     onOpen: () => void;
+    // NOVAS PROPS PARA O CARD TAMBÉM FUNCIONAR
+    isConectado: boolean;
+    onToggleConexao: (usuario: IUsuario) => void;
 }
 
-export function ProfileCard({ usuario, onOpen }: Props) {
-    const handleButtonClick = (e: React.MouseEvent) => {
-        e.stopPropagation(); 
+export function ProfileCard({ usuario, onOpen, isConectado, onToggleConexao }: Props) {
+    const handleConectar = (e: React.MouseEvent) => {
+        e.stopPropagation(); // Impede de abrir o modal ao clicar no botão
+        onToggleConexao(usuario);
+    };
+
+    const handleMensagem = (e: React.MouseEvent) => {
+        e.stopPropagation();
     };
 
     return (
@@ -22,10 +31,7 @@ export function ProfileCard({ usuario, onOpen }: Props) {
             "
             onClick={onOpen}
         >
-            {/* CABEÇALHO DO CARD: FOTO + TEXTO */}
             <div className="flex items-start gap-4">
-                
-                {/* Container da Imagem */}
                 <div className="w-14 h-14 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
                     <img
                         src={usuario.foto}
@@ -33,9 +39,7 @@ export function ProfileCard({ usuario, onOpen }: Props) {
                         className="w-full h-full object-cover"
                     />
                 </div>
-
                 <div className="flex-1 min-w-0">
-                    {/* Texto: Preto no claro, Branco no escuro */}
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate group-hover:text-blue-500 transition-colors">
                         {usuario.nome}
                     </h3>
@@ -45,34 +49,31 @@ export function ProfileCard({ usuario, onOpen }: Props) {
                 </div>
             </div>
             
-            {/* Resumo */}
             <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-3 h-[3.6em]">
                 {usuario.resumo}
             </p>
             
-            {/* BOTÕES */}
             <div className="flex gap-2 mt-auto pt-2">
+                {/* BOTÃO CONECTAR ATUALIZADO */}
                 <button 
-                    className="
-                        flex-1 
-                        bg-blue-600 hover:bg-blue-700 
-                        dark:bg-[#0A66C2] dark:hover:bg-[#0b5ab0] 
-                        text-white py-1.5 rounded-md text-sm font-medium transition-colors
-                    "
-                    onClick={handleButtonClick}
+                    className={`
+                        flex-1 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-1
+                        ${isConectado 
+                            ? "bg-green-600 hover:bg-green-700 text-white" 
+                            : "bg-blue-600 hover:bg-blue-700 dark:bg-[#0A66C2] dark:hover:bg-[#0b5ab0] text-white"}
+                    `}
+                    onClick={handleConectar}
                 >
-                    Conectar
+                    {isConectado ? (
+                        <> <Check size={14} /> Conectado </>
+                    ) : (
+                        <> <UserPlus size={14} /> Conectar </>
+                    )}
                 </button>
                 
-                {/* Botão Mensagem: Cinza Claro no modo Light */}
                 <button 
-                    className="
-                        flex-1 
-                        bg-gray-100 hover:bg-gray-200 text-gray-900
-                        dark:bg-[#2f3338] dark:hover:bg-[#3a3f47] dark:text-white 
-                        py-1.5 rounded-md text-sm font-medium transition-colors
-                    "
-                    onClick={handleButtonClick}
+                    className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-[#2f3338] dark:hover:bg-[#3a3f47] dark:text-white py-1.5 rounded-md text-sm font-medium transition-colors"
+                    onClick={handleMensagem}
                 >
                     Mensagem
                 </button>

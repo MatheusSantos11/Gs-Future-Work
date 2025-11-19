@@ -1,40 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { X, MapPin, FolderGit2, Hash } from 'lucide-react';
+// ADICIONEI OS NOVOS ÍCONES AQUI: Settings, Users, Award
+import { X, MapPin, FolderGit2, Hash, Settings, Users, Award, Check } from 'lucide-react';
 import { salvarUser, carregarUser } from '../data/storage';
 import type { User } from '../data/storage';
 
 export default function CustomizarModal() {
   const [open, setOpen] = useState(false);
   const [users, setUsers] = useState<User[]>(() => carregarUser());
-  const [form, setForm] = useState<User>({
-    id: Date.now(),
-    nome: '',
-    foto: '',
-    cargo: '',
-    resumo: '',
-    localizacao: '',
-    area: '',
-    habilidadesTecnicas: '',
-    softSkills: '',
-    curso: '',
-    instituicao: '',
-    ano: '',
-  });
+  const [form, setForm] = useState<User>({ id: Date.now(), nome: '', foto: '', cargo: '', resumo: '', localizacao: '', area: '', habilidadesTecnicas: '', softSkills: '', curso: '', instituicao: '', ano: '' });
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  // escuta evento global para abrir o modal
   useEffect(() => {
-    function handleOpenEvent() {
-      setOpen(true);
-    }
+    function handleOpenEvent() { setOpen(true); }
     window.addEventListener('open-customizar', handleOpenEvent);
     return () => window.removeEventListener('open-customizar', handleOpenEvent);
   }, []);
 
-  useEffect(() => {
-    setUsers(carregarUser());
-  }, []);
+  useEffect(() => { setUsers(carregarUser()); }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
@@ -45,192 +28,119 @@ export default function CustomizarModal() {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = () => {
-      setForm((prev) => ({ ...prev, foto: String(reader.result) }));
-    };
+    reader.onload = () => { setForm((prev) => ({ ...prev, foto: String(reader.result) })); };
     reader.readAsDataURL(file);
-  }
-
-  function validate(f: User) {
-    if (typeof f.nome !== 'string' || !f.nome.trim()) return 'Preencha o nome.';
-    if (typeof f.cargo !== 'string' || !f.cargo.trim()) return 'Preencha o cargo.';
-    return null;
   }
 
   function handleSubmit(e?: React.FormEvent) {
     e && e.preventDefault();
-    const v = validate(form);
-    if (v) {
-      setError(v);
-      setSuccess(null);
-      return;
-    }
-
+    if (!form.nome.trim() || !form.cargo.trim()) { setError('Preencha nome e cargo.'); return; }
     setUsers((prev) => {
       const exists = prev.find((u) => u.id === form.id);
       const next: User[] = exists ? prev.map((u) => (u.id === form.id ? form : u)) : [form, ...prev];
       salvarUser(next);
-      // informa o App que os dados foram atualizados
       window.dispatchEvent(new CustomEvent('user-updated'));
-      setSuccess('Dados salvos com sucesso!');
-      setError(null);
+      setSuccess('Salvo!'); setError(null);
       return next;
     });
   }
 
-
-
   function handleDelete(id: number) {
     const next = users.filter((u) => u.id !== id);
-    setUsers(next);
-    salvarUser(next);
-    window.dispatchEvent(new CustomEvent('user-updated'));
+    setUsers(next); salvarUser(next); window.dispatchEvent(new CustomEvent('user-updated'));
   }
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full max-w-3xl rounded-xl shadow-2xl overflow-hidden relative border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1F2226] text-gray-900 dark:text-white">
-
-        <button
-          onClick={() => { setOpen(false); setError(null); setSuccess(null); }}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors z-10"
-          aria-label="Fechar"
-        >
-          <X size={20} className="text-gray-500 dark:text-gray-300" />
-        </button>
-
-        <div id="customizar-modal-scroll" className="p-6 max-h-[80vh] overflow-y-auto">
-
-          {/* CABEÇALHO */}
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6 border-b border-gray-100 dark:border-gray-800 pb-6">
-            <div className="w-28 h-28 rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0 shadow-sm">
-              {form.foto ? (
-                <img src={form.foto} alt={form.nome || 'foto'} className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-sm text-gray-500">Sem foto</div>
-              )}
-            </div>
-
-            <div className="flex-1 text-center sm:text-left">
-              <h2 className="text-2xl font-bold leading-tight mb-1">Customizar perfil</h2>
-              <p className="text-gray-500 dark:text-gray-400">Salve seus dados para usar em templates e formulários.</p>
-
-              <div className="flex flex-wrap justify-center sm:justify-start gap-3 mt-3 text-sm text-gray-500 dark:text-gray-400">
-                <div className="flex items-center gap-1">
-                  <MapPin size={14} />
-                  <span>{form.localizacao || 'Localização'}</span>
-                </div>
-                {form.area && (
-                  <div className="flex items-center gap-1 px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-semibold uppercase tracking-wide">
-                    <Hash size={12} />
-                    <span>{form.area}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="w-full sm:w-auto shrink-0 flex items-center gap-2 mt-4 sm:mt-0">
-              <label className="block text-xs text-gray-500 dark:text-gray-400">Foto (PNG/JPG)</label>
-              <input type="file" accept="image/*" onChange={handleImage} className="mt-1 text-sm" />
-            </div>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Nome</label>
-                <input name="nome" value={form.nome} onChange={handleChange} className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Cargo</label>
-                <input name="cargo" value={form.cargo} onChange={handleChange} className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]" />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Resumo</label>
-                <textarea name="resumo" value={form.resumo} onChange={handleChange} rows={3} className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]"></textarea>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Localização</label>
-                <input name="localizacao" value={form.localizacao} onChange={handleChange} className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Área</label>
-                <input name="area" value={form.area} onChange={handleChange} className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Habilidades Técnicas</label>
-                <input name="habilidadesTecnicas" value={form.habilidadesTecnicas} onChange={handleChange} placeholder="ex: React,Node,SQL" className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Soft Skills</label>
-                <input name="softSkills" value={form.softSkills} onChange={handleChange} placeholder="ex: Comunicação,Trabalho em equipe" className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Curso</label>
-                <input name="curso" value={form.curso} onChange={handleChange} className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Instituição</label>
-                <input name="instituicao" value={form.instituicao} onChange={handleChange} className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Ano</label>
-                <input name="ano" value={form.ano} onChange={handleChange} className="mt-1 w-full rounded-lg border px-3 py-2 bg-white dark:bg-[#121315]" />
-              </div>
-            </div>
-
-            {error && <div className="text-red-600">{error}</div>}
-            {success && <div className="text-green-600">{success}</div>}
-
-            <div className="flex items-center gap-3">
-              <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition-colors shadow">Salvar</button>
-            </div>
-          </form>
-
-          {/* PERFIS SALVOS */}
-          <section className="mt-8">
-            <h3 className="font-bold text-gray-900 dark:text-white mb-4 text-lg flex items-center gap-2">
-              <FolderGit2 className="text-purple-500" size={18} /> Perfis salvos
-            </h3>
-
-            <div className="grid gap-3">
-              {users.length === 0 && <div className="text-sm text-gray-500">Nenhum usuário salvo.</div>}
-              {users.map((u) => (
-                <div key={u.id} className="flex items-center gap-3 border rounded-lg p-3 bg-gray-50 dark:bg-white/5">
-                  <div className="w-12 h-12 rounded-2xl overflow-hidden border">
-                    {u.foto ? <img src={u.foto} alt={u.nome} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-xs">Sem foto</div>}
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-medium text-sm">{u.nome}</div>
-                    <div className="text-xs text-gray-500">{u.cargo} • {u.localizacao}</div>
-                  </div>
-                  <div className="flex gap-2">
-                    <button onClick={() => handleDelete(u.id)} className="px-3 py-1 text-xs rounded-lg border">Deletar</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-[60] p-4 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="w-full max-w-3xl bg-white dark:bg-[#1F2226] text-gray-900 dark:text-white rounded-xl shadow-2xl flex flex-col max-h-[90vh] border border-gray-200 dark:border-gray-700">
+        
+        {/* Cabeçalho Fixo */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 shrink-0">
+             <div className="flex items-center gap-2">
+                 {/* Ícone no título também fica legal */}
+                 <Settings className="text-blue-600 dark:text-blue-400" size={24} />
+                 <h2 className="text-xl font-bold">Customizar Perfil</h2>
+             </div>
+             <button onClick={() => setOpen(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors">
+                <X size={20} className="text-gray-500 dark:text-gray-300" />
+             </button>
         </div>
 
-        <div className="pt-4 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-[#131416] sticky bottom-0">
-          <div className="p-4 max-w-3xl mx-auto">
-            <button onClick={() => setOpen(false)} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold text-lg transition-colors shadow">Fechar</button>
-          </div>
+        {/* Área de Scroll */}
+        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
+               <div className="w-24 h-24 rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0 shadow-sm ring-2 ring-gray-100 dark:ring-gray-700">
+                 {form.foto ? <img src={form.foto} className="w-full h-full object-cover"/> : <div className="w-full h-full flex items-center justify-center text-sm">Sem foto</div>}
+               </div>
+               <div className="flex-1 w-full text-center sm:text-left">
+                 <label className="inline-block text-xs bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 px-3 py-2 rounded-lg cursor-pointer hover:brightness-95 transition font-medium mb-2">
+                    Alterar Foto
+                    <input type="file" accept="image/*" className="hidden" onChange={handleImage}/>
+                 </label>
+                 <p className="text-xs text-gray-400">Recomendado: PNG ou JPG quadrado.</p>
+               </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div><label className="text-sm font-medium mb-1 block">Nome Completo</label><input name="nome" value={form.nome} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315] focus:ring-2 focus:ring-blue-500 outline-none"/></div>
+                    <div><label className="text-sm font-medium mb-1 block">Cargo / Profissão</label><input name="cargo" value={form.cargo} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315] focus:ring-2 focus:ring-blue-500 outline-none"/></div>
+                    
+                    <div className="md:col-span-2"><label className="text-sm font-medium mb-1 block">Resumo / Bio</label><textarea name="resumo" value={form.resumo} onChange={handleChange} rows={3} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315] focus:ring-2 focus:ring-blue-500 outline-none"/></div>
+
+                    <div><label className="text-sm font-medium mb-1 block">Localização</label><input name="localizacao" value={form.localizacao} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315]"/></div>
+                    <div><label className="text-sm font-medium mb-1 block">Área de Atuação</label><input name="area" value={form.area} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315]"/></div>
+
+                    <div><label className="text-sm font-medium mb-1 block">Habilidades Técnicas</label><input name="habilidadesTecnicas" value={form.habilidadesTecnicas} onChange={handleChange} placeholder="React, Node, SQL" className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315]"/></div>
+                    <div><label className="text-sm font-medium mb-1 block">Soft Skills</label><input name="softSkills" value={form.softSkills} onChange={handleChange} placeholder="Comunicação, Liderança" className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315]"/></div>
+
+                    <div className="md:col-span-2 pt-4 border-t border-gray-100 dark:border-gray-700"><h4 className="font-bold text-sm text-gray-500 dark:text-gray-400 uppercase mb-3">Formação Acadêmica</h4></div>
+                    
+                    <div><label className="text-sm font-medium mb-1 block">Curso</label><input name="curso" value={form.curso} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315]"/></div>
+                    <div><label className="text-sm font-medium mb-1 block">Instituição</label><input name="instituicao" value={form.instituicao} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315]"/></div>
+                    <div><label className="text-sm font-medium mb-1 block">Ano de Conclusão</label><input name="ano" value={form.ano} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315]"/></div>
+                </div>
+                
+                {error && <p className="text-red-500 bg-red-50 dark:bg-red-900/20 p-2 rounded border border-red-200 dark:border-red-800 text-sm">{error}</p>}
+                {success && <p className="text-green-600 bg-green-50 dark:bg-green-900/20 p-2 rounded border border-green-200 dark:border-green-800 text-sm">{success}</p>}
+                
+                <button type="submit" className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition-colors shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2">
+                    <Check size={18} /> Salvar Alterações
+                </button>
+            </form>
+            
+            {/* Lista de Perfis Salvos */}
+            <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700 pb-4">
+                <h3 className="font-bold mb-4 flex items-center gap-2"><FolderGit2 size={18} className="text-purple-500"/> Perfis salvos neste navegador</h3>
+                <div className="grid gap-3">
+                    {users.map(u => (
+                        <div key={u.id} className="flex items-center gap-3 border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                            <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                {u.foto ? <img src={u.foto} alt={u.nome} className="w-full h-full object-cover"/> : <span className="text-xs">Foto</span>}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <div className="font-bold text-sm truncate">{u.nome}</div>
+                                <div className="text-xs text-gray-500 truncate">{u.cargo}</div>
+                            </div>
+                            <div className="flex gap-2">
+                                <button onClick={() => { setForm(u); setSuccess(null); setError(null); }} className="text-xs bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300 px-3 py-1.5 rounded-md font-medium hover:bg-blue-100 transition">Editar</button>
+                                <button onClick={() => handleDelete(u.id)} className="text-xs bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-300 px-3 py-1.5 rounded-md font-medium hover:bg-red-100 transition">Excluir</button>
+                            </div>
+                        </div>
+                    ))}
+                    {users.length === 0 && <p className="text-sm text-gray-400 italic">Nenhum perfil salvo ainda.</p>}
+                </div>
+            </div>
         </div>
 
+        {/* Rodapé Fixo */}
+        <div className="p-4 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-[#131416] shrink-0 z-10">
+             <button onClick={() => setOpen(false)} className="w-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white py-3 rounded-xl font-bold text-lg transition-colors">
+                Fechar
+             </button>
+        </div>
       </div>
     </div>
   );

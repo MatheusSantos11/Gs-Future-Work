@@ -1,20 +1,24 @@
 import type { IUsuario, IFormacao } from "../data/usuario.model";
-// ADICIONEI "GraduationCap" AQUI NA LISTA DE IMPORTS 👇
-import { X, MapPin, Briefcase, FolderGit2, Award, Globe, Star, Heart, Hash, GraduationCap } from "lucide-react"; 
+import { 
+  X, MapPin, Briefcase, GraduationCap, Globe, 
+  Code, Star, Heart, Hash, GraduationCap as CapIcon, 
+  Check, UserPlus, FolderGit2, Award, MessageCircle, Mail 
+} from "lucide-react"; 
 
 interface Props {
   usuario: IUsuario | null;
   onClose: () => void;
+  isConectado: boolean;
+  onToggleConexao: (usuario: IUsuario) => void;
 }
 
-export function UserModal({ usuario, onClose }: Props) {
+export function UserModal({ usuario, onClose, isConectado, onToggleConexao }: Props) {
   if (!usuario) return null;
 
   const nome = usuario.nome || "Usuário";
-  const primeiroNome = nome.split(' ')?.[0] || nome;
+  const primeiroNome = nome.split(' ')[0];
   
   const habilidades = (usuario as any).habilidadesTecnicas || (usuario as any).habilidades || [];
-  
   const softSkills = (usuario as any).softSkills || [];
   const experiencias = (usuario as any).experiencias || [];
   const projetos = (usuario as any).projetos || [];
@@ -24,69 +28,58 @@ export function UserModal({ usuario, onClose }: Props) {
   const areaAtuacao = (usuario as any).area || "";
 
   const renderFormacao = () => {
-    if (!usuario.formacao) return "Não informada";
-
+    if (!usuario.formacao) return <span className="text-gray-500 italic">Não informada</span>;
+    
     if (typeof usuario.formacao === 'string') {
       return <p className="text-gray-600 dark:text-gray-400">{usuario.formacao}</p>;
     }
 
     if (Array.isArray(usuario.formacao)) {
       return (usuario.formacao as IFormacao[]).map((item, index) => (
-        <div key={index} className="mb-2">
-          <p className="text-gray-800 dark:text-gray-200 font-medium">
-            {item.curso}
-          </p>
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
-            {item.instituicao} • {item.ano}
-          </p>
+        <div key={index} className="mb-3 last:mb-0">
+          <p className="text-gray-900 dark:text-gray-100 font-semibold">{item.curso}</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">{item.instituicao} • {item.ano}</p>
         </div>
       ));
     }
-    
     return null;
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-[60] p-4 backdrop-blur-sm animate-in fade-in duration-200">
       
-      <div className="
-          bg-white dark:bg-[#1F2226] 
-          text-gray-900 dark:text-white
-          w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden relative
-          border border-gray-200 dark:border-gray-700
-          flex flex-col max-h-[90vh]
-      ">
+      <div className="bg-white dark:bg-[#1F2226] text-gray-900 dark:text-white w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden relative border border-gray-200 dark:border-gray-700 flex flex-col max-h-[90vh]">
         
+        {/* Botão Fechar Flutuante */}
         <button 
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors z-10"
+          onClick={onClose} 
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors z-10 bg-white/80 dark:bg-black/30 backdrop-blur-sm"
         >
           <X size={24} className="text-gray-500 dark:text-gray-300" />
         </button>
 
-        <div className="p-6 overflow-y-auto">
+        {/* Conteúdo Rolável */}
+        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
           
-          {/* === CABEÇALHO === */}
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6 border-b border-gray-100 dark:border-gray-800 pb-6">
+          {/* Cabeçalho */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8 border-b border-gray-100 dark:border-gray-800 pb-8">
             <img 
               src={usuario.foto || "https://via.placeholder.com/150"} 
               alt={nome} 
-              className="w-24 h-24 rounded-2xl object-cover bg-gray-200 dark:bg-gray-700 shrink-0 shadow-sm"
+              className="w-28 h-28 rounded-2xl object-cover bg-gray-200 dark:bg-gray-700 shrink-0 shadow-md ring-4 ring-gray-50 dark:ring-[#2A2B30]" 
             />
-            <div className="text-center sm:text-left">
-              <h2 className="text-3xl font-bold leading-tight">{nome}</h2>
-              <p className="text-blue-600 dark:text-blue-400 font-medium text-lg mt-1">
-                {usuario.cargo || "Sem cargo"}
-              </p>
+            <div className="text-center sm:text-left w-full">
+              <h2 className="text-3xl font-bold leading-tight mb-1">{nome}</h2>
+              <p className="text-blue-600 dark:text-blue-400 font-medium text-lg">{usuario.cargo || "Sem cargo"}</p>
               
-              <div className="flex flex-wrap justify-center sm:justify-start gap-3 mt-2 text-sm text-gray-500 dark:text-gray-400">
-                <div className="flex items-center gap-1">
-                   <MapPin size={14} />
+              <div className="flex flex-wrap justify-center sm:justify-start gap-3 mt-4 text-sm text-gray-500 dark:text-gray-400">
+                <div className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800/50 px-3 py-1.5 rounded-lg">
+                   <MapPin size={16} className="text-gray-400" />
                    <span>{usuario.localizacao || "Localização não informada"}</span>
                 </div>
                 {areaAtuacao && (
-                  <div className="flex items-center gap-1 px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-semibold uppercase tracking-wide">
-                    <Hash size={12} />
+                  <div className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800/50 px-3 py-1.5 rounded-lg">
+                    <Hash size={16} className="text-gray-400" />
                     <span>{areaAtuacao}</span>
                   </div>
                 )}
@@ -94,33 +87,37 @@ export function UserModal({ usuario, onClose }: Props) {
             </div>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-8 pb-4">
             
-            {/* === RESUMO === */}
+            {/* Resumo */}
             {usuario.resumo && (
-              <div>
-                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+              <div className="bg-blue-50/50 dark:bg-blue-900/10 p-4 rounded-xl border border-blue-100 dark:border-blue-900/20">
+                 <h3 className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">Sobre</h3>
+                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
                   {usuario.resumo}
                 </p>
               </div>
             )}
 
-            {/* === EXPERIÊNCIAS === */}
+            {/* Experiências */}
             {experiencias.length > 0 && (
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white mb-4 text-lg flex items-center gap-2">
                   <Briefcase className="text-blue-500" size={20} /> Experiência Profissional
                 </h3>
-                <div className="space-y-4 border-l-2 border-gray-200 dark:border-gray-700 ml-2 pl-4">
+                <div className="space-y-6 border-l-2 border-gray-200 dark:border-gray-700 ml-2.5 pl-6">
                   {experiencias.map((exp: any, index: number) => (
                     <div key={index} className="relative">
-                      <div className="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white dark:ring-[#1F2226]"></div>
-                      <h4 className="font-bold text-gray-900 dark:text-white text-md">{exp.cargo}</h4>
-                      <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">{exp.empresa}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
-                        ({exp.inicio} - {exp.fim})
-                      </span>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                      <div className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white dark:ring-[#1F2226]"></div>
+                      <h4 className="font-bold text-gray-900 dark:text-white text-base">{exp.cargo}</h4>
+                      <div className="flex flex-wrap items-center gap-2 mt-1 mb-2">
+                        <span className="text-sm font-medium text-blue-600 dark:text-blue-400">{exp.empresa}</span>
+                        <span className="text-gray-300 dark:text-gray-600">•</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded">
+                          {exp.inicio} - {exp.fim}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                         {exp.descricao}
                       </p>
                     </div>
@@ -129,38 +126,35 @@ export function UserModal({ usuario, onClose }: Props) {
               </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* === FORMAÇÃO === */}
+            {/* Grid: Formação e Projetos */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {usuario.formacao && (
-                  <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-lg flex items-center gap-2">
-                      <GraduationCap className="text-green-500" size={20} /> Formação
+                  <div className="bg-gray-50 dark:bg-white/5 p-5 rounded-xl border border-gray-100 dark:border-gray-700/50">
+                    <h3 className="font-bold text-gray-900 dark:text-white mb-4 text-lg flex items-center gap-2">
+                      <CapIcon className="text-green-500" size={20} /> Formação
                     </h3>
-                    <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-lg">
-                      {renderFormacao()}
-                    </div>
+                    <div>{renderFormacao()}</div>
                   </div>
                 )}
 
-                {/* === PROJETOS === */}
                 {projetos.length > 0 && (
-                   <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-lg flex items-center gap-2">
+                   <div className="bg-gray-50 dark:bg-white/5 p-5 rounded-xl border border-gray-100 dark:border-gray-700/50">
+                    <h3 className="font-bold text-gray-900 dark:text-white mb-4 text-lg flex items-center gap-2">
                       <FolderGit2 className="text-purple-500" size={20} /> Projetos
                     </h3>
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       {projetos.map((proj: any, index: number) => (
                         <a 
                           key={index} 
                           href={proj.link} 
                           target="_blank" 
-                          rel="noreferrer"
-                          className="block p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition-colors group"
+                          rel="noreferrer" 
+                          className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-black/20 border border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-500 transition-colors group"
                         >
-                          <p className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
+                          <span className="font-medium text-sm text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 line-clamp-1">
                             {proj.titulo}
-                          </p>
-                          <p className="text-xs text-gray-500 truncate">{proj.link}</p>
+                          </span>
+                          <Globe size={14} className="text-gray-400 group-hover:text-purple-500" />
                         </a>
                       ))}
                     </div>
@@ -168,8 +162,8 @@ export function UserModal({ usuario, onClose }: Props) {
                 )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* === IDIOMAS === */}
+            {/* Grid: Idiomas e Certificações */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {idiomas.length > 0 && (
                   <div>
                     <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-md flex items-center gap-2">
@@ -177,9 +171,9 @@ export function UserModal({ usuario, onClose }: Props) {
                     </h3>
                     <ul className="space-y-2">
                       {idiomas.map((lang: any, index: number) => (
-                        <li key={index} className="flex justify-between items-center text-sm border-b border-gray-100 dark:border-gray-800 pb-1 last:border-0">
+                        <li key={index} className="flex justify-between items-center text-sm border-b border-gray-100 dark:border-gray-800 pb-2 last:border-0">
                           <span className="text-gray-700 dark:text-gray-300">{lang.idioma}</span>
-                          <span className="text-xs font-semibold px-2 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-300 rounded">
+                          <span className="text-xs font-semibold px-2 py-0.5 bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300 rounded-full">
                             {lang.nivel}
                           </span>
                         </li>
@@ -188,7 +182,6 @@ export function UserModal({ usuario, onClose }: Props) {
                   </div>
                 )}
 
-                {/* === CERTIFICAÇÕES === */}
                 {certificacoes.length > 0 && (
                   <div>
                     <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-md flex items-center gap-2">
@@ -197,7 +190,7 @@ export function UserModal({ usuario, onClose }: Props) {
                     <ul className="space-y-2">
                       {certificacoes.map((cert: string, index: number) => (
                         <li key={index} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-yellow-500 shrink-0"></span>
+                          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0"></span>
                           {cert}
                         </li>
                       ))}
@@ -206,20 +199,18 @@ export function UserModal({ usuario, onClose }: Props) {
                 )}
             </div>
 
-            {/* === ÁREA DE SKILLS === */}
-            <div className="space-y-4 pt-4 border-t border-gray-100 dark:border-gray-800">
-                
-                {/* Habilidades Técnicas */}
+            {/* Skills e Interesses */}
+            <div className="space-y-6 pt-6 border-t border-gray-200 dark:border-gray-800">
                 {habilidades.length > 0 && (
                   <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-2 text-sm uppercase tracking-wide opacity-80">
+                    <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-sm uppercase tracking-wide opacity-80">
                       Habilidades Técnicas
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {habilidades.map((tech: string, index: number) => (
                         <span 
                           key={index} 
-                          className="px-3 py-1 rounded-lg text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300 border border-blue-200 dark:border-transparent"
+                          className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300 border border-blue-100 dark:border-blue-900/30"
                         >
                           {tech}
                         </span>
@@ -228,54 +219,76 @@ export function UserModal({ usuario, onClose }: Props) {
                   </div>
                 )}
 
-                {/* Soft Skills */}
-                {softSkills.length > 0 && (
-                  <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-2 text-sm uppercase tracking-wide opacity-80 flex items-center gap-1">
-                       <Star size={14} /> Soft Skills
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {softSkills.map((skill: string, index: number) => (
-                        <span 
-                          key={index} 
-                          className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-300"
-                        >
-                          {skill}
-                        </span>
-                      ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {softSkills.length > 0 && (
+                    <div>
+                      <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-sm uppercase tracking-wide opacity-80 flex items-center gap-1">
+                        <Star size={14} /> Soft Skills
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {softSkills.map((skill: string, index: number) => (
+                          <span key={index} className="px-3 py-1 rounded-full text-xs font-medium bg-orange-50 text-orange-700 dark:bg-orange-500/10 dark:text-orange-300 border border-orange-100 dark:border-orange-900/30">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {/* Áreas de Interesse */}
-                {areasInteresse.length > 0 && (
-                  <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white mb-2 text-sm uppercase tracking-wide opacity-80 flex items-center gap-1">
-                       <Heart size={14} /> Interesses
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {areasInteresse.map((interesse: string, index: number) => (
-                        <span 
-                          key={index} 
-                          className="px-2 py-1 rounded text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800"
-                        >
-                          #{interesse}
-                        </span>
-                      ))}
+                  {areasInteresse.length > 0 && (
+                    <div>
+                      <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-sm uppercase tracking-wide opacity-80 flex items-center gap-1">
+                        <Heart size={14} /> Interesses
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {areasInteresse.map((interesse: string, index: number) => (
+                          <span key={index} className="px-2 py-1 rounded text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                            #{interesse}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-            </div>
-
-            {/* === RODAPÉ === */}
-            <div className="pt-6 mt-2 border-t border-gray-200 dark:border-gray-700 sticky bottom-0 bg-white dark:bg-[#1F2226] pb-2">
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold text-lg transition-colors shadow-lg shadow-blue-600/20">
-                    Conectar com {primeiroNome}
-                </button>
+                  )}
+                </div>
             </div>
 
           </div>
         </div>
+
+        {/* === RODAPÉ FIXO (BOTÕES DE AÇÃO) === */}
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1F2226] flex gap-3 shrink-0">
+            {/* Botão Conectar */}
+            <button 
+                onClick={() => onToggleConexao(usuario)}
+                className={`
+                    flex-1 py-3 rounded-xl font-bold text-base transition-all shadow-md active:scale-95 flex items-center justify-center gap-2
+                    ${isConectado 
+                        ? "bg-green-600 hover:bg-green-700 text-white shadow-green-600/20 ring-2 ring-green-500/50" 
+                        : "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-600/20 hover:shadow-blue-500/25"}
+                `}
+            >
+                {isConectado ? (
+                    <>
+                        <Check size={20} className="animate-in zoom-in duration-300" />
+                        <span>Conectado</span>
+                    </>
+                ) : (
+                    <>
+                        <UserPlus size={20} />
+                        <span>Conectar</span>
+                    </>
+                )}
+            </button>
+
+            {/* Botão Mensagem */}
+            <button 
+                className="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-[#2f3338] dark:hover:bg-[#3a3f47] text-gray-900 dark:text-white py-3 rounded-xl font-bold text-base transition-colors flex items-center justify-center gap-2"
+            >
+                <MessageCircle size={20} />
+                <span>Mensagem</span>
+            </button>
+        </div>
+
       </div>
     </div>
   );
