@@ -2,22 +2,21 @@ import type { IUsuario } from './data/usuario.model';
 import usuariosData from './data/usuario.json';
 
 import type { IProjetoFeed } from './data/projeto.model';
-// Importando o JSON de projetos (verifique se o arquivo é 'projeto.json' ou 'projetos.json')
 import projetosData from './data/projeto.json';
 import { SugestoesProjetos } from './components/SugestoesProjetos';
 import { ProjectModal } from './components/ProjectModal';
-import CustomizarModal from "./components/CustomizarModal";
-import logo from "./imgs/logo.png";
-import perfil from "./imgs/perfil.png";
-import './App.css'
-import { SugestoesPerfis } from "./components/SugestoesPerfis";
-import { UserModal } from "./components/UserModal";
+import CustomizarModal from './components/CustomizarModal';
+import { carregarUser } from './data/storage';
+import logo from './imgs/logo.png';
+import perfil from './imgs/perfil.png';
+import './App.css';
+import { SugestoesPerfis } from './components/SugestoesPerfis';
+import { UserModal } from './components/UserModal';
 import { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 function App() {
   const usuarios = usuariosData as IUsuario[];
-  // Carrega os projetos do arquivo JSON separado
   const projetos = projetosData as IProjetoFeed[];
 
   const [usuarioSelecionado, setUsuarioSelecionado] = useState<IUsuario | null>(null);
@@ -25,6 +24,19 @@ function App() {
 
   const [menuAberto, setMenuAberto] = useState(false);
   const [temaEscuro, setTemaEscuro] = useState(true);
+  const [userCustom, setUserCustom] = useState<any>(null);
+
+  useEffect(() => {
+    const data = carregarUser();
+    setUserCustom(data[0] || null);
+
+    function onUserUpdated() {
+      const updated = carregarUser();
+      setUserCustom(updated[0] || null);
+    }
+    window.addEventListener('user-updated', onUserUpdated);
+    return () => window.removeEventListener('user-updated', onUserUpdated);
+  }, []);
 
   useEffect(() => {
     if (temaEscuro) {
@@ -40,9 +52,8 @@ function App() {
     <div className="bg-gray-100 dark:bg-[#2A2B30] min-h-screen w-full flex flex-col transition-colors duration-300 overflow-x-hidden">
       <CustomizarModal />
 
-
       {/* ================= HEADER FIXO ================= */}
-      <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-[#202327] h-16 px-4 flex items-center justify-between shadow-md border-b border-gray-200 dark:border-none transition-colors duration-300">
+      <header className="fixed top-0 left-0 w-full z-49 bg-white dark:bg-[#202327] h-16 px-4 flex items-center justify-between shadow-md border-b border-gray-200 dark:border-none transition-colors duration-300">
         <div className="flex items-center gap-4">
           <img
             src={logo}
@@ -84,14 +95,16 @@ function App() {
             <div className="flex items-center mb-6">
               <img src={perfil} alt="perfil" className="h-14 w-14 rounded" />
               <div className="ml-4">
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white">Nome do Usuário</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {typeof userCustom?.nome === 'string' && userCustom.nome.trim() ? userCustom.nome : 'Nome'}
+                </h2>
                 <p className="text-gray-500 dark:text-[#9FA2A3]">Cargo / Função</p>
               </div>
             </div>
 
             <div className="flex flex-col gap-3">
               <button
-                onClick={() => window.dispatchEvent(new CustomEvent('open-customizar'))}
+                onClick={() => { setMenuAberto(false); window.dispatchEvent(new CustomEvent('open-customizar')); }}
                 className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition"
               >
                 Customizar
@@ -110,7 +123,9 @@ function App() {
           <div className="flex items-center">
             <img src={perfil} alt="perfil" className="h-16 w-16 rounded" />
             <div className="ml-3">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white">Nome</h2>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+                {typeof userCustom?.nome === 'string' && userCustom.nome.trim() ? userCustom.nome : 'Nome'}
+              </h2>
               <p className="text-gray-500 dark:text-[#9FA2A3] text-sm">cargo</p>
             </div>
           </div>
@@ -135,11 +150,8 @@ function App() {
         </aside>
 
         {/* Wrapper de Conteúdo + Footer */}
-        {/* CORREÇÃO CRÍTICA AQUI: ml-64 (margem) + w-auto (largura automática) */}
-        {/* Em vez de w-full (que força 100% + margem), usamos w-auto ou flex-1 para preencher o resto */}
         <div className="flex-1 flex flex-col w-full md:ml-64 md:w-[calc(100%-16rem)] min-h-[calc(100vh-4rem)] transition-colors duration-300">
 
-          {/* max-w-full garante que o conteúdo interno não estoure o pai */}
           <main className="flex-1 p-4 w-full max-w-full overflow-hidden">
             <div className="mb-4 md:hidden relative">
               <input

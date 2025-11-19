@@ -1,30 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { X, MapPin,   FolderGit2,   Hash } from 'lucide-react';
-
-// --- Tipos e funções de storage (mantive compatível com seu User) ---
-export interface User {
-  id: number;
-  nome: string;
-  foto: string; // base64 ou url
-  cargo: string;
-  resumo: string;
-  localizacao: string;
-  area: string;
-  habilidadesTecnicas: string; // vírgula separados
-  softSkills: string; // vírgula separados
-  curso: string;
-  instituicao: string;
-  ano: string;
-}
-
-export function salvarUser(users: User[]) {
-  localStorage.setItem('user', JSON.stringify(users));
-}
-
-export function carregarUser(): User[] {
-  const data = localStorage.getItem('user');
-  return data ? JSON.parse(data) : [];
-}
+import { X, MapPin, FolderGit2, Hash } from 'lucide-react';
+import { salvarUser, carregarUser } from '../data/storage';
+import type { User } from '../data/storage';
 
 export default function CustomizarModal() {
   const [open, setOpen] = useState(false);
@@ -75,8 +52,8 @@ export default function CustomizarModal() {
   }
 
   function validate(f: User) {
-    if (!f.nome.trim()) return 'Preencha o nome.';
-    if (!f.cargo.trim()) return 'Preencha o cargo.';
+    if (typeof f.nome !== 'string' || !f.nome.trim()) return 'Preencha o nome.';
+    if (typeof f.cargo !== 'string' || !f.cargo.trim()) return 'Preencha o cargo.';
     return null;
   }
 
@@ -91,13 +68,10 @@ export default function CustomizarModal() {
 
     setUsers((prev) => {
       const exists = prev.find((u) => u.id === form.id);
-      let next: User[];
-      if (exists) {
-        next = prev.map((u) => (u.id === form.id ? form : u));
-      } else {
-        next = [form, ...prev];
-      }
+      const next: User[] = exists ? prev.map((u) => (u.id === form.id ? form : u)) : [form, ...prev];
       salvarUser(next);
+      // informa o App que os dados foram atualizados
+      window.dispatchEvent(new CustomEvent('user-updated'));
       setSuccess('Dados salvos com sucesso!');
       setError(null);
       return next;
@@ -111,7 +85,6 @@ export default function CustomizarModal() {
     setError(null);
     setSuccess(null);
     setOpen(true);
-    // scroll to top of modal content if needed
     const el = document.getElementById('customizar-modal-scroll');
     if (el) el.scrollTop = 0;
   }
@@ -120,18 +93,19 @@ export default function CustomizarModal() {
     const next = users.filter((u) => u.id !== id);
     setUsers(next);
     salvarUser(next);
+    window.dispatchEvent(new CustomEvent('user-updated'));
   }
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-in fade-in duration-200 mt-15 pt-10">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="w-full max-w-3xl rounded-xl shadow-2xl overflow-hidden relative border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1F2226] text-gray-900 dark:text-white">
 
         <button
           onClick={() => { setOpen(false); setError(null); setSuccess(null); }}
           className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors z-10"
-          aria-label="Fechar" 
+          aria-label="Fechar"
         >
           <X size={20} className="text-gray-500 dark:text-gray-300" />
         </button>
@@ -230,6 +204,21 @@ export default function CustomizarModal() {
 
             <div className="flex items-center gap-3">
               <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition-colors shadow">Salvar</button>
+              <button
+                type="button"
+                onClick={() => {
+                  setForm({ ...form, id: Date.now() });
+                  setSuccess(null);
+                  setError(null);
+                }}
+                className="px-4 py-2 rounded-xl border"
+              >
+                Reset ID
+              </button>
+
+              <div className="ml-auto flex items-center gap-2">
+                <button onClick={() => { setOpen(false); }} className="px-3 py-2 rounded-lg border">Cancelar</button>
+              </div>
             </div>
           </form>
 
