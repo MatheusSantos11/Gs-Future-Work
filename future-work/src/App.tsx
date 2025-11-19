@@ -98,7 +98,9 @@ function App() {
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                   {typeof userCustom?.nome === 'string' && userCustom.nome.trim() ? userCustom.nome : 'Nome'}
                 </h2>
-                <p className="text-gray-500 dark:text-[#9FA2A3]">Cargo / Função</p>
+                <p className="text-gray-500 dark:text-[#9FA2A3]">
+                  {typeof userCustom?.cargo === 'string' && userCustom.cargo.trim() ? userCustom.cargo : 'Cargo'}
+                </p>
               </div>
             </div>
 
@@ -126,7 +128,9 @@ function App() {
               <h2 className="text-lg font-bold text-gray-900 dark:text-white">
                 {typeof userCustom?.nome === 'string' && userCustom.nome.trim() ? userCustom.nome : 'Nome'}
               </h2>
-              <p className="text-gray-500 dark:text-[#9FA2A3] text-sm">cargo</p>
+              <p className="text-gray-500 dark:text-[#9FA2A3]">
+                {typeof userCustom?.cargo === 'string' && userCustom.cargo.trim() ? userCustom.cargo : 'Cargo'}
+              </p>
             </div>
           </div>
 

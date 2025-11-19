@@ -204,21 +204,6 @@ export default function CustomizarModal() {
 
             <div className="flex items-center gap-3">
               <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition-colors shadow">Salvar</button>
-              <button
-                type="button"
-                onClick={() => {
-                  setForm({ ...form, id: Date.now() });
-                  setSuccess(null);
-                  setError(null);
-                }}
-                className="px-4 py-2 rounded-xl border"
-              >
-                Reset ID
-              </button>
-
-              <div className="ml-auto flex items-center gap-2">
-                <button onClick={() => { setOpen(false); }} className="px-3 py-2 rounded-lg border">Cancelar</button>
-              </div>
             </div>
           </form>
 
