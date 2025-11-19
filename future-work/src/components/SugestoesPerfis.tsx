@@ -14,7 +14,7 @@ export function SugestoesPerfis({ usuarios, abrirModal }: Props) {
       </h2>
       
       {/* Lista de Cards com scroll horizontal */}
-      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide w-115 md:w-150 lg:w-200 xl:w-250">
         {usuarios.map((usuario) => (
           <ProfileCard 
             key={usuario.id} 
