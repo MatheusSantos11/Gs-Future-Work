@@ -4,7 +4,7 @@ import { Sparkles } from "lucide-react";
 
 interface Props {
   projetos: IProjetoFeed[];
-  abrirModal: (projeto: IProjetoFeed) => void; // <--- NOVO PROP
+  abrirModal: (projeto: IProjetoFeed) => void;
 }
 
 export function SugestoesProjetos({ projetos, abrirModal }: Props) {
@@ -14,13 +14,13 @@ export function SugestoesProjetos({ projetos, abrirModal }: Props) {
         <Sparkles className="text-yellow-500" size={20} /> Projetos em Alta
       </h2>
       
-      {/* Lista com Scroll Horizontal */}
-      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+      {/* REMOVIDO 'scrollbar-hide' DAQUI: A barra vai voltar a aparecer */}
+      <div className="flex gap-4 overflow-x-auto pb-4">
         {projetos.map((projeto) => (
           <ProjectCard 
             key={projeto.id} 
             projeto={projeto} 
-            onOpen={() => abrirModal(projeto)} // <--- REPASSANDO O CLICK
+            onOpen={() => abrirModal(projeto)} 
           />
         ))}
       </div>

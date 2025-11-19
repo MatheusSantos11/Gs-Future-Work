@@ -1,2 +1,19 @@
 @import "tailwindcss";
+
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* === CORREÇÃO DO FUNDO BRANCO === */
+/* Aplica a cor de fundo no corpo inteiro do site */
+body {
+    @apply bg-gray-100 dark:bg-[#2A2B30] overflow-x-hidden;
+}
+
+/* === REGRAS DE SCROLLBAR === */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE e Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari e Opera */
+}
