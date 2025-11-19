@@ -14,7 +14,7 @@ export function ProfileCard({ usuario, onOpen }: Props) {
     return (
         <div 
             className="
-                bg-[#1c1f24] border border-[#2a2d33] rounded-xl p-4 w-72 shrink-0 flex flex-col 
+                bg-[#202327] border border-[#2a2d33] rounded-xl p-4 w-72 shrink-0 flex flex-col 
                 gap-3 text-white cursor-pointer transition-colors duration-200 hover:border-blue-400
             "
             onClick={onOpen}

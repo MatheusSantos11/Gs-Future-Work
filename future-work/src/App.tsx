@@ -16,7 +16,7 @@ function App() {
     <div className="bg-[#2A2B30] min-h-screen w-full flex">
 
       {/* ==== SIDEBAR PERFIL (ESQUERDA) ==== */}
-      <aside className="hidden md:block w-64 bg-[#202327] fixed left-0 top-0 h-full p-4 text-white">
+      <aside className="hidden md:block w-64 bg-[#2A2B30] fixed left-0 top-0 h-full p-4 text-white">
         <div className="flex">
           <img src={perfil} alt="perfil" className="h-16 w-16 rounded" />
           <div className="ml-3 mt-1">
