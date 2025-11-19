@@ -2,10 +2,10 @@ import type { IUsuario } from './data/usuario.model';
 import usuariosData from './data/usuario.json';
 
 import type { IProjetoFeed } from './data/projeto.model';
-import projetosData from './data/projeto.json'; 
+import projetosData from './data/projeto.json';
 import { SugestoesProjetos } from './components/SugestoesProjetos';
 import { ProjectModal } from './components/ProjectModal';
-
+import CustomizarModal from "./components/CustomizarModal";
 import logo from "./imgs/logo.png";
 import perfil from "./imgs/perfil.png";
 import './App.css'
@@ -37,7 +37,7 @@ function App() {
   return (
     // Adicionado overflow-x-hidden para evitar rolagem lateral da página inteira
     <div className="bg-gray-100 dark:bg-[#2A2B30] min-h-screen w-full flex flex-col transition-colors duration-300 overflow-x-hidden">
-
+      <CustomizarModal />
       {/* ================= HEADER FIXO (z-50) ================= */}
       <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-[#202327] h-16 px-4 flex items-center justify-between shadow-md border-b border-gray-200 dark:border-none transition-colors duration-300">
         <div className="flex items-center gap-4">
@@ -87,7 +87,13 @@ function App() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <button onClick={handleFecharMenu} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Customizar</button>
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('open-customizar'))}
+                className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition"
+              >
+                Customizar
+              </button>
+
               <button onClick={handleFecharMenu} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Networks</button>
               <button onClick={handleFecharMenu} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">Certificados</button>
             </div>
@@ -108,11 +114,17 @@ function App() {
           </div>
 
           <div className="mt-6 flex flex-col gap-3">
-            <button className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Customizar</button>
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-customizar'))}
+              className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition"
+            >
+              Customizar
+            </button>
+
             <button className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Networks</button>
             <button className="bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-medium transition">Certificados</button>
           </div>
-          
+
           <div className="relative h-full">
             <button
               onClick={() => setTemaEscuro(!temaEscuro)}
@@ -126,7 +138,7 @@ function App() {
 
         {/* Wrapper de Conteúdo + Footer */}
         <div className="flex-1 flex flex-col w-full md:ml-64 min-h-[calc(100vh-4rem)] transition-colors duration-300">
-          
+
           <main className="flex-1 p-4 overflow-x-hidden w-full max-w-[100vw]">
             <div className="mb-4 md:hidden relative">
               <input
@@ -155,14 +167,14 @@ function App() {
               projeto={projetoSelecionado}
               onClose={() => setProjetoSelecionado(null)}
             />
-            
+
             <div className="h-8"></div>
           </main>
 
           {/* Footer (z-0 para garantir que não sobreponha a sidebar ou menus) */}
           <footer className="bg-white dark:bg-[#202327] border-t border-gray-200 dark:border-none py-6 mt-auto transition-colors duration-300 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] relative z-0">
             <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-              
+
               <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                   SkillConnect
