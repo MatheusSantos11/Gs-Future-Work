@@ -78,16 +78,7 @@ export default function CustomizarModal() {
     });
   }
 
-  function handleEdit(id: number) {
-    const u = users.find((x) => x.id === id);
-    if (!u) return;
-    setForm(u);
-    setError(null);
-    setSuccess(null);
-    setOpen(true);
-    const el = document.getElementById('customizar-modal-scroll');
-    if (el) el.scrollTop = 0;
-  }
+
 
   function handleDelete(id: number) {
     const next = users.filter((u) => u.id !== id);
@@ -225,7 +216,6 @@ export default function CustomizarModal() {
                     <div className="text-xs text-gray-500">{u.cargo} • {u.localizacao}</div>
                   </div>
                   <div className="flex gap-2">
-                    <button onClick={() => handleEdit(u.id)} className="px-3 py-1 text-xs rounded-lg border">Editar</button>
                     <button onClick={() => handleDelete(u.id)} className="px-3 py-1 text-xs rounded-lg border">Deletar</button>
                   </div>
                 </div>
