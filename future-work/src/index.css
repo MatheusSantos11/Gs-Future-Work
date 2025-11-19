@@ -2,18 +2,37 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* === CORREÇÃO DO FUNDO BRANCO === */
-/* Aplica a cor de fundo no corpo inteiro do site */
+/* === CORREÇÃO DO CSS GLOBAL === */
 body {
-    @apply bg-gray-100 dark:bg-[#2A2B30] overflow-x-hidden;
+    @apply bg-gray-100 dark:bg-[#2A2B30] text-gray-900 dark:text-white;
+    /* overflow-x hidden previne rolagem lateral indesejada na página inteira */
+    overflow-x: hidden; 
 }
 
-/* === REGRAS DE SCROLLBAR === */
+/* Estilização da barra de rolagem (opcional, mas fica bonito) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background-color: rgba(75, 85, 99, 0.5);
+}
+
+/* Classe utilitária para esconder a barra apenas onde necessário (listas horizontais) */
 .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE e Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
-
 .scrollbar-hide::-webkit-scrollbar {
-    display: none; /* Chrome, Safari e Opera */
+    display: none;
 }
