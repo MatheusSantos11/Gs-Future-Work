@@ -1,8 +1,8 @@
 import type { IUsuario, IFormacao } from "../data/usuario.model";
 import { 
-  X, MapPin, Briefcase, GraduationCap, Globe, 
-  Code, Star, Heart, Hash, GraduationCap as CapIcon, 
-  Check, UserPlus, FolderGit2, Award, MessageCircle, Mail 
+  X, MapPin, Briefcase, Globe, 
+  Star, Heart, Hash, GraduationCap as CapIcon, 
+  Check, UserPlus, FolderGit2, Award, MessageCircle
 } from "lucide-react"; 
 
 interface Props {
@@ -16,7 +16,6 @@ export function UserModal({ usuario, onClose, isConectado, onToggleConexao }: Pr
   if (!usuario) return null;
 
   const nome = usuario.nome || "Usuário";
-  const primeiroNome = nome.split(' ')[0];
   
   const habilidades = (usuario as any).habilidadesTecnicas || (usuario as any).habilidades || [];
   const softSkills = (usuario as any).softSkills || [];
