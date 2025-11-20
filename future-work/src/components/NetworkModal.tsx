@@ -16,7 +16,7 @@ export function NetworkModal({ isOpen, onClose, conexoes, todosUsuarios, onDesco
   const meusContatos = todosUsuarios.filter(u => conexoes.includes(u.id));
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[60] p-4 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-60 p-4 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="bg-white dark:bg-[#1F2226] w-full max-w-md rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col max-h-[80vh]">
         
         {/* Cabeçalho */}
