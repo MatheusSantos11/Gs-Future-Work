@@ -25,7 +25,7 @@ export function LinkedinModal({ isOpen, onClose }: Props) {
 
                 <div className="p-4 space-y-3 overflow-y-auto">
                     <a
-                        href="https://github.com/herqoliveira"
+                        href="https://www.linkedin.com/in/henrique-de-oliveira-gomes-a34891300?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                         target="_blank"
                         className="block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
                     >
@@ -33,7 +33,7 @@ export function LinkedinModal({ isOpen, onClose }: Props) {
                     </a>
 
                     <a
-                        href="https://github.com/Kolomyess"
+                        href="https://www.linkedin.com/in/henrique-kolomyes-silveira-263018368?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                         target="_blank"
                         className="block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
                     >
@@ -41,7 +41,7 @@ export function LinkedinModal({ isOpen, onClose }: Props) {
                     </a>
 
                     <a
-                        href="https://github.com/MatheusSantos11"
+                        href="https://www.linkedin.com/in/matheus-santos-809a43225?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                         target="_blank"
                         className="block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
                     >
