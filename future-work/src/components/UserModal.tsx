@@ -28,7 +28,7 @@ export function UserModal({ usuario, onClose, isConectado, onToggleConexao }: Pr
   const areaAtuacao = (usuario as any).area || "";
 
   const [recomendacoes, setRecomendacoes] = useState<any[]>([]);
-  const [recomendCount, setRecomendCount] = useState(0);
+  const [, setRecomendCount] = useState(0);
   const [showAllRecomendacoes, setShowAllRecomendacoes] = useState(false);
 
   const loadRecomendacoes = (id?: number) => {
