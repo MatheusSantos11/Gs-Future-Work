@@ -20,6 +20,7 @@ import { Menu, X, Sun, Moon, Github, Linkedin, Mail, Users, Settings, Award, Sea
 
 import { GitHubModal } from "./components/GitHubModal";
 import { LinkedinModal } from './components/LinkedinModal';
+import Chat from './components/Chat';
 
 function App() {
   const usuarios = usuariosData as IUsuario[];
@@ -31,6 +32,8 @@ function App() {
   const [GitHubModalAberto, setGitHubModalAberto] = useState(false);
   const [certificadosAberto, setCertificadosAberto] = useState(false);
   const [LinkedinModalAberto, setLinkedinModalAberto] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatUsuario, setChatUsuario] = useState<any>(null);
 
   const [busca, setBusca] = useState("");
   const [meusCertificados, setMeusCertificados] = useState<string[]>([]);
@@ -132,6 +135,33 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [temaEscuro]);
+
+  // Clear chat messages from localStorage when the page is reloaded
+  useEffect(() => {
+    function handleBeforeUnload() {
+      try {
+        const keysToRemove: string[] = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('chat_messages_')) keysToRemove.push(key);
+        }
+        for (const k of keysToRemove) localStorage.removeItem(k);
+      } catch (err) {
+        // ignore
+      }
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, []);
+
+  useEffect(() => {
+    function handleOpenChat(e: any) {
+      setChatUsuario(e?.detail?.usuario || null);
+      setChatOpen(true);
+    }
+    window.addEventListener('open-chat', handleOpenChat as EventListener);
+    return () => window.removeEventListener('open-chat', handleOpenChat as EventListener);
+  }, []);
 
   const getList = (text: string) => {
     if (!text) return [];
@@ -324,6 +354,7 @@ function App() {
             <UserModal usuario={usuarioSelecionado} onClose={() => setUsuarioSelecionado(null)} isConectado={usuarioSelecionado ? rede.includes(usuarioSelecionado.id) : false} onToggleConexao={toggleConexao} />
             <ProjectModal projeto={projetoSelecionado} onClose={() => setProjetoSelecionado(null)} />
             <NetworkModal isOpen={networkModalAberto} onClose={() => setNetworkModalAberto(false)} conexoes={rede} todosUsuarios={usuarios} onDesconectar={removerConexao} />
+            <Chat isOpen={chatOpen} onClose={() => setChatOpen(false)} usuario={chatUsuario} />
 
             <div className="h-8"></div>
           </main>

@@ -47,9 +47,9 @@ export function NetworkModal({ isOpen, onClose, conexoes, todosUsuarios, onDesco
 
                   <div className="flex items-center gap-2">
                      {/* Botão Mensagem (Fictício) */}
-                    <button className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full transition-colors" title="Enviar Mensagem">
-                       <MessageCircle size={18} />
-                    </button>
+                      <button onClick={() => { window.dispatchEvent(new CustomEvent('open-chat', { detail: { usuario: user } })); onClose(); }} className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-full transition-colors" title="Enviar Mensagem">
+                        <MessageCircle size={18} />
+                      </button>
                     {/* Botão Desconectar */}
                     <button 
                       onClick={() => onDesconectar(user.id)}

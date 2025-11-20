@@ -17,6 +17,8 @@ export function ProfileCard({ usuario, onOpen, isConectado, onToggleConexao }: P
 
     const handleMensagem = (e: React.MouseEvent) => {
         e.stopPropagation();
+        // Dispara o modal de chat com o usuário deste card
+        window.dispatchEvent(new CustomEvent('open-chat', { detail: { usuario } }));
     };
 
     return (

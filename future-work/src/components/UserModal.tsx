@@ -281,10 +281,11 @@ export function UserModal({ usuario, onClose, isConectado, onToggleConexao }: Pr
 
             {/* Botão Mensagem */}
             <button 
-                className="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-[#2f3338] dark:hover:bg-[#3a3f47] text-gray-900 dark:text-white py-3 rounded-xl font-bold text-base transition-colors flex items-center justify-center gap-2"
+              onClick={() => { window.dispatchEvent(new CustomEvent('open-chat', { detail: { usuario } })); onClose(); }}
+              className="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-[#2f3338] dark:hover:bg-[#3a3f47] text-gray-900 dark:text-white py-3 rounded-xl font-bold text-base transition-colors flex items-center justify-center gap-2"
             >
-                <MessageCircle size={20} />
-                <span>Mensagem</span>
+              <MessageCircle size={20} />
+              <span>Mensagem</span>
             </button>
         </div>
 
