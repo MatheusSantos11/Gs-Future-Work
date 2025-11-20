@@ -1,4 +1,4 @@
-import { X, Github } from "lucide-react";
+import { X, Github, Trophy } from "lucide-react";
 
 interface Props {
     isOpen: boolean;
@@ -14,7 +14,7 @@ export function GitHubModal({ isOpen, onClose }: Props) {
 
                 {/* Header */}
                 <div className="p-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
-                    <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200"><Github size={14} className="text-blue-600" />Integrantes</h2>
+                    <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200"><Github size={14} className="text-white" />Integrantes</h2>
 
                     <button
                         onClick={onClose}
@@ -28,9 +28,9 @@ export function GitHubModal({ isOpen, onClose }: Props) {
                     <a
                         href="https://github.com/MatheusSantos11/Gs-Future-Work"
                         target="_blank"
-                        className="text-blue-600 block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
+                        className="font-bold flex p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
                     >
-                        Repositório do Projeto
+                        <Trophy size={16} className="mt-1 mr-1 text-[#FFD700]"/> Repositório do Projeto
                     </a>
                     <a
                         href="https://github.com/herqoliveira"
