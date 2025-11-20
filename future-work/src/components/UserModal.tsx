@@ -4,6 +4,7 @@ import {
   Star, Heart, Hash, GraduationCap as CapIcon, 
   Check, UserPlus, FolderGit2, Award, MessageCircle
 } from "lucide-react"; 
+import { useEffect, useState } from 'react';
 
 interface Props {
   usuario: IUsuario | null;
@@ -25,6 +26,44 @@ export function UserModal({ usuario, onClose, isConectado, onToggleConexao }: Pr
   const idiomas = (usuario as any).idiomas || [];
   const areasInteresse = (usuario as any).areainteresses || [];
   const areaAtuacao = (usuario as any).area || "";
+
+  const [recomendacoes, setRecomendacoes] = useState<any[]>([]);
+  const [recomendCount, setRecomendCount] = useState(0);
+  const [showAllRecomendacoes, setShowAllRecomendacoes] = useState(false);
+
+  const loadRecomendacoes = (id?: number) => {
+    try {
+      if (id === undefined || id === null) return [];
+      const raw = localStorage.getItem(`recomendacoes_${id}`);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    const id = usuario?.id;
+    const items = loadRecomendacoes(id);
+    setRecomendacoes(items);
+    setRecomendCount(items.length);
+
+    function onRec(e: any) {
+      const payload = e?.detail;
+      if (!payload) return;
+      if (payload.paraId === id) {
+        setRecomendacoes(prev => {
+          const next = [...prev, payload];
+          setRecomendCount(next.length);
+          return next;
+        });
+      }
+    }
+
+    window.addEventListener('recomendacao-enviada', onRec as EventListener);
+    return () => window.removeEventListener('recomendacao-enviada', onRec as EventListener);
+  }, [usuario?.id]);
 
   const renderFormacao = () => {
     if (!usuario.formacao) return <span className="text-gray-500 italic">Não informada</span>;
@@ -198,6 +237,51 @@ export function UserModal({ usuario, onClose, isConectado, onToggleConexao }: Pr
                 )}
             </div>
 
+            {/* Recomendações */}
+            <div className="space-y-6 pt-6 border-t border-gray-200 dark:border-gray-800">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-3 text-lg flex items-center gap-2">
+                <Star size={18} className="text-yellow-500" /> Recomendações
+                <span className="ml-2 text-sm text-gray-500">({recomendacoes.length})</span>
+              </h3>
+              <div className="space-y-3">
+                {recomendacoes.length === 0 && (
+                  <div className="text-sm text-gray-500">Nenhuma recomendação ainda.</div>
+                )}
+                {recomendacoes.length > 0 && (
+                  (() => {
+                    const shown = showAllRecomendacoes ? recomendacoes : recomendacoes.slice(0, 3);
+                    return (
+                      <>
+                        {shown.map((r: any, idx: number) => (
+                          <div key={idx} className="p-3 bg-gray-50 dark:bg-white/5 rounded-lg border border-gray-100 dark:border-gray-700">
+                            <div className="flex items-start justify-between gap-4">
+                              <div>
+                                <div className="text-sm font-medium text-gray-900 dark:text-white">{r.deNome || 'Anônimo'}</div>
+                                <div className="text-xs text-gray-500">{r.deId ? `ID ${r.deId}` : ''}</div>
+                              </div>
+                              <div className="text-xs text-gray-400">{r.criadoEm ? new Date(r.criadoEm).toLocaleString() : ''}</div>
+                            </div>
+                            <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">{r.texto}</p>
+                          </div>
+                        ))}
+
+                        {recomendacoes.length > 3 && (
+                          <div className="pt-2">
+                            <button
+                              onClick={() => setShowAllRecomendacoes(prev => !prev)}
+                              className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                            >
+                              {showAllRecomendacoes ? 'Ver menos' : `Ver mais (${recomendacoes.length - 3})`}
+                            </button>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()
+                )}
+              </div>
+            </div>
+
             {/* Skills e Interesses */}
             <div className="space-y-6 pt-6 border-t border-gray-200 dark:border-gray-800">
                 {habilidades.length > 0 && (
@@ -286,6 +370,13 @@ export function UserModal({ usuario, onClose, isConectado, onToggleConexao }: Pr
             >
               <MessageCircle size={20} />
               <span>Mensagem</span>
+            </button>
+            {/* Botão Recomendar */}
+            <button
+              onClick={() => { window.dispatchEvent(new CustomEvent('open-recomendar', { detail: { usuario } })); onClose(); }}
+              className="flex-1 bg-yellow-50 hover:bg-yellow-100 dark:bg-yellow-900/10 dark:hover:bg-yellow-800/10 text-yellow-700 dark:text-yellow-300 py-3 rounded-xl font-bold text-base transition-colors flex items-center justify-center gap-2"
+            >
+              <span>Recomendar</span>
             </button>
         </div>
 

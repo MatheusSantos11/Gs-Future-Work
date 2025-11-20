@@ -6,6 +6,7 @@ import projetosData from './data/projeto.json';
 import { SugestoesProjetos } from './components/SugestoesProjetos';
 import { ProjectModal } from './components/ProjectModal';
 import CustomizarModal from './components/CustomizarModal';
+import RecomendarModal from './components/Recomendar';
 import { NetworkModal } from './components/NetworkModal';
 import { CertificadosModal } from './components/CertificadosModal';
 
@@ -143,7 +144,9 @@ function App() {
         const keysToRemove: string[] = [];
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
-          if (key && key.startsWith('chat_messages_')) keysToRemove.push(key);
+          if (!key) continue;
+          if (key.startsWith('chat_messages_')) keysToRemove.push(key);
+          if (key.startsWith('recomendacoes_')) keysToRemove.push(key);
         }
         for (const k of keysToRemove) localStorage.removeItem(k);
       } catch (err) {
@@ -171,6 +174,7 @@ function App() {
   return (
     <div className="bg-gray-100 dark:bg-[#2A2B30] min-h-screen w-full flex flex-col transition-colors duration-300 overflow-x-hidden">
       <CustomizarModal />
+      <RecomendarModal />
       <CertificadosModal isOpen={certificadosAberto} onClose={() => setCertificadosAberto(false)} />
 
       <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-[#202327] h-16 px-4 flex items-center justify-between shadow-md border-b border-gray-200 dark:border-none transition-colors duration-300">
