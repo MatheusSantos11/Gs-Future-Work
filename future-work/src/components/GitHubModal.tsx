@@ -1,4 +1,7 @@
 import { X, Github, Trophy } from "lucide-react";
+import hog from "./../imgs/hog.jpg";
+import hks from "./../imgs/hks.jpg";
+import mso from "./../imgs/mso.jpg";
 
 interface Props {
     isOpen: boolean;
@@ -14,7 +17,7 @@ export function GitHubModal({ isOpen, onClose }: Props) {
 
                 {/* Header */}
                 <div className="p-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
-                    <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200"><Github size={14} className="text-white" />Integrantes</h2>
+                    <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200"><Github size={14} className="text-blue-600" />Integrantes</h2>
 
                     <button
                         onClick={onClose}
@@ -35,25 +38,25 @@ export function GitHubModal({ isOpen, onClose }: Props) {
                     <a
                         href="https://github.com/herqoliveira"
                         target="_blank"
-                        className="block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
+                        className="flex p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition items-center"
                     >
-                        Henrique de Oliveira Gomes
+                        <img src={hog} alt="" className="w-10 h-10 rounded-md mr-2"/>Henrique de Oliveira Gomes
                     </a>
 
                     <a
                         href="https://github.com/Kolomyess"
                         target="_blank"
-                        className="block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
+                        className="flex p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition items-center"
                     >
-                        Henrique Kolomyes Silveira
+                        <img src={hks} alt="" className="w-10 h-10 rounded-md mr-2"/>Henrique Kolomyes Silveira
                     </a>
 
                     <a
                         href="https://github.com/MatheusSantos11"
                         target="_blank"
-                        className="block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
+                        className="flex p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition items-center"
                     >
-                        Matheus Santos de Oliveira
+                        <img src={mso} alt="" className="w-10 h-10 rounded-md mr-2"/>Matheus Santos de Oliveira
                     </a>
                 </div>
             </div>

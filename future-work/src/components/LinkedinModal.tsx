@@ -1,5 +1,7 @@
 import { X, Linkedin } from "lucide-react";
-
+import hog from "./../imgs/hog.jpg";
+import hks from "./../imgs/hks.jpg";
+import mso from "./../imgs/mso.jpg";
 
 interface Props {
     isOpen: boolean;
@@ -27,25 +29,25 @@ export function LinkedinModal({ isOpen, onClose }: Props) {
                     <a
                         href="https://www.linkedin.com/in/henrique-de-oliveira-gomes-a34891300?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                         target="_blank"
-                        className="block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
+                        className="flex p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition items-center"
                     >
-                        Henrique de Oliveira Gomes
+                        <img src={hog} alt="" className="w-10 h-10 rounded-md mr-2"/>Henrique de Oliveira Gomes
                     </a>
 
                     <a
                         href="https://www.linkedin.com/in/henrique-kolomyes-silveira-263018368?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                         target="_blank"
-                        className="block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
+                        className="flex p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition items-center"
                     >
-                        Henrique Kolomyes Silveira
+                        <img src={hks} alt="" className="w-10 h-10 rounded-md mr-2"/>Henrique Kolomyes Silveira
                     </a>
 
                     <a
                         href="https://www.linkedin.com/in/matheus-santos-809a43225?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                         target="_blank"
-                        className="block p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition"
+                        className="flex p-3 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition items-center"
                     >
-                        Matheus Santos de Oliveira
+                        <img src={mso} alt="" className="w-10 h-10 rounded-md mr-2"/>Matheus Santos de Oliveira
                     </a>
                 </div>
             </div>
