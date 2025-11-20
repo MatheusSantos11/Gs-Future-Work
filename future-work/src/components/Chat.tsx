@@ -48,7 +48,7 @@ export default function Chat({ isOpen, onClose, usuario }: Props) {
     if (stored && stored.length > 0) {
       setMessages(stored);
     } else {
-      const greet = { sender: "bot" as const, text: `Olá${usuario?.nome ? " " + usuario.nome.split(" ")[0] : ""}! Eu sou o assistente. Como posso ajudar hoje?` };
+      const greet = { sender: "bot" as const, text: `Olá, eu sou o ${usuario?.nome ? " " + usuario.nome.split(" ")[0] : ""}! Como você vai hoje?` };
         setMessages([greet]);
         saveMessages(usuario, [greet]);
     }
