@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { X, FolderGit2, Settings, Users, Award, Check } from 'lucide-react';
+import { X, MapPin, FolderGit2, Hash, Settings, Users, Award, Check } from 'lucide-react';
 import { salvarUser, carregarUser } from '../data/storage';
 import type { User } from '../data/storage';
 
@@ -66,7 +66,7 @@ export default function CustomizarModal() {
     setUsers(next); salvarUser(next); window.dispatchEvent(new CustomEvent('user-updated'));
   }
 
-  // === FUNÇÕES DE NAVEGAÇÃO ===
+  // === NAVEGAÇÃO ENTRE MODAIS ===
   const abrirCertificados = () => {
     setOpen(false); 
     window.dispatchEvent(new CustomEvent('open-certificados'));
@@ -92,7 +92,7 @@ export default function CustomizarModal() {
                 Editar Perfil
             </button>
             
-            {/* BOTÃO NETWORKS - AGORA FUNCIONA */}
+            {/* BOTÃO NETWORKS FUNCIONAL */}
             <button 
                 onClick={abrirNetworks}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-200 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 font-medium text-sm transition-colors"
@@ -123,6 +123,7 @@ export default function CustomizarModal() {
             </button>
 
             <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+                {/* CABEÇALHO DO FORM */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
                     <div className="w-24 h-24 rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0 shadow-sm ring-2 ring-gray-100 dark:ring-gray-700">
                         {form.foto ? <img src={form.foto} className="w-full h-full object-cover"/> : <div className="w-full h-full flex items-center justify-center text-sm">Sem foto</div>}
@@ -140,7 +141,9 @@ export default function CustomizarModal() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div><label className="text-sm font-medium mb-1 block">Nome Completo</label><input name="nome" value={form.nome} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315] focus:ring-2 focus:ring-blue-500 outline-none"/></div>
                         <div><label className="text-sm font-medium mb-1 block">Cargo / Profissão</label><input name="cargo" value={form.cargo} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315] focus:ring-2 focus:ring-blue-500 outline-none"/></div>
+                        
                         <div className="md:col-span-2"><label className="text-sm font-medium mb-1 block">Resumo / Bio</label><textarea name="resumo" value={form.resumo} onChange={handleChange} rows={3} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315] focus:ring-2 focus:ring-blue-500 outline-none"/></div>
+
                         <div><label className="text-sm font-medium mb-1 block">Localização</label><input name="localizacao" value={form.localizacao} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315] focus:ring-2 focus:ring-blue-500 outline-none"/></div>
                         <div><label className="text-sm font-medium mb-1 block">Área de Atuação</label><input name="area" value={form.area} onChange={handleChange} className="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2.5 bg-white dark:bg-[#121315] focus:ring-2 focus:ring-blue-500 outline-none"/></div>
                         
@@ -165,6 +168,7 @@ export default function CustomizarModal() {
                     </button>
                 </form>
                 
+                {/* LISTA DE PERFIS */}
                 <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700 pb-4">
                     <h3 className="font-bold mb-4 flex items-center gap-2"><FolderGit2 size={18} className="text-purple-500"/> Perfis salvos neste navegador</h3>
                     <div className="grid gap-3">
@@ -183,7 +187,6 @@ export default function CustomizarModal() {
                                 </div>
                             </div>
                         ))}
-                        {users.length === 0 && <p className="text-sm text-gray-400 italic">Nenhum perfil salvo ainda.</p>}
                     </div>
                 </div>
             </div>

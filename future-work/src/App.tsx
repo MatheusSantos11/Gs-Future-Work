@@ -2,13 +2,14 @@ import type { IUsuario } from './data/usuario.model';
 import usuariosData from './data/usuario.json';
 
 import type { IProjetoFeed } from './data/projeto.model';
-import projetosData from './data/projeto.json';
+import projetosData from './data/projeto.json'; 
 import { SugestoesProjetos } from './components/SugestoesProjetos';
 import { ProjectModal } from './components/ProjectModal';
 import CustomizarModal from './components/CustomizarModal';
-import RecomendarModal from './components/Recomendar';
 import { NetworkModal } from './components/NetworkModal';
 import { CertificadosModal } from './components/CertificadosModal';
+import RecomendarModal from './components/Recomendar'; 
+import Chat from './components/Chat';
 
 import { carregarUser } from './data/storage';
 import logo from "./imgs/logo.png";
@@ -17,11 +18,9 @@ import './App.css'
 import { SugestoesPerfis } from "./components/SugestoesPerfis";
 import { UserModal } from "./components/UserModal";
 import { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, Github, Linkedin, Mail, Users, Settings, Award, Search, Trophy, Globe, Code, Heart, Star } from 'lucide-react';
-
-import { GitHubModal } from "./components/GitHubModal";
+import { Menu, X, Sun, Moon, Github, Linkedin, Twitter, Mail, Users, Settings, Award, Search, Trophy, Globe, Code, Heart, Star, ThumbsUp, Filter } from 'lucide-react';
 import { LinkedinModal } from './components/LinkedinModal';
-import Chat from './components/Chat';
+import { GitHubModal } from './components/GitHubModal';
 
 function App() {
   const usuarios = usuariosData as IUsuario[];
@@ -29,23 +28,44 @@ function App() {
 
   const [usuarioSelecionado, setUsuarioSelecionado] = useState<IUsuario | null>(null);
   const [projetoSelecionado, setProjetoSelecionado] = useState<IProjetoFeed | null>(null);
+  
+  // Estados dos Modais
   const [networkModalAberto, setNetworkModalAberto] = useState(false);
-  const [GitHubModalAberto, setGitHubModalAberto] = useState(false);
   const [certificadosAberto, setCertificadosAberto] = useState(false);
-  const [LinkedinModalAberto, setLinkedinModalAberto] = useState(false);
+  const [gitHubModalAberto, setGitHubModalAberto] = useState(false);
+  const [linkedinModalAberto, setLinkedinModalAberto] = useState(false);
+  
+  // Chat
   const [chatOpen, setChatOpen] = useState(false);
   const [chatUsuario, setChatUsuario] = useState<any>(null);
 
+  // === ESTADOS DE FILTRO ===
   const [busca, setBusca] = useState("");
+  const [filtroCargo, setFiltroCargo] = useState(""); // Estado para o cargo selecionado
+
   const [meusCertificados, setMeusCertificados] = useState<string[]>([]);
+  const [minhasRecomendacoes, setMinhasRecomendacoes] = useState<any[]>([]);
 
-  const usuariosFiltrados = usuarios.filter(u =>
-    u.nome.toLowerCase().includes(busca.toLowerCase()) ||
-    u.cargo.toLowerCase().includes(busca.toLowerCase()) ||
-    u.habilidadesTecnicas?.some(h => h.toLowerCase().includes(busca.toLowerCase()))
-  );
+  // === EXTRAIR CARGOS ÚNICOS PARA O FILTRO ===
+  // Cria uma lista alfabética de todos os cargos disponíveis no JSON
+  const todosCargos = Array.from(new Set(usuarios.map(u => u.cargo))).sort();
 
-  const projetosFiltrados = projetosTodos.filter(p =>
+  // === LÓGICA DE FILTRAGEM ATUALIZADA ===
+  const usuariosFiltrados = usuarios.filter(u => {
+    // 1. Verifica se bate com o texto da busca
+    const matchBusca = 
+      u.nome.toLowerCase().includes(busca.toLowerCase()) ||
+      u.cargo.toLowerCase().includes(busca.toLowerCase()) ||
+      u.habilidadesTecnicas?.some(h => h.toLowerCase().includes(busca.toLowerCase()));
+
+    // 2. Verifica se bate com o cargo selecionado (se houver algum selecionado)
+    const matchCargo = filtroCargo ? u.cargo === filtroCargo : true;
+
+    // Retorna verdadeiro apenas se ambos os filtros passarem
+    return matchBusca && matchCargo;
+  });
+
+  const projetosFiltrados = projetosTodos.filter(p => 
     p.titulo.toLowerCase().includes(busca.toLowerCase()) ||
     p.criador.toLowerCase().includes(busca.toLowerCase()) ||
     p.descricao.toLowerCase().includes(busca.toLowerCase())
@@ -64,7 +84,7 @@ function App() {
   };
 
   const removerConexao = (id: number) => {
-    setRede(prev => prev.filter(uid => uid !== id));
+     setRede(prev => prev.filter(uid => uid !== id));
   };
 
   const [menuAberto, setMenuAberto] = useState(false);
@@ -84,12 +104,12 @@ function App() {
 
   useEffect(() => {
     function carregarCertificados() {
-      const salvos = localStorage.getItem('meus-certificados');
-      if (salvos) {
-        setMeusCertificados(JSON.parse(salvos));
-      } else {
-        setMeusCertificados(["AWS Certified Cloud Practitioner", "Meta Front-End Developer"]);
-      }
+        const salvos = localStorage.getItem('meus-certificados');
+        if (salvos) {
+            setMeusCertificados(JSON.parse(salvos));
+        } else {
+            setMeusCertificados(["AWS Certified Cloud Practitioner", "Meta Front-End Developer"]);
+        }
     }
     carregarCertificados();
     window.addEventListener('certificados-updated', carregarCertificados);
@@ -97,64 +117,26 @@ function App() {
   }, []);
 
   useEffect(() => {
-    function handleOpenCertificados() {
-      setCertificadosAberto(true);
-    }
+      function loadMinhasRecs() {
+          if (!userCustom?.id) return;
+          const raw = localStorage.getItem(`recomendacoes_${userCustom.id}`);
+          if (raw) setMinhasRecomendacoes(JSON.parse(raw));
+      }
+      loadMinhasRecs();
+      window.addEventListener('recomendacao-enviada', loadMinhasRecs);
+      return () => window.removeEventListener('recomendacao-enviada', loadMinhasRecs);
+  }, [userCustom]);
+
+  useEffect(() => {
+    function handleOpenCertificados() { setCertificadosAberto(true); }
     window.addEventListener('open-certificados', handleOpenCertificados);
     return () => window.removeEventListener('open-certificados', handleOpenCertificados);
   }, []);
 
-  // === NOVO LISTENER PARA NETWORKS ===
   useEffect(() => {
-    function handleOpenNetworks() {
-      setNetworkModalAberto(true);
-    }
+    function handleOpenNetworks() { setNetworkModalAberto(true); }
     window.addEventListener('open-networks', handleOpenNetworks);
     return () => window.removeEventListener('open-networks', handleOpenNetworks);
-  }, []);
-
-  useEffect(() => {
-    function handleOpenGitHub() {
-      setGitHubModalAberto(true);
-    }
-    window.addEventListener('open-github', handleOpenGitHub);
-    return () => window.removeEventListener('open-github', handleOpenGitHub);
-  }, []);
-
-  useEffect(() => {
-    function handleOpenLinkedin() {
-      setLinkedinModalAberto(true);
-    }
-    window.addEventListener('open-linkedin', handleOpenLinkedin);
-    return () => window.removeEventListener('open-github', handleOpenLinkedin);
-  }, []);
-
-  useEffect(() => {
-    if (temaEscuro) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [temaEscuro]);
-
-  // Clear chat messages from localStorage when the page is reloaded
-  useEffect(() => {
-    function handleBeforeUnload() {
-      try {
-        const keysToRemove: string[] = [];
-        for (let i = 0; i < localStorage.length; i++) {
-          const key = localStorage.key(i);
-          if (!key) continue;
-          if (key.startsWith('chat_messages_')) keysToRemove.push(key);
-          if (key.startsWith('recomendacoes_')) keysToRemove.push(key);
-        }
-        for (const k of keysToRemove) localStorage.removeItem(k);
-      } catch (err) {
-        // ignore
-      }
-    }
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, []);
 
   useEffect(() => {
@@ -166,23 +148,93 @@ function App() {
     return () => window.removeEventListener('open-chat', handleOpenChat as EventListener);
   }, []);
 
+  useEffect(() => {
+    function handleOpenGitHub() { setGitHubModalAberto(true); }
+    window.addEventListener('open-github', handleOpenGitHub);
+    return () => window.removeEventListener('open-github', handleOpenGitHub);
+  }, []);
+  
+  useEffect(() => {
+    function handleOpenLinkedin() { setLinkedinModalAberto(true); }
+    window.addEventListener('open-linkedin', handleOpenLinkedin);
+    return () => window.removeEventListener('open-linkedin', handleOpenLinkedin);
+  }, []);
+
+  useEffect(() => {
+    function handleOpenRecomendar(e: any) {
+        // Lógica opcional aqui se necessário
+    }
+    window.addEventListener('open-recomendar', handleOpenRecomendar as EventListener);
+    return () => window.removeEventListener('open-recomendar', handleOpenRecomendar as EventListener);
+  }, []);
+
+  useEffect(() => {
+    if (temaEscuro) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [temaEscuro]);
+
+  const handleFecharMenu = () => setMenuAberto(false);
+
   const getList = (text: string) => {
-    if (!text) return [];
-    return text.split(',').map(t => t.trim()).filter(t => t);
+      if (!text) return [];
+      return text.split(',').map(t => t.trim()).filter(t => t).slice(0, 10);
   };
 
   return (
     <div className="bg-gray-100 dark:bg-[#2A2B30] min-h-screen w-full flex flex-col transition-colors duration-300 overflow-x-hidden">
       <CustomizarModal />
-      <RecomendarModal />
       <CertificadosModal isOpen={certificadosAberto} onClose={() => setCertificadosAberto(false)} />
+      <NetworkModal isOpen={networkModalAberto} onClose={() => setNetworkModalAberto(false)} conexoes={rede} todosUsuarios={usuarios} onDesconectar={removerConexao} />
+      <RecomendarModal /> 
+      <Chat isOpen={chatOpen} onClose={() => setChatOpen(false)} usuario={chatUsuario} />
+      <ProjectModal projeto={projetoSelecionado} onClose={() => setProjetoSelecionado(null)} />
+      <UserModal usuario={usuarioSelecionado} onClose={() => setUsuarioSelecionado(null)} isConectado={usuarioSelecionado ? rede.includes(usuarioSelecionado.id) : false} onToggleConexao={toggleConexao} />
+      
+      <GitHubModal isOpen={gitHubModalAberto} onClose={() => setGitHubModalAberto(false)} />
+      <LinkedinModal isOpen={linkedinModalAberto} onClose={() => setLinkedinModalAberto(false)} />
 
       <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-[#202327] h-16 px-4 flex items-center justify-between shadow-md border-b border-gray-200 dark:border-none transition-colors duration-300">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full md:w-auto">
           <img src={logo} alt="logo" className="h-10 w-auto object-contain invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 transition-all duration-300" />
-          <div className="relative hidden md:block">
-            <input type="text" placeholder="Pesquisar perfis ou projetos..." value={busca} onChange={(e) => setBusca(e.target.value)} className="border-gray-300 dark:border-[#35393C] border-2 h-9 pl-10 pr-3 rounded-lg w-80 bg-gray-50 dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors" />
-            <Search size={16} className="absolute left-3 top-2.5 text-gray-400" />
+          
+          {/* ÁREA DE PESQUISA E FILTRO (DESKTOP) */}
+          <div className="relative hidden md:flex items-center gap-2">
+            {/* Input de Busca */}
+            <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Pesquisar..." 
+                  value={busca}
+                  onChange={(e) => setBusca(e.target.value)}
+                  className="border-gray-300 dark:border-[#35393C] border-2 h-9 pl-9 pr-3 rounded-lg w-64 bg-gray-50 dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors text-sm" 
+                />
+                <Search size={16} className="absolute left-3 top-2.5 text-gray-400" />
+            </div>
+
+            {/* === NOVO: BOTÃO/SELECT DE FILTRO POR CARGO === */}
+            <div className="relative">
+                <div className="absolute left-2.5 top-2.5 pointer-events-none text-gray-400">
+                    <Filter size={16} />
+                </div>
+                <select
+                    value={filtroCargo}
+                    onChange={(e) => setFiltroCargo(e.target.value)}
+                    className="appearance-none border-gray-300 dark:border-[#35393C] border-2 h-9 pl-9 pr-8 rounded-lg bg-gray-50 dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors text-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-[#2a2d33]"
+                >
+                    <option value="">Todos os Cargos</option>
+                    {todosCargos.map((cargo) => (
+                        <option key={cargo} value={cargo}>{cargo}</option>
+                    ))}
+                </select>
+                {/* Seta customizada para o select */}
+                <div className="absolute right-2.5 top-3 pointer-events-none text-gray-400">
+                    <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                </div>
+            </div>
+
           </div>
         </div>
         <button onClick={() => setMenuAberto(!menuAberto)} className="md:hidden p-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition">
@@ -192,9 +244,9 @@ function App() {
 
       {/* MENU MOBILE */}
       {menuAberto && (
-        <div className="fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-white dark:bg-[#202327] z-50 p-4 md:hidden overflow-y-auto animate-in slide-in-from-top-2">
-          <div className="flex flex-col h-full">
-            <button onClick={() => setTemaEscuro(!temaEscuro)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-[#35393C] text-gray-900 dark:text-white py-4 rounded-lg mb-6 font-medium transition hover:brightness-95 border border-gray-200 dark:border-transparent">
+        <div className="fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-white dark:bg-[#202327] z-50 p-4 md:hidden overflow-y-auto animate-in slide-in-from-top-2 custom-scrollbar">
+          <div className="flex flex-col min-h-full">
+            <button onClick={() => setTemaEscuro(!temaEscuro)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-[#35393C] text-gray-900 dark:text-white py-4 rounded-lg mb-6 font-medium transition hover:brightness-95 border border-gray-200 dark:border-transparent shrink-0">
               {temaEscuro ? <Sun size={20} /> : <Moon size={20} />} {temaEscuro ? "Mudar para Tema Claro" : "Mudar para Tema Escuro"}
             </button>
             <hr className="border-gray-200 dark:border-[#35393C] mb-6" />
@@ -206,187 +258,115 @@ function App() {
               </div>
             </div>
             <div className="flex flex-col gap-3">
-              <button onClick={() => { setMenuAberto(false); window.dispatchEvent(new CustomEvent('open-customizar')); }} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-3 px-4"><Settings size={20} className="opacity-80" /> Customizar</button>
-              <button onClick={() => { setMenuAberto(false); setNetworkModalAberto(true); }} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition flex justify-between px-4 items-center"><div className="flex items-center gap-3"><Users size={20} className="opacity-80" /> Networks</div>{rede.length > 0 && <span className="bg-white/20 px-2 py-0.5 rounded text-sm font-bold">{rede.length}</span>}</button>
-              <button onClick={() => { setMenuAberto(false); setCertificadosAberto(true); }} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-3 px-4"><Award size={20} className="opacity-80" /> Certificados</button>
+                <button onClick={() => { setMenuAberto(false); window.dispatchEvent(new CustomEvent('open-customizar')); }} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-3 px-4"><Settings size={20} className="opacity-80" /> Customizar</button>
+                
+                <button onClick={() => { setMenuAberto(false); setNetworkModalAberto(true); }} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition flex justify-between px-4 items-center"><div className="flex items-center gap-3"><Users size={20} className="opacity-80"/> Networks</div>{rede.length > 0 && <span className="bg-white/20 px-2 py-0.5 rounded text-sm font-bold">{rede.length}</span>}</button>
+                
+                <button onClick={() => { setMenuAberto(false); setCertificadosAberto(true); }} className="bg-blue-600 dark:bg-[#287ADF] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition flex items-center justify-between px-4">
+                    <div className="flex items-center gap-3"><Award size={20} className="opacity-80" /> Certificados</div>
+                    {meusCertificados.length > 0 && <span className="bg-white/20 px-2 py-0.5 rounded text-sm font-bold">{meusCertificados.length}</span>}
+                </button>
             </div>
+            
+            {/* SEÇÕES EXTRAS MOBILE */}
+            {/* ... (resto do menu mobile igual) ... */}
+            <div className="mt-8 mb-6 space-y-6">
+                <div><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2"><Trophy size={14} /> Conquistas</h3>{meusCertificados.length === 0 ? (<div className="text-xs text-gray-400 italic bg-gray-50 dark:bg-white/5 p-3 rounded-lg text-center">Nenhum certificado.</div>) : (<div className="space-y-2">{meusCertificados.slice(0, 3).map((cert, index) => (<div key={index} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-white/5 p-2 rounded-lg border border-gray-100 dark:border-transparent"><Award size={14} className="text-yellow-500 mt-0.5 shrink-0" /><span className="line-clamp-2 leading-snug text-xs font-medium">{cert}</span></div>))}{meusCertificados.length > 3 && (<button onClick={() => { setMenuAberto(false); setCertificadosAberto(true); }} className="text-xs text-blue-500 hover:underline w-full text-center mt-1">Ver mais...</button>)}</div>)}</div>
+                {userCustom?.idiomas && getList(userCustom.idiomas).length > 0 && (<div><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><Globe size={14} className="text-teal-500"/> Idiomas</h3><div className="flex flex-wrap gap-2">{getList(userCustom.idiomas).map((lang, i) => (<span key={i} className="text-xs font-medium bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300 px-2 py-1 rounded break-words">{lang}</span>))}</div></div>)}
+                {userCustom?.habilidadesTecnicas && getList(userCustom.habilidadesTecnicas).length > 0 && (<div><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><Code size={14} className="text-blue-500"/> Habilidades</h3><div className="flex flex-wrap gap-2">{getList(userCustom.habilidadesTecnicas).map((tech, i) => (<span key={i} className="text-xs font-medium bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-2 py-1 rounded border border-blue-100 dark:border-blue-900/30 break-words">{tech}</span>))}</div></div>)}
+                {userCustom?.softSkills && getList(userCustom.softSkills).length > 0 && (<div><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><Star size={14} className="text-orange-500"/> Soft Skills</h3><div className="flex flex-wrap gap-2">{getList(userCustom.softSkills).map((skill, i) => (<span key={i} className="text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full break-words">{skill}</span>))}</div></div>)}
+                {userCustom?.interesses && getList(userCustom.interesses).length > 0 && (<div><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><Heart size={14} className="text-pink-500"/> Interesses</h3><div className="flex flex-wrap gap-2">{getList(userCustom.interesses).map((int, i) => (<span key={i} className="text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-2 py-1 rounded border border-gray-200 dark:border-transparent break-words">#{int}</span>))}</div></div>)}
+                {minhasRecomendacoes.length > 0 && (<div><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><ThumbsUp size={14} className="text-green-500"/> Recomendações</h3><div className="space-y-2">{minhasRecomendacoes.slice(0, 2).map((rec, i) => (<div key={i} className="bg-gray-50 dark:bg-white/5 p-2 rounded-lg text-xs"><p className="font-bold dark:text-white">{rec.deNome}</p><p className="text-gray-500 line-clamp-2 italic">"{rec.texto}"</p></div>))}</div></div>)}
+            </div>
+            <div className="h-8 shrink-0"></div>
           </div>
         </div>
       )}
 
       <div className="flex pt-16 w-full relative min-h-screen">
-
+        
         {/* SIDEBAR DESKTOP */}
-        <aside className="hidden md:flex flex-col w-64 bg-white dark:bg-[#2A2B30] fixed left-0 top-16 h-[calc(100vh-4rem)] p-4 border-r border-gray-200 dark:border-[#35393C] transition-colors duration-300 z-40 overflow-y-auto custom-scrollbar">
-
-          {/* PERFIL USUÁRIO */}
+        <aside className="hidden md:flex flex-col w-64 bg-white dark:bg-[#2A2B30] fixed left-0 top-16 h-[calc(100vh-4rem)] p-4 border-r border-gray-200 dark:border-[#35393C] transition-colors duration-300 z-40 overflow-y-auto custom-scrollbar pb-20">
           <div className="flex items-center mb-6">
-            <img
-              src={userCustom?.foto ? userCustom.foto : perfil}
-              alt="perfil"
-              className="h-16 w-16 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700"
-            />
+            <img src={userCustom?.foto ? userCustom.foto : perfil} alt="perfil" className="h-16 w-16 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700 shrink-0" />
             <div className="ml-3 overflow-hidden">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white truncate">
-                {typeof userCustom?.nome === 'string' && userCustom.nome.trim() ? userCustom.nome : 'Nome'}
-              </h2>
-              <p className="text-sm text-gray-500 dark:text-[#9FA2A3] truncate">
-                {typeof userCustom?.cargo === 'string' && userCustom.cargo.trim() ? userCustom.cargo : 'Cargo'}
-              </p>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white truncate">{typeof userCustom?.nome === 'string' && userCustom.nome.trim() ? userCustom.nome : 'Nome'}</h2>
+              <p className="text-sm text-gray-500 dark:text-[#9FA2A3] truncate">{typeof userCustom?.cargo === 'string' && userCustom.cargo.trim() ? userCustom.cargo : 'Cargo'}</p>
             </div>
           </div>
-
-          {/* BOTÕES AÇÃO */}
+          
           <div className="flex flex-col gap-2.5">
-            <button onClick={() => window.dispatchEvent(new CustomEvent('open-customizar'))} className="w-full bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition flex items-center gap-2 group shadow-sm"><Settings size={18} className="opacity-80 group-hover:rotate-45 transition-transform" /> Customizar</button>
-            <button onClick={() => setNetworkModalAberto(true)} className="w-full bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition flex justify-between items-center group shadow-sm"><div className="flex items-center gap-2"><Users size={18} className="opacity-80" /> Networks</div>{rede.length > 0 && <span className="bg-white/20 group-hover:bg-white/30 px-2 rounded-md text-xs font-bold transition-colors">{rede.length}</span>}</button>
-            <button onClick={() => setCertificadosAberto(true)} className="w-full bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition flex items-center justify-between group shadow-sm"><div className="flex items-center gap-2"><Award size={18} className="opacity-80 group-hover:scale-110 transition-transform" /> Certificados</div><span className="bg-white/20 group-hover:bg-white/30 px-2 rounded-md text-xs font-bold transition-colors">{meusCertificados.length}</span></button>
+            <button onClick={() => window.dispatchEvent(new CustomEvent('open-customizar'))} className="w-full bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition flex items-center gap-2 group shadow-sm"><Settings size={18} className="opacity-80 group-hover:rotate-45 transition-transform"/> Customizar</button>
+            <button onClick={() => setNetworkModalAberto(true)} className="w-full bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition flex justify-between items-center group shadow-sm"><div className="flex items-center gap-2"><Users size={18} className="opacity-80"/> Networks</div>{rede.length > 0 && <span className="bg-white/20 group-hover:bg-white/30 px-2 rounded-md text-xs font-bold transition-colors">{rede.length}</span>}</button>
+            <button onClick={() => setCertificadosAberto(true)} className="w-full bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition flex items-center justify-between group shadow-sm"><div className="flex items-center gap-2"><Award size={18} className="opacity-80 group-hover:scale-110 transition-transform"/> Certificados</div><span className="bg-white/20 group-hover:bg-white/30 px-2 rounded-md text-xs font-bold transition-colors">{meusCertificados.length}</span></button>
           </div>
 
-          {/* === CONQUISTAS / CERTIFICADOS === */}
+          {/* SEÇÕES DE PERFIL DA SIDEBAR (CONQUISTAS, IDIOMAS, ETC) */}
+          {/* ... (Mantido igual ao anterior) ... */}
           <div className="mt-8">
-            <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-              <Trophy size={14} /> Conquistas
-            </h3>
-            {meusCertificados.length === 0 ? (
-              <div className="text-xs text-gray-400 italic bg-gray-50 dark:bg-white/5 p-3 rounded-lg text-center">
-                Nenhum certificado. Adicione no botão acima!
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {meusCertificados.map((cert, index) => (
-                  <div key={index} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-white/5 p-2 rounded-lg border border-gray-100 dark:border-transparent hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-default">
-                    <Award size={14} className="text-yellow-500 mt-0.5 shrink-0" />
-                    <span className="line-clamp-2 leading-snug text-xs font-medium">{cert}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+            <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2"><Trophy size={14} /> Conquistas</h3>
+            {meusCertificados.length === 0 ? (<div className="text-xs text-gray-400 italic bg-gray-50 dark:bg-white/5 p-3 rounded-lg text-center">Nenhum certificado.</div>) : (<div className="space-y-2">{meusCertificados.slice(0, 3).map((cert, index) => (<div key={index} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-white/5 p-2 rounded-lg border border-gray-100 dark:border-transparent hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-default"><Award size={14} className="text-yellow-500 mt-0.5 shrink-0" /><span className="line-clamp-2 leading-snug text-xs font-medium">{cert}</span></div>))}{meusCertificados.length > 3 && (<button onClick={() => setCertificadosAberto(true)} className="text-xs text-blue-500 hover:underline w-full text-center mt-1">Ver mais {meusCertificados.length - 3}...</button>)}</div>)}
           </div>
 
-          {/* === NOVAS SEÇÕES NA SIDEBAR (PREENCHIDAS DO CUSTOMIZAR) === */}
-
-          {/* IDIOMAS */}
-          {userCustom?.idiomas && (
-            <div className="mt-6">
-              <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-                <Globe size={14} className="text-teal-500" /> Idiomas
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {getList(userCustom.idiomas).map((lang, i) => (
-                  <span key={i} className="text-xs font-medium bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300 px-2 py-1 rounded">
-                    {lang}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* HABILIDADES TÉCNICAS */}
-          {userCustom?.habilidadesTecnicas && (
-            <div className="mt-6">
-              <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-                <Code size={14} className="text-blue-500" /> Habilidades
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {getList(userCustom.habilidadesTecnicas).map((tech, i) => (
-                  <span key={i} className="text-xs font-medium bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-2 py-1 rounded border border-blue-100 dark:border-blue-900/30">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* SOFT SKILLS */}
-          {userCustom?.softSkills && (
-            <div className="mt-6">
-              <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-                <Star size={14} className="text-orange-500" /> Soft Skills
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {getList(userCustom.softSkills).map((skill, i) => (
-                  <span key={i} className="text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* INTERESSES */}
-          {userCustom?.interesses && (
-            <div className="mt-6">
-              <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-                <Heart size={14} className="text-pink-500" /> Interesses
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {getList(userCustom.interesses).map((int, i) => (
-                  <span key={i} className="text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-2 py-1 rounded border border-gray-200 dark:border-transparent">
-                    #{int}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
-            <button onClick={() => setTemaEscuro(!temaEscuro)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-[#35393C] hover:bg-gray-200 dark:hover:bg-[#40444b] text-gray-900 dark:text-white py-2.5 rounded-lg text-sm font-bold transition border border-gray-200 dark:border-transparent">
-              {temaEscuro ? <Sun size={18} /> : <Moon size={18} />} {temaEscuro ? "Modo Claro" : "Modo Escuro"}
-            </button>
+          {userCustom?.idiomas && getList(userCustom.idiomas).length > 0 && (<div className="mt-6"><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><Globe size={14} className="text-teal-500"/> Idiomas</h3><div className="flex flex-wrap gap-2">{getList(userCustom.idiomas).map((lang, i) => (<span key={i} className="text-xs font-medium bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300 px-2 py-1 rounded truncate max-w-full">{lang}</span>))}</div></div>)}
+          {userCustom?.habilidadesTecnicas && getList(userCustom.habilidadesTecnicas).length > 0 && (<div className="mt-6"><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><Code size={14} className="text-blue-500"/> Habilidades</h3><div className="flex flex-wrap gap-2">{getList(userCustom.habilidadesTecnicas).map((tech, i) => (<span key={i} className="text-xs font-medium bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-2 py-1 rounded border border-blue-100 dark:border-blue-900/30 truncate max-w-full">{tech}</span>))}</div></div>)}
+          {userCustom?.softSkills && getList(userCustom.softSkills).length > 0 && (<div className="mt-6"><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><Star size={14} className="text-orange-500"/> Soft Skills</h3><div className="flex flex-wrap gap-2">{getList(userCustom.softSkills).map((skill, i) => (<span key={i} className="text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full truncate max-w-full">{skill}</span>))}</div></div>)}
+          {userCustom?.interesses && getList(userCustom.interesses).length > 0 && (<div className="mt-6"><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><Heart size={14} className="text-pink-500"/> Interesses</h3><div className="flex flex-wrap gap-2">{getList(userCustom.interesses).map((int, i) => (<span key={i} className="text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-2 py-1 rounded border border-gray-200 dark:border-transparent truncate max-w-full">#{int}</span>))}</div></div>)}
+          {minhasRecomendacoes.length > 0 && (<div className="mt-6"><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><ThumbsUp size={14} className="text-green-500"/> Recomendações</h3><div className="space-y-2">{minhasRecomendacoes.slice(0, 2).map((rec, i) => (<div key={i} className="bg-gray-50 dark:bg-white/5 p-2 rounded-lg text-xs border border-gray-100 dark:border-transparent"><p className="font-bold dark:text-white">{rec.deNome}</p><p className="text-gray-500 line-clamp-2 italic">"{rec.texto}"</p></div>))}</div></div>)}
+          
+          <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700 mb-4">
+             <button onClick={() => setTemaEscuro(!temaEscuro)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-[#35393C] hover:bg-gray-200 dark:hover:bg-[#40444b] text-gray-900 dark:text-white py-2.5 rounded-lg text-sm font-bold transition border border-gray-200 dark:border-transparent">
+               {temaEscuro ? <Sun size={18} /> : <Moon size={18} />} {temaEscuro ? "Modo Claro" : "Modo Escuro"}
+             </button>
           </div>
         </aside>
 
         <div className="flex-1 flex flex-col md:ml-64 min-w-0 transition-colors duration-300">
           <main className="flex-1 p-4 w-full max-w-full overflow-hidden">
-            <div className="mb-4 md:hidden relative">
-              <input type="text" placeholder="Pesquisar..." value={busca} onChange={(e) => setBusca(e.target.value)} className="w-full border-gray-300 dark:border-[#35393C] border-2 h-10 pl-10 pr-3 rounded-lg bg-white dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none" />
-              <Search size={18} className="absolute left-3 top-2.5 text-gray-400" />
+            
+            {/* INPUT DE BUSCA E FILTRO NO MOBILE (ADICIONADO AGORA) */}
+            <div className="mb-4 md:hidden relative flex gap-2">
+               <div className="relative flex-1">
+                   <input type="text" placeholder="Pesquisar..." value={busca} onChange={(e) => setBusca(e.target.value)} className="w-full border-gray-300 dark:border-[#35393C] border-2 h-10 pl-9 pr-3 rounded-lg bg-white dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none" />
+                   <Search size={18} className="absolute left-3 top-2.5 text-gray-400" />
+               </div>
+               <div className="relative w-1/3 min-w-[100px]">
+                    <div className="absolute left-2 top-3 pointer-events-none text-gray-400"><Filter size={14} /></div>
+                    <select value={filtroCargo} onChange={(e) => setFiltroCargo(e.target.value)} className="appearance-none w-full border-gray-300 dark:border-[#35393C] border-2 h-10 pl-8 pr-2 rounded-lg bg-white dark:bg-[#1A1D1F] text-gray-900 dark:text-white text-xs focus:outline-none">
+                        <option value="">Cargos</option>
+                        {todosCargos.map((cargo) => (<option key={cargo} value={cargo}>{cargo}</option>))}
+                    </select>
+               </div>
             </div>
 
             {(busca && usuariosFiltrados.length === 0 && projetosFiltrados.length === 0) ? (
-              <div className="py-12 text-center text-gray-500 dark:text-gray-400">
-                <p className="text-lg font-medium">Nenhum resultado encontrado para "{busca}".</p>
-              </div>
+                 <div className="py-12 text-center text-gray-500 dark:text-gray-400">
+                   <p className="text-lg font-medium">Nenhum resultado encontrado para "{busca}".</p>
+                 </div>
             ) : (
-              <>
-                {usuariosFiltrados.length > 0 && <SugestoesPerfis usuarios={usuariosFiltrados} abrirModal={(u) => setUsuarioSelecionado(u)} redeIds={rede} onToggleConexao={toggleConexao} />}
-                {projetosFiltrados.length > 0 && <SugestoesProjetos projetos={projetosFiltrados} abrirModal={(p) => setProjetoSelecionado(p)} />}
-              </>
+                <>
+                    {usuariosFiltrados.length > 0 && <SugestoesPerfis usuarios={usuariosFiltrados} abrirModal={(u) => setUsuarioSelecionado(u)} redeIds={rede} onToggleConexao={toggleConexao} />}
+                    {projetosFiltrados.length > 0 && <SugestoesProjetos projetos={projetosFiltrados} abrirModal={(p) => setProjetoSelecionado(p)} />}
+                </>
             )}
 
             <UserModal usuario={usuarioSelecionado} onClose={() => setUsuarioSelecionado(null)} isConectado={usuarioSelecionado ? rede.includes(usuarioSelecionado.id) : false} onToggleConexao={toggleConexao} />
             <ProjectModal projeto={projetoSelecionado} onClose={() => setProjetoSelecionado(null)} />
             <NetworkModal isOpen={networkModalAberto} onClose={() => setNetworkModalAberto(false)} conexoes={rede} todosUsuarios={usuarios} onDesconectar={removerConexao} />
-            <Chat isOpen={chatOpen} onClose={() => setChatOpen(false)} usuario={chatUsuario} />
-
+            
             <div className="h-8"></div>
           </main>
 
           <footer className="bg-white dark:bg-[#202327] border-t border-gray-200 dark:border-none py-6 mt-auto transition-colors duration-300 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] relative z-0 w-full">
-            <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="text-center md:text-left"><h3 className="text-lg font-bold text-gray-900 dark:text-white">SkillConnect</h3><p className="text-sm text-gray-500 dark:text-gray-400">© {new Date().getFullYear()} Todos os direitos reservados.</p></div>
-              <div className="flex items-center gap-6">
-                <Github
-                  onClick={() => setGitHubModalAberto(true)}
-                  size={20}
-                  className="text-gray-500 hover:text-black dark:hover:text-white transition-colors"
-                />
-                <GitHubModal
-                  isOpen={GitHubModalAberto}
-                  onClose={() => setGitHubModalAberto(false)}
-                />
-                <Linkedin
-                  onClick={() => setLinkedinModalAberto(true)}
-                  size={20}
-                  className="text-gray-500 hover:text-black dark:hover:text-white transition-colors"
-                />
-                <LinkedinModal
-                  isOpen={LinkedinModalAberto}
-                  onClose={() => setLinkedinModalAberto(false)}
-                />                  
-                <Mail size={20} className="text-gray-500 hover:text-red-500 transition-colors" /></div>
-            </div>
+             <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                 <div className="text-center md:text-left"><h3 className="text-lg font-bold text-gray-900 dark:text-white">SkillConnect</h3><p className="text-sm text-gray-500 dark:text-gray-400">© {new Date().getFullYear()} Todos os direitos reservados.</p></div>
+                 <div className="flex items-center gap-6">
+                    <Github size={20} className="text-gray-500 hover:text-black dark:hover:text-white transition-colors cursor-pointer" onClick={() => setGitHubModalAberto(true)} />
+                    <Linkedin size={20} className="text-gray-500 hover:text-blue-700 transition-colors cursor-pointer" onClick={() => setLinkedinModalAberto(true)} />
+                    <Twitter size={20} className="text-gray-500 hover:text-blue-400 transition-colors cursor-pointer" />
+                    <Mail size={20} className="text-gray-500 hover:text-red-500 transition-colors cursor-pointer" />
+                 </div>
+             </div>
           </footer>
         </div>
       </div>
