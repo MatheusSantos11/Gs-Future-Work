@@ -19,6 +19,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, Github, Linkedin, Mail, Users, Settings, Award, Search, Trophy, Globe, Code, Heart, Star } from 'lucide-react';
 
 import { GitHubModal } from "./components/GitHubModal";
+import { LinkedinModal } from './components/LinkedinModal';
 
 function App() {
   const usuarios = usuariosData as IUsuario[];
@@ -29,6 +30,7 @@ function App() {
   const [networkModalAberto, setNetworkModalAberto] = useState(false);
   const [GitHubModalAberto, setGitHubModalAberto] = useState(false);
   const [certificadosAberto, setCertificadosAberto] = useState(false);
+  const [LinkedinModalAberto, setLinkedinModalAberto] = useState(false);
 
   const [busca, setBusca] = useState("");
   const [meusCertificados, setMeusCertificados] = useState<string[]>([]);
@@ -113,6 +115,14 @@ function App() {
     }
     window.addEventListener('open-github', handleOpenGitHub);
     return () => window.removeEventListener('open-github', handleOpenGitHub);
+  }, []);
+
+  useEffect(() => {
+    function handleOpenLinkedin() {
+      setLinkedinModalAberto(true);
+    }
+    window.addEventListener('open-linkedin', handleOpenLinkedin);
+    return () => window.removeEventListener('open-github', handleOpenLinkedin);
   }, []);
 
   useEffect(() => {
@@ -330,8 +340,16 @@ function App() {
                 <GitHubModal
                   isOpen={GitHubModalAberto}
                   onClose={() => setGitHubModalAberto(false)}
-                />                
-                <Linkedin size={20} className="text-gray-500 hover:text-blue-700 transition-colors" />
+                />
+                <Linkedin
+                  onClick={() => setLinkedinModalAberto(true)}
+                  size={20}
+                  className="text-gray-500 hover:text-black dark:hover:text-white transition-colors"
+                />
+                <LinkedinModal
+                  isOpen={LinkedinModalAberto}
+                  onClose={() => setLinkedinModalAberto(false)}
+                />                  
                 <Mail size={20} className="text-gray-500 hover:text-red-500 transition-colors" /></div>
             </div>
           </footer>
