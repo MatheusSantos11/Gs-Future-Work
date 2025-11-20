@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { X, MapPin, FolderGit2, Hash, Settings, Users, Award, Check } from 'lucide-react';
+import { X, FolderGit2, Settings, Users, Award, Check } from 'lucide-react';
 import { salvarUser, carregarUser } from '../data/storage';
 import type { User } from '../data/storage';
 
