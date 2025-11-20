@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { X, MapPin, FolderGit2, Hash, Settings, Users, Award, Check } from 'lucide-react';
+import { X, FolderGit2, Settings, Users, Award, Check } from 'lucide-react';
 import { salvarUser, carregarUser } from '../data/storage';
 import type { User } from '../data/storage';
 
@@ -80,11 +80,11 @@ export default function CustomizarModal() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-[60] p-4 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-60 p-4 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="w-full max-w-5xl bg-white dark:bg-[#1F2226] text-gray-900 dark:text-white rounded-xl shadow-2xl flex max-h-[90vh] border border-gray-200 dark:border-gray-700 overflow-hidden">
         
         {/* MENU LATERAL */}
-        <div className="w-64 bg-gray-50 dark:bg-[#181a1d] border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col gap-2 hidden md:flex">
+        <div className="w-64 bg-gray-50 dark:bg-[#181a1d] border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col gap-2 md:flex">
             <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2 px-3">Configurações</h3>
             
             <button className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium text-sm">

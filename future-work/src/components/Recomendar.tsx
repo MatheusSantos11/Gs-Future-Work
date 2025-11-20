@@ -57,7 +57,7 @@ export default function RecomendarModal() {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[70] p-4">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-70 p-4">
       <div className="bg-white dark:bg-[#1F2226] w-full max-w-lg rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800">
           <h3 className="font-bold text-lg">Recomendar profissional</h3>
