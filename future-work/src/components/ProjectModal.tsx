@@ -20,7 +20,7 @@ export function ProjectModal({ projeto, onClose }: Props) {
           flex flex-col max-h-[90vh]
       ">
         
-        {/* Botão Fechar */}
+
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 p-2 rounded-full bg-black/20 hover:bg-black/40 text-white transition-colors z-10"
@@ -30,7 +30,7 @@ export function ProjectModal({ projeto, onClose }: Props) {
 
         <div className="overflow-y-auto">
           
-          {/* Imagem de Capa (Bem grande) */}
+  
           <div className="h-64 sm:h-80 w-full relative">
             <img 
               src={projeto.imagem} 
@@ -50,7 +50,7 @@ export function ProjectModal({ projeto, onClose }: Props) {
 
           <div className="p-6 sm:p-8 space-y-6">
             
-            {/* Descrição */}
+  
             <div>
                 <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">Sobre o Projeto</h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
@@ -58,7 +58,7 @@ export function ProjectModal({ projeto, onClose }: Props) {
                 </p>
             </div>
 
-            {/* Área de Ações */}
+
             <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <button className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-600/20">
                     <ExternalLink size={20} />

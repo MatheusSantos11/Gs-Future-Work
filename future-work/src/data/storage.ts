@@ -8,10 +8,8 @@ export interface User {
   area: string;
   habilidadesTecnicas: string;
   softSkills: string;
-  // NOVOS CAMPOS ADICIONADOS
   idiomas: string;
   interesses: string;
-  
   curso: string;
   instituicao: string;
   ano: string;

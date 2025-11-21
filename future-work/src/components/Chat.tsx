@@ -43,7 +43,6 @@ export default function Chat({ isOpen, onClose, usuario }: Props) {
 
   useEffect(() => {
     if (!isOpen) return;
-    // load stored messages for this usuario
     const stored = loadMessages(usuario);
     if (stored && stored.length > 0) {
       setMessages(stored);
@@ -84,7 +83,7 @@ export default function Chat({ isOpen, onClose, usuario }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[70] p-4">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-70 p-4">
       <div className="bg-white dark:bg-[#1F2226] w-full max-w-xl rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800">
           <div className="flex items-center gap-3">

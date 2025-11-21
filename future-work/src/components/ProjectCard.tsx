@@ -3,13 +3,13 @@ import { Calendar, User } from "lucide-react";
 
 interface Props {
     projeto: IProjetoFeed;
-    onOpen: () => void; // <--- NOVO PROP
+    onOpen: () => void; 
 }
 
 export function ProjectCard({ projeto, onOpen }: Props) {
     return (
         <div 
-            onClick={onOpen} // <--- CLICK AQUI
+            onClick={onOpen} 
             className="
             bg-white dark:bg-[#202327] 
             border border-gray-200 dark:border-[#2a2d33] 
@@ -18,14 +18,14 @@ export function ProjectCard({ projeto, onOpen }: Props) {
             hover:border-blue-400 dark:hover:border-blue-400
             shadow-sm hover:shadow-md group
         ">
-            {/* Imagem do Projeto (Capa) */}
+
             <div className="relative h-40 w-full overflow-hidden rounded-lg">
                 <img
                     src={projeto.imagem}
                     alt={projeto.titulo}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                {/* Badge de Data */}
+  
                 <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded-full flex items-center gap-1">
                     <Calendar size={10} />
                     {new Date(projeto.data).toLocaleDateString('pt-BR')}

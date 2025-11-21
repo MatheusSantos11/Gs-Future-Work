@@ -66,7 +66,7 @@ export default function CustomizarModal() {
     setUsers(next); salvarUser(next); window.dispatchEvent(new CustomEvent('user-updated'));
   }
 
-  // === NAVEGAÇÃO ENTRE MODAIS ===
+
   const abrirCertificados = () => {
     setOpen(false); 
     window.dispatchEvent(new CustomEvent('open-certificados'));
@@ -83,7 +83,7 @@ export default function CustomizarModal() {
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-60 p-4 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="w-full max-w-5xl bg-white dark:bg-[#1F2226] text-gray-900 dark:text-white rounded-xl shadow-2xl flex max-h-[90vh] border border-gray-200 dark:border-gray-700 overflow-hidden">
         
-        {/* MENU LATERAL */}
+
         <div className="w-64 bg-gray-50 dark:bg-[#181a1d] border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col gap-2 md:flex">
             <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2 px-3">Configurações</h3>
             
@@ -92,7 +92,7 @@ export default function CustomizarModal() {
                 Editar Perfil
             </button>
             
-            {/* BOTÃO NETWORKS FUNCIONAL */}
+
             <button 
                 onClick={abrirNetworks}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-200 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 font-medium text-sm transition-colors"
@@ -110,7 +110,7 @@ export default function CustomizarModal() {
             </button>
         </div>
 
-        {/* ÁREA PRINCIPAL */}
+
         <div className="flex-1 flex flex-col min-w-0">
             
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 md:hidden">
@@ -123,7 +123,7 @@ export default function CustomizarModal() {
             </button>
 
             <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
-                {/* CABEÇALHO DO FORM */}
+
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
                     <div className="w-24 h-24 rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0 shadow-sm ring-2 ring-gray-100 dark:ring-gray-700">
                         {form.foto ? <img src={form.foto} className="w-full h-full object-cover"/> : <div className="w-full h-full flex items-center justify-center text-sm">Sem foto</div>}
@@ -168,7 +168,7 @@ export default function CustomizarModal() {
                     </button>
                 </form>
                 
-                {/* LISTA DE PERFIS */}
+
                 <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700 pb-4">
                     <h3 className="font-bold mb-4 flex items-center gap-2"><FolderGit2 size={18} className="text-purple-500"/> Perfis salvos neste navegador</h3>
                     <div className="grid gap-3">

@@ -15,7 +15,7 @@ export function GitHubModal({ isOpen, onClose }: Props) {
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-60 p-4 backdrop-blur-sm animate-in fade-in duration-200">
             <div className="bg-white dark:bg-[#1F2226] w-full max-w-md rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col max-h-[80vh]">
 
-                {/* Header */}
+
                 <div className="p-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
                     <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200"><Github size={14} className="text-blue-600" />Integrantes</h2>
 

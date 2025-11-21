@@ -4,20 +4,20 @@ import { Check, UserPlus } from "lucide-react";
 interface Props {
     usuario: IUsuario;
     onOpen: () => void;
-    // NOVAS PROPS PARA O CARD TAMBÉM FUNCIONAR
+
     isConectado: boolean;
     onToggleConexao: (usuario: IUsuario) => void;
 }
 
 export function ProfileCard({ usuario, onOpen, isConectado, onToggleConexao }: Props) {
     const handleConectar = (e: React.MouseEvent) => {
-        e.stopPropagation(); // Impede de abrir o modal ao clicar no botão
+        e.stopPropagation(); 
         onToggleConexao(usuario);
     };
 
     const handleMensagem = (e: React.MouseEvent) => {
         e.stopPropagation();
-        // Dispara o modal de chat com o usuário deste card
+
         window.dispatchEvent(new CustomEvent('open-chat', { detail: { usuario } }));
     };
 
@@ -56,7 +56,7 @@ export function ProfileCard({ usuario, onOpen, isConectado, onToggleConexao }: P
             </p>
             
             <div className="flex gap-2 mt-auto pt-2">
-                {/* BOTÃO CONECTAR ATUALIZADO */}
+
                 <button 
                     className={`
                         flex-1 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-1

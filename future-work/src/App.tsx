@@ -29,39 +29,38 @@ function App() {
   const [usuarioSelecionado, setUsuarioSelecionado] = useState<IUsuario | null>(null);
   const [projetoSelecionado, setProjetoSelecionado] = useState<IProjetoFeed | null>(null);
   
-  // Estados dos Modais
+
   const [networkModalAberto, setNetworkModalAberto] = useState(false);
   const [certificadosAberto, setCertificadosAberto] = useState(false);
   const [gitHubModalAberto, setGitHubModalAberto] = useState(false);
   const [linkedinModalAberto, setLinkedinModalAberto] = useState(false);
   
-  // Chat
+
   const [chatOpen, setChatOpen] = useState(false);
   const [chatUsuario, setChatUsuario] = useState<any>(null);
 
-  // === ESTADOS DE FILTRO ===
+
   const [busca, setBusca] = useState("");
-  const [filtroCargo, setFiltroCargo] = useState(""); // Estado para o cargo selecionado
+  const [filtroCargo, setFiltroCargo] = useState(""); 
 
   const [meusCertificados, setMeusCertificados] = useState<string[]>([]);
   const [minhasRecomendacoes, setMinhasRecomendacoes] = useState<any[]>([]);
 
-  // === EXTRAIR CARGOS ÚNICOS PARA O FILTRO ===
-  // Cria uma lista alfabética de todos os cargos disponíveis no JSON
+ 
   const todosCargos = Array.from(new Set(usuarios.map(u => u.cargo))).sort();
 
-  // === LÓGICA DE FILTRAGEM ATUALIZADA ===
+ 
   const usuariosFiltrados = usuarios.filter(u => {
-    // 1. Verifica se bate com o texto da busca
+ 
     const matchBusca = 
       u.nome.toLowerCase().includes(busca.toLowerCase()) ||
       u.cargo.toLowerCase().includes(busca.toLowerCase()) ||
       u.habilidadesTecnicas?.some(h => h.toLowerCase().includes(busca.toLowerCase()));
 
-    // 2. Verifica se bate com o cargo selecionado (se houver algum selecionado)
+
     const matchCargo = filtroCargo ? u.cargo === filtroCargo : true;
 
-    // Retorna verdadeiro apenas se ambos os filtros passarem
+ 
     return matchBusca && matchCargo;
   });
 
@@ -162,7 +161,7 @@ function App() {
 
   useEffect(() => {
     function handleOpenRecomendar(_e: any) {
-        // Lógica opcional aqui se necessário
+ 
     }
     window.addEventListener('open-recomendar', handleOpenRecomendar as EventListener);
     return () => window.removeEventListener('open-recomendar', handleOpenRecomendar as EventListener);
@@ -199,9 +198,9 @@ function App() {
         <div className="flex items-center gap-4 w-full md:w-auto">
           <img src={logo} alt="logo" className="h-10 w-auto object-contain invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 transition-all duration-300" />
           
-          {/* ÁREA DE PESQUISA E FILTRO (DESKTOP) */}
+ 
           <div className="relative hidden md:flex items-center gap-2">
-            {/* Input de Busca */}
+ 
             <div className="relative">
                 <input 
                   type="text" 
@@ -213,7 +212,7 @@ function App() {
                 <Search size={16} className="absolute left-3 top-2.5 text-gray-400" />
             </div>
 
-            {/* === NOVO: BOTÃO/SELECT DE FILTRO POR CARGO === */}
+ 
             <div className="relative">
                 <div className="absolute left-2.5 top-2.5 pointer-events-none text-gray-400">
                     <Filter size={16} />
@@ -228,7 +227,7 @@ function App() {
                         <option key={cargo} value={cargo}>{cargo}</option>
                     ))}
                 </select>
-                {/* Seta customizada para o select */}
+ 
                 <div className="absolute right-2.5 top-3 pointer-events-none text-gray-400">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
@@ -241,7 +240,7 @@ function App() {
         </button>
       </header>
 
-      {/* MENU MOBILE */}
+
       {menuAberto && (
         <div className="fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-white dark:bg-[#202327] z-50 p-4 md:hidden overflow-y-auto animate-in slide-in-from-top-2 custom-scrollbar">
           <div className="flex flex-col min-h-full">
@@ -267,8 +266,7 @@ function App() {
                 </button>
             </div>
             
-            {/* SEÇÕES EXTRAS MOBILE */}
-            {/* ... (resto do menu mobile igual) ... */}
+
             <div className="mt-8 mb-6 space-y-6">
                 <div><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2"><Trophy size={14} /> Conquistas</h3>{meusCertificados.length === 0 ? (<div className="text-xs text-gray-400 italic bg-gray-50 dark:bg-white/5 p-3 rounded-lg text-center">Nenhum certificado.</div>) : (<div className="space-y-2">{meusCertificados.slice(0, 3).map((cert, index) => (<div key={index} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-white/5 p-2 rounded-lg border border-gray-100 dark:border-transparent"><Award size={14} className="text-yellow-500 mt-0.5 shrink-0" /><span className="line-clamp-2 leading-snug text-xs font-medium">{cert}</span></div>))}{meusCertificados.length > 3 && (<button onClick={() => { setMenuAberto(false); setCertificadosAberto(true); }} className="text-xs text-blue-500 hover:underline w-full text-center mt-1">Ver mais...</button>)}</div>)}</div>
                 {userCustom?.idiomas && getList(userCustom.idiomas).length > 0 && (<div><h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2"><Globe size={14} className="text-teal-500"/> Idiomas</h3><div className="flex flex-wrap gap-2">{getList(userCustom.idiomas).map((lang, i) => (<span key={i} className="text-xs font-medium bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300 px-2 py-1 rounded wrap-break-word">{lang}</span>))}</div></div>)}
@@ -284,7 +282,7 @@ function App() {
 
       <div className="flex pt-16 w-full relative min-h-screen">
         
-        {/* SIDEBAR DESKTOP */}
+  
         <aside className="hidden md:flex flex-col w-64 bg-white dark:bg-[#2A2B30] fixed left-0 top-16 h-[calc(100vh-4rem)] p-4 border-r border-gray-200 dark:border-[#35393C] transition-colors duration-300 z-40 overflow-y-auto custom-scrollbar pb-20">
           <div className="flex items-center mb-6">
             <img src={userCustom?.foto ? userCustom.foto : perfil} alt="perfil" className="h-16 w-16 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700 shrink-0" />
@@ -300,8 +298,7 @@ function App() {
             <button onClick={() => setCertificadosAberto(true)} className="w-full bg-blue-600 dark:bg-[#287ADF] hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition flex items-center justify-between group shadow-sm"><div className="flex items-center gap-2"><Award size={18} className="opacity-80 group-hover:scale-110 transition-transform"/> Certificados</div><span className="bg-white/20 group-hover:bg-white/30 px-2 rounded-md text-xs font-bold transition-colors">{meusCertificados.length}</span></button>
           </div>
 
-          {/* SEÇÕES DE PERFIL DA SIDEBAR (CONQUISTAS, IDIOMAS, ETC) */}
-          {/* ... (Mantido igual ao anterior) ... */}
+ 
           <div className="mt-8">
             <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2"><Trophy size={14} /> Conquistas</h3>
             {meusCertificados.length === 0 ? (<div className="text-xs text-gray-400 italic bg-gray-50 dark:bg-white/5 p-3 rounded-lg text-center">Nenhum certificado.</div>) : (<div className="space-y-2">{meusCertificados.slice(0, 3).map((cert, index) => (<div key={index} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-white/5 p-2 rounded-lg border border-gray-100 dark:border-transparent hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-default"><Award size={14} className="text-yellow-500 mt-0.5 shrink-0" /><span className="line-clamp-2 leading-snug text-xs font-medium">{cert}</span></div>))}{meusCertificados.length > 3 && (<button onClick={() => setCertificadosAberto(true)} className="text-xs text-blue-500 hover:underline w-full text-center mt-1">Ver mais {meusCertificados.length - 3}...</button>)}</div>)}
@@ -322,8 +319,7 @@ function App() {
 
         <div className="flex-1 flex flex-col md:ml-64 min-w-0 transition-colors duration-300">
           <main className="flex-1 p-4 w-full max-w-full overflow-hidden">
-            
-            {/* INPUT DE BUSCA E FILTRO NO MOBILE (ADICIONADO AGORA) */}
+
             <div className="mb-4 md:hidden relative flex gap-2">
                <div className="relative flex-1">
                    <input type="text" placeholder="Pesquisar..." value={busca} onChange={(e) => setBusca(e.target.value)} className="w-full border-gray-300 dark:border-[#35393C] border-2 h-10 pl-9 pr-3 rounded-lg bg-white dark:bg-[#1A1D1F] text-gray-900 dark:text-white focus:outline-none" />

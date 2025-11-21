@@ -5,7 +5,7 @@ import { Users } from "lucide-react";
 interface Props {
   usuarios: IUsuario[];
   abrirModal: (usuario: IUsuario) => void;
-  // NOVAS PROPS
+
   redeIds: number[];
   onToggleConexao: (usuario: IUsuario) => void;
 }
@@ -23,7 +23,7 @@ export function SugestoesPerfis({ usuarios, abrirModal, redeIds, onToggleConexao
             key={usuario.id} 
             usuario={usuario} 
             onOpen={() => abrirModal(usuario)}
-            // PASSANDO DADOS
+
             isConectado={redeIds.includes(usuario.id)}
             onToggleConexao={onToggleConexao}
           />

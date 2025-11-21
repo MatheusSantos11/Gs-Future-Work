@@ -10,7 +10,7 @@ export function CertificadosModal({ isOpen, onClose }: Props) {
   const [certificados, setCertificados] = useState<string[]>([]);
   const [novoCertificado, setNovoCertificado] = useState("");
 
-  // Carregar do localStorage
+
   useEffect(() => {
     if (isOpen) {
       const salvos = localStorage.getItem('meus-certificados');
@@ -25,7 +25,7 @@ export function CertificadosModal({ isOpen, onClose }: Props) {
   const atualizarTudo = (novaLista: string[]) => {
     setCertificados(novaLista);
     localStorage.setItem('meus-certificados', JSON.stringify(novaLista));
-    // Avisa a sidebar para atualizar o número
+
     window.dispatchEvent(new CustomEvent('certificados-updated'));
   };
 
@@ -49,10 +49,10 @@ export function CertificadosModal({ isOpen, onClose }: Props) {
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-70 p-4 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="bg-white dark:bg-[#1F2226] w-full max-w-md rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col max-h-[80vh]">
         
-        {/* === CABEÇALHO (AGORA PRETO/PADRÃO) === */}
+
         <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-[#1F2226]">
           <div className="flex items-center gap-2">
-            {/* Ícone Azul para destacar */}
+
             <Award size={24} className="text-blue-600 dark:text-blue-400" />
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">Meus Certificados</h2>
           </div>
@@ -61,10 +61,10 @@ export function CertificadosModal({ isOpen, onClose }: Props) {
           </button>
         </div>
 
-        {/* Corpo */}
+
         <div className="flex-1 overflow-y-auto p-5 custom-scrollbar">
           
-          {/* Formulário */}
+ 
           <form onSubmit={adicionar} className="flex gap-2 mb-6">
             <input 
                 type="text" 
@@ -83,7 +83,7 @@ export function CertificadosModal({ isOpen, onClose }: Props) {
             </button>
           </form>
 
-          {/* Lista */}
+
           <div className="space-y-3">
             {certificados.length === 0 ? (
                 <div className="text-center py-8 text-gray-400 flex flex-col items-center">
@@ -113,7 +113,7 @@ export function CertificadosModal({ isOpen, onClose }: Props) {
 
         </div>
         
-        {/* Footerzinho com contador */}
+
         <div className="p-3 bg-gray-50 dark:bg-[#181a1d] border-t border-gray-200 dark:border-gray-700 text-center">
             <p className="text-xs text-gray-500 dark:text-gray-400">Total: {certificados.length} certificados</p>
         </div>
